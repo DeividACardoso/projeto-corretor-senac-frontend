@@ -7,12 +7,12 @@ import { Cliente } from '../model/cliente.interface';
 })
 export class ClienteService {
 
-  // private http = inject(HttpClient);
+  private readonly API = 'http://localhost:8080/api/clientes'
 
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Cliente[]>('http://localhost:8080/api/clientes');
+    return this.http.get<Array<Cliente>>(this.API+'/todos');
   }
 
   get(id: number) {
