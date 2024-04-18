@@ -1,0 +1,35 @@
+<h2 class="mb-5">
+  @if(cliente) {
+  Editar
+  } @else {
+  Novo Cliente
+  }
+</h2>
+
+<div class="row row-cols-3" juustify-content-center>
+  @if(form){
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class=" mb-3">
+      <label for="name">Nome</label>
+      <input id="name" type="text" placeholder="Nome" class="form-control" formControlName="name">
+
+    </div>
+
+    <div class="mb-3">
+      <label for="cpf">Cpf</label>
+      <input id="name" type="number" placeholder="Nome" class="form-control" formControlName="cpf">
+    </div>
+
+    <div class="text-end">
+      <button type="button" class="btn btn-light" routerLink="">Cancelar</button>
+      <button class="btn btn-primary ms-2">
+        @if(cliente) {
+        Atualizar
+        } @else {
+        Criar Contato
+        }
+      </button>
+    </div>
+  </form>
+  }
+</div>
