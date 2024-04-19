@@ -11,7 +11,7 @@ export class ClienteService {
 
   constructor(private http: HttpClient) {}
 
-  list() {
+  listarTodos() {
     return this.http.get<Array<Cliente>>(this.API+'/todos');
   }
 

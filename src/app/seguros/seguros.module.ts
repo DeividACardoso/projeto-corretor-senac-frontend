@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { SegurosRoutingModule } from './seguros-routing.module';
 import { SegurosListagemComponent } from './seguros-listagem/seguros-listagem.component';
-import { SegurosDetalheComponent } from './seguros-detalhe/seguros-detalhe.component';
+import { SeguroDetalheComponent } from './seguros-detalhe/seguros-detalhe.component'
 
 
 @NgModule({
   declarations: [
     SegurosListagemComponent,
-    SegurosDetalheComponent
+    SeguroDetalheComponent
   ],
   imports: [
     CommonModule,

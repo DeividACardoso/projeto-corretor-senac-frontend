@@ -6,55 +6,29 @@ import { Cliente } from '../../model/cliente.interface';
 
 @Component({
   selector: 'app-cliente-form',
-  templateUrl: './../cliente-listagem/cliente-listagem.component.html',
-  styleUrl: './../cliente-listagem/cliente-listagem.component.scss'
+  templateUrl: './cliente-listagem.component.html',
+  styleUrl: './cliente-listagem.component.scss'
 })
 export class ClienteListagemComponent implements OnInit {
 
+  constructor(private ClienteService: ClienteService, private router: Router){
+  }
+
 public clientes: Array<Cliente> = new Array();
 
-save() {
-  const clienteForm = this.form!.value;
-
-  if (this.cliente) {
-    this.clienteService.update(this.cliente.id, clienteForm)
-    .subscribe(() => {
-      this.router.navigate(['/']);
-    });
-  } else {
-    this.clienteService.create(clienteForm)
-    .subscribe(() => {
-      this.router.navigate(['/']);
-      });
-    }
-}
-
-  private fb = inject(FormBuilder);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
-  private clienteService = inject(ClienteService);
-
-  form ?: FormGroup;
-  cliente ?: Cliente;
-
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    this.buscarClientes();
+  }
 
-    if(id){
-      this.clienteService.get(parseInt(id))
-      .subscribe( cliente => {
-        this.cliente = cliente;
-        this.form = this.fb.group({
-          nome:[cliente.id],
-          cpf:[cliente.cpf],
-        });
-    })
-  } else {
-    this.form = this.fb.group({
-      nome:[''],
-      cpf:[''],
-    });
-    }
+  buscarClientes() {
+    this.ClienteService.listarTodos().subscribe(
+      resultado => {
+        this.clientes = resultado;
+      },
+      erro => {
+        console.log('Erro ao buscar Clientes: ', erro);
+      }
+    )
   }
 }
 
