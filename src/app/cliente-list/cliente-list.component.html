@@ -1,48 +1,79 @@
-<h2 class="mb-5">Lista de Clientes</h2>
+<div
+  style="max-width: 1140px; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; text-align: center;">
+  <header
+    style="color: #ccc; background-color: #333; font-family: Arial, sans-serif; padding: 15px 0; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div style="display: flex; align-items: center;">
+      <a style="display: flex; align-items: center; color: #fff; text-decoration: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2"
+          style="width: 40px; height: 40px; background-color: #4b0082; border-radius: 50%; padding: 10px; margin-right: 10px;"
+          viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span style="font-size: 24px; margin-left: 15px;">Lista de Clientes</span>
+      </a>
+    </div>
+    <button
+      style="padding: 10px 20px; background-color: #007bff; border: none; border-radius: 4px; color: #fff; font-size: 16px; cursor: pointer; margin-right: 10px;"
+      routerLink="/new">
+      Novo Cliente
+    </button>
+  </header>
 
-<div class="text-right">
-  <button class="btn-btn-primary router" routerLink="new">
-    Novo Cliente
-  </button>
-</div>
-
-<table class="table table-hover">
-  <tr>
-    <th>Nome</th>
-    <th>Cpf</th>
-    <th>dtNascimento</th>
-    <th>Email</th>
-    <th>Cnh</th>
-    <th>DDD</th>
-    <th>Telefone</th>
-    <th>Estado_Civil</th>
-    <th>Genero</th>
-    <th>Rua</th>
-    <th>Bairro</th>
-  </tr>
-  <tbody>
-    <tr *ngFor="let cliente of clientes; trackBy: trackById">
-      <td>{{ cliente.id }}</td>
-      <td>{{ cliente.nome }}</td>
-      <td>{{ cliente.cpf }}</td>
-      <td>{{ cliente.dtNascimento }}</td>
-      <td>{{ cliente.email }}</td>
-      <td>{{ cliente.cnh }}</td>
-      <td>{{ cliente.ddd }}</td>
-      <td>{{ cliente.telefone }}</td>
-      <td>{{ cliente.estado_civil }}</td>
-      <td>{{ cliente.genero }}</td>
-      <td>{{ cliente.rua }}</td>
-      <td>{{ cliente.bairro }}</td>
-      <td>
-        <div class="btn-group">
-          <button class="btn btn-primary" [routerLink]=[cliente.id.edit]>
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead style="background-color: #f0f0f0;">
+      <tr>
+        <th>Nome</th>
+        <th>Cpf</th>
+        <th>dtNascimento</th>
+        <th>Email</th>
+        <th>Cnh</th>
+        <th>DDD</th>
+        <th>Telefone</th>
+        <th>Estado_Civil</th>
+        <th>Genero</th>
+        <th>Rua</th>
+        <th>Bairro</th>
+        <th>Nr</th>
+        <th>Complemento</th>
+        <th>Cidade</th>
+        <th>Uf</th>
+        <th>Cep</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aqui você pode adicionar mais linhas conforme necessário -->
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.cpf }}</td>
+        <td>{{ cliente.dtNascimento }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.cnh }}</td>
+        <td>{{ cliente.ddd }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.estado_civil }}</td>
+        <td>{{ cliente.genero }}</td>
+        <td>{{ cliente.rua }}</td>
+        <td>{{ cliente.bairro }}</td>
+        <td>{{ cliente.numero }}</td>
+        <td>{{ cliente.complemento }}</td>
+        <td>{{ cliente.cidade }}</td>
+        <td>{{ cliente.uf }}</td>
+        <td>{{ cliente.cep }}</td>
+        <td>
+          <button
+            style="padding: 8px 16px; background-color: #007bff; border: none; border-radius: 4px; color: #fff; font-size: 14px; cursor: pointer;"
+            [routerLink]="['editar', cliente.id]">
             Editar
           </button>
-          <button class="btn btn-danger" (click)="deleteCliente(cliente)">
+          <button
+            style="padding: 8px 16px; background-color: #dc3545; border: none; border-radius: 4px; color: #fff; font-size: 14px; cursor: pointer; margin-left: 10px;"
+            (click)="deleteCliente(cliente)">
             Excluir
           </button>
-        </div>
-      </td>
-    </tr>
-</table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

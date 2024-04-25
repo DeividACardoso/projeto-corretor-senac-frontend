@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ClienteService } from './../services/cliente.service';
 import { Cliente } from '../model/cliente.interface';
+import { ClienteService } from './../services/cliente.service';
 
 @Component({
   selector: 'app-cliente-form',
@@ -45,8 +45,22 @@ save() {
       .subscribe( cliente => {
         this.cliente = cliente;
         this.form = this.fb.group({
-          nome:[cliente.id],
-          cpf:[cliente.cpf],
+          nome:['', Validators.required],
+          cpf:['', Validators.required],
+          dtNascimento: [''],
+          email: ['', [Validators.required, Validators.email]],
+          cnh: [''],
+          ddd: [''],
+          telefone: [''],
+          estado_civil: [''],
+          genero: [''],
+          rua: [''],
+          bairro: [''],
+          nr: [''],
+          complemento: [''],
+          cidade: [''],
+          uf: [''],
+          cep: ['']
         });
     })
   } else {
@@ -57,4 +71,5 @@ save() {
     }
   }
 }
+
 
