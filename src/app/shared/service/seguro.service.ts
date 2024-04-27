@@ -4,6 +4,7 @@ import { Seguro } from "../model/seguro";
 import { Observable } from "rxjs";
 // import { SeguroSeletor } from 'src/app/shared/model/seletor/seguro.seletor'
 import { Cliente } from "../model/cliente.interface";
+import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 
 @Injectable({
   providedIn :'root'
@@ -21,9 +22,9 @@ export class SeguroService{
     return this.httpClient.get<Seguro>(this.API+'/'+id)
   }
 
-  // listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguro>>{
-  //   return this.httpClient.post<Array<Seguro>>(this.API+'/filtro', seletor);
-  // }
+  listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguro>>{
+    return this.httpClient.post<Array<Seguro>>(this.API+'/filtro', seletor);
+  }
 
   salvar(seguro: Seguro): Observable<Seguro>{
     return this.httpClient.post<Seguro>(this.API, seguro);

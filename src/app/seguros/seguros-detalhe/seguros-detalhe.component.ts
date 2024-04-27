@@ -1,13 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Seguro } from '../../model/seguro'; 
-import { SeguroService } from '../../services/seguro.service';
+import { Seguro } from '../../shared/model/seguro'; 
+import { SeguroService } from '../../shared/service/seguro.service';
 // import Swal from sweetalert2';
 // import { Veiculo } from 'src/app/shared/model/veiculo';
 // import { VeiculoService } from 'src/app/shared/service/veiculo.service';
 // import { VeiculoSeletor } from 'src/app/shared/model/seletor/veiculo.seletor';
-import { Cliente } from '../../model/cliente.interface';  
+import { Cliente } from '../../shared/model/cliente.interface';  
 
 @Component({
   selector: 'app-seguro-detalhe',
