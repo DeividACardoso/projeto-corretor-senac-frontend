@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ClienteService } from './../../services/cliente.service';
-import { Cliente } from '../../model/cliente.interface';
+import { ClienteService } from '../../shared/service/cliente.service';
+import { Cliente } from '../../shared/model/cliente.interface';
 
 @Component({
   selector: 'app-cliente-form',
@@ -10,6 +10,7 @@ import { Cliente } from '../../model/cliente.interface';
   styleUrl: './cliente-listagem.component.scss'
 })
 export class ClienteListagemComponent implements OnInit {
+seletor: any;
 
   constructor(private ClienteService: ClienteService, private router: Router){
   }
