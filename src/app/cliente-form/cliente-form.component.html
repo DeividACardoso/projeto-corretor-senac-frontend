@@ -5,9 +5,10 @@
     style="background-color: #333; color: white; font-family: Arial; font-size: 24px; border-radius: 10px; padding: 10px 20px; margin-bottom: 20px;">
     @if(cliente) {
     Editar
-    } @else {
-    Novo Cliente
     }
+    @else {
+    Novo
+    } cliente
   </div>
 
   <div class="row" style="width: 100%; padding: 20px;">
@@ -16,6 +17,8 @@
     <div class="col-md-6">
       @if(form) {
       <form [formGroup]="form" (ngSubmit)="save()" style="text-align: left; width: 100%;">
+
+        <!-- Campos do formulário -->
 
         <div class="mb-3">
           <label for="name">Nome</label>
@@ -53,13 +56,18 @@
       </form>
       }
       <button type="button"
-        style="background-color: red; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; margin-top: 20px;">Cancelar</button>
+        style="background-color: red; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; margin-top: 20px"
+        routerLink="/">
+        Cancelar
+      </button>
     </div>
 
     <!-- Segunda Coluna -->
-    <div class="col-md-6" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div class="col-md-6" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
       @if(form) {
       <form [formGroup]="form" (ngSubmit)="save()" style="text-align: left; width: 100%;">
+
+        <!-- Campos do formulário -->
 
         <div class="mb-3">
           <label for="genero">Genero</label>
@@ -94,17 +102,18 @@
           <label for="cep">Cep</label>
           <input id="cep" type="number" placeholder="Numero" class="form-control" formControlName="cep">
         </div>
-
       </form>
-
-      <!-- Botão Novo Cliente -->
-      <button
-        style="background-color: blue; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; margin-top: 20px;">Novo
-        Cliente</button>
-
       }
+      <!-- Botão Novo Cliente -->
+        <button
+          style="background-color: blue; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; margin-top: 20px" (click)="addCliente()">
+          @if(cliente) {
+          Editar
+          }
+          @else {
+          Novo Cliente
+          }
+        </button>
     </div>
-
   </div>
-
 </div>

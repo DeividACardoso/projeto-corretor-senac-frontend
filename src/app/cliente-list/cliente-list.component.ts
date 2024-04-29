@@ -15,7 +15,7 @@ import { ClienteService } from '../services/cliente.service';
 export default class ClienteListComponent implements OnInit {
 
 // private clienteService = inject(ClienteService);
-clientes: any[] = [];
+clientes: Array<Cliente> = new Array();
 
 constructor(private clienteService: ClienteService, private router: Router) {}
 
@@ -24,13 +24,23 @@ trackById: TrackByFunction<any> = (index, item) => {
 }
 
 ngOnInit(): void {
-  this.clienteService.list().subscribe(clientes => {
-    this.clientes = clientes;
-    });
+  this.buscarTodos()
   }
 
 deleteCliente(cliente: Cliente) {
     this.clienteService.delete(cliente.id).subscribe(() => console.log(''));
   }
+
+  buscarTodos(){
+    this.clienteService.list().subscribe(
+      resultado => {
+        this.clientes = resultado;
+      },
+      erro => {
+        console.log('Erro ao buscar Clientes', erro)
+      }
+    )
+  }
 }
+
 

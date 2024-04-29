@@ -11,7 +11,12 @@ import { ClienteService } from './../services/cliente.service';
   templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.scss'
 })
+
 export default class ClienteFormComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private clienteService = inject(ClienteService);
 
 save() {
   const clienteForm = this.form!.value;
@@ -28,11 +33,6 @@ save() {
       });
     }
 }
-
-  private fb = inject(FormBuilder);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
-  private clienteService = inject(ClienteService);
 
   form ?: FormGroup;
   cliente ?: Cliente;
@@ -67,8 +67,31 @@ save() {
     this.form = this.fb.group({
       nome:[''],
       cpf:[''],
+      dtNascimento: [''],
+          email: ['', [Validators.required, Validators.email]],
+          cnh: [''],
+          ddd: [''],
+          telefone: [''],
+          estado_civil: [''],
+          genero: [''],
+          rua: [''],
+          bairro: [''],
+          nr: [''],
+          complemento: [''],
+          cidade: [''],
+          uf: [''],
+          cep: ['']
     });
     }
+  }
+
+  addCliente(): void {
+    const clienteForm = this.form?.value;
+    this.clienteService.create(clienteForm)
+      .subscribe(() => {
+        this.router.navigate(['/']);
+      });
+    //console.log('caralho !');
   }
 }
 

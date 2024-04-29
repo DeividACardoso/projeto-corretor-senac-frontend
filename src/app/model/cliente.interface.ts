@@ -5,17 +5,17 @@ export interface Cliente {
   cpf: number;
   dtNascimento:Date;
   email:string;
-  cnh:string;
-  ddd:string;
-  telefone: string;
+  cnh:number;
+  ddd:number;
+  telefone: number;
   estadoCivil:string;
   genero: string;
   rua:string;
   bairro:string;
-  numero:string;
+  numero:number;
   complemento:string;
   cidade:string;
   uf:string;
-  cep:string;
+  cep:number;
 
 }

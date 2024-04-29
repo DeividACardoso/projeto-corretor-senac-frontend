@@ -1,79 +1,112 @@
-<div
-  style="max-width: 1140px; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; text-align: center;">
-  <header
-    style="color: #ccc; background-color: #333; font-family: Arial, sans-serif; padding: 15px 0; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; width: 100%;">
-    <div style="display: flex; align-items: center;">
-      <a style="display: flex; align-items: center; color: #fff; text-decoration: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="2"
-          style="width: 40px; height: 40px; background-color: #4b0082; border-radius: 50%; padding: 10px; margin-right: 10px;"
-          viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        <span style="font-size: 24px; margin-left: 15px;">Lista de Clientes</span>
-      </a>
+<div class="bg-light" style="height: 100vh;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pt-2">
+        <div class="col-sm-12 text-center">
+          <h3>Listagem de Clientes</h3>
+        </div>
+        <!-- <form class="row align-items-center">
+          <div class="form-group col col-md-6">
+            <label for="nomeCliente">CPF do Cliente</label>
+            <input class="form-control shadow-sm rounded-0" name="nomeCliente" [(ngModel)]="seletor.cpfCliente">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="placaVeiculo">Placa Veículo</label>
+            <input class="form-control shadow-sm rounded-0" name="placaVeiculo" [(ngModel)]="seletor.placaVeiculo">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="dtInicioComecoVigencia">Data Inicial de Inicio de Vigência</label>
+            <input class="form-control shadow-sm rounded-0" type="date" name="dtInicioComecoVigencia" [(ngModel)]="seletor.dtInicioComecoVigencia">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="dtFimComecoVigencia">Data Final de Inicio de Vigência</label>
+            <input class="form-control shadow-sm rounded-0" type="date" name="dtFimComecoVigencia" [(ngModel)]="seletor.dtFimComecoVigencia">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="dtInicioFimVigencia">Data Inicial de Fim de Vigência</label>
+            <input class="form-control shadow-sm rounded-0" type="date" name="dtInicioFimVigencia" [(ngModel)]="seletor.dtInicioFimVigencia">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="dtFimFimVigencia">Data Final de Fim de Vigência</label>
+            <input class="form-control shadow-sm rounded-0" type="date" name="dtFimFimVigencia" [(ngModel)]="seletor.dtFimFimVigencia">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="rcfDanosMateriais">RCF Danos Materiais</label>
+            <input class="form-control shadow-sm rounded-0" name="rcfDanosMateriais" [(ngModel)]="seletor.rcfDanosMateriais">
+          </div>
+          <div class="form-group col col-md-6">
+            <label for="rcfDanosCorporais">RCF Danos Corporais</label>
+            <input class="form-control shadow-sm rounded-0" name="rcfDanosCorporais" [(ngModel)]="seletor.rcfDanosCorporais">
+          </div>
+          <div class="form-group col col-md-4">
+            <label for="franquia">Franquia</label>
+            <input class="form-control shadow-sm rounded-0" name="franquia" [(ngModel)]="seletor.franquia">
+          </div>
+          <div class="form-group col col-md-4">
+            <label for="assistencia">Assistência</label>
+            <input class="form-control shadow-sm rounded-0" name="assistencia" [(ngModel)]="seletor.assistencia">
+          </div>
+          <div class="form-group col col-md-4">
+            <label for="carroReserva">Carro Reserva</label>
+            <input class="form-control shadow-sm rounded-0" name="carroReserva" [(ngModel)]="seletor.carroReserva">
+          </div>
+          <div class="form-group col pt-3 col-md-2">
+            <button type="sumbit" name="btnrelatorio" class="form-control btn btn-success mb-3 rounded-0 shadow-sm">Relatório</button>
+            <-- Implementar: (click)="exportExcel()" -->
+        <!-- </div>
+          <div class="form-group col pt-3 col-md-5">
+            <button type="sumbit" name="btnsubmit" class="form-control btn btn-warning mb-3 rounded-0 shadow-sm">Limpar</button>
+            <-- Implementar: (click)="limpar()" -->
+        <!-- </div>
+          <div class="form-group col pt-3 col-md-5">
+            <button type="sumbit" class="form-control btn btn-primary mb-3 rounded-0 shadow-sm">Pesquisar</button> -->
+        <!-- Implementar: (click)="pesquisar()" -->
+        <!-- </div> -->
+        <!-- </form> -->
+      </div>
     </div>
-    <button
-      style="padding: 10px 20px; background-color: #007bff; border: none; border-radius: 4px; color: #fff; font-size: 16px; cursor: pointer; margin-right: 10px;"
-      routerLink="/new">
-      Novo Cliente
-    </button>
-  </header>
-
-  <table style="width: 100%; border-collapse: collapse;">
-    <thead style="background-color: #f0f0f0;">
-      <tr>
-        <th>Nome</th>
-        <th>Cpf</th>
-        <th>dtNascimento</th>
-        <th>Email</th>
-        <th>Cnh</th>
-        <th>DDD</th>
-        <th>Telefone</th>
-        <th>Estado_Civil</th>
-        <th>Genero</th>
-        <th>Rua</th>
-        <th>Bairro</th>
-        <th>Nr</th>
-        <th>Complemento</th>
-        <th>Cidade</th>
-        <th>Uf</th>
-        <th>Cep</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Aqui você pode adicionar mais linhas conforme necessário -->
-      <tr *ngFor="let cliente of clientes">
-        <td>{{ cliente.nome }}</td>
-        <td>{{ cliente.cpf }}</td>
-        <td>{{ cliente.dtNascimento }}</td>
-        <td>{{ cliente.email }}</td>
-        <td>{{ cliente.cnh }}</td>
-        <td>{{ cliente.ddd }}</td>
-        <td>{{ cliente.telefone }}</td>
-        <td>{{ cliente.estado_civil }}</td>
-        <td>{{ cliente.genero }}</td>
-        <td>{{ cliente.rua }}</td>
-        <td>{{ cliente.bairro }}</td>
-        <td>{{ cliente.numero }}</td>
-        <td>{{ cliente.complemento }}</td>
-        <td>{{ cliente.cidade }}</td>
-        <td>{{ cliente.uf }}</td>
-        <td>{{ cliente.cep }}</td>
-        <td>
-          <button
-            style="padding: 8px 16px; background-color: #007bff; border: none; border-radius: 4px; color: #fff; font-size: 14px; cursor: pointer;"
-            [routerLink]="['editar', cliente.id]">
-            Editar
-          </button>
-          <button
-            style="padding: 8px 16px; background-color: #dc3545; border: none; border-radius: 4px; color: #fff; font-size: 14px; cursor: pointer; margin-left: 10px;"
-            (click)="deleteCliente(cliente)">
-            Excluir
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  </div>
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md pt-2">
+        <div class="table-responsive rounded-0 border border-light">
+          <table id="tabelaSeguros" class="table table-responsive table-striped table-hover table-sm table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Nome</th>
+                <th scope="col" class="text-center">CPF</th>
+                <th scope="col" class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of clientes">
+                <td class="text-center align-middle">{{c.id}}</td>
+                <td class="text-center align-middle">{{c.nome}}</td>
+                <!-- <td class="text-center align-middle">{{s.veiculo.placaVeiculo}}</td> -->
+                <td class="text-center align-middle">{{c.cpf}}</td>
+                <td class="text-center align-middle">
+                  <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
+                    data-placement="top" title="Inspecionar" disabled>
+                    <!-- Implementar: (click)="inspecionar()" -->
+                    <img src="https://imgur.com/FSJgeji.png" width="15" class="pb-1 align-items-center" />
+                  </button>
+                  <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" data-toggle="tooltip"
+                    data-placement="top" title="Editar">
+                    <!-- Implementar: (click)="editar(s.id)" -->
+                    <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
+                  </button>
+                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip"
+                    data-placement="top" title="Excluir">
+                    <!-- Implementar: (click)="excluir(s.id)" -->
+                    <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

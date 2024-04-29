@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Cliente } from '../model/cliente.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
+  private http = inject(HttpClient);
 
-  // private http = inject(HttpClient);
-
-  constructor(private http: HttpClient) {}
+  //constructor(private http: HttpClient) {}
 
   list() {
     return this.http.get<Cliente[]>('http://localhost:8080/api/clientes');
