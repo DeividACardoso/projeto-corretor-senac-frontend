@@ -1,34 +1,38 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Cliente } from '../model/cliente.interface';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Cliente } from "../model/cliente";
+// import { ClienteSeletor } from 'src/app/shared/model/seletor/cliente.seletor'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn :'root'
 })
-export class ClienteService {
-
+export class ClienteService{
   private readonly API = 'http://localhost:8080/api/clientes'
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-  listarTodos() {
-    return this.http.get<Array<Cliente>>(this.API+'/todos');
+  listarTodos(): Observable<Array<Cliente>>{
+    return this.httpClient.get<Array<Cliente>>(this.API+'/todos');
   }
 
-  get(id: number) {
-    return this.http.get<Cliente>('http://localhost:8080/api/clientes/$(id)');
+  pesquisarPorId(id: number){
+    return this.httpClient.get<Cliente>(this.API+'/'+id)
   }
 
-  create(cliente: Cliente) {
-    return this.http.post<Cliente>('http://localhost:8080/api/clientes',cliente);
+  // listarComFiltro(seletor: ClienteSeletor): Observable<Array<Cliente>>{
+  //   return this.httpClient.post<Array<Cliente>>(this.API+'/filtro', seletor);
+  // }
+
+  salvar(cliente: Cliente): Observable<Cliente>{
+    return this.httpClient.post<Cliente>(this.API+'/novo', cliente);
   }
 
-  update(id: number, cliente: Cliente) {
-    return this.http.post<void>('http://localhost:8080/api/clientes/$(id)',cliente);
+  atualizar(cliente : Cliente): Observable<Cliente>{
+    return this.httpClient.post<Cliente>(this.API, cliente);
   }
 
-  delete(id: number) {
-    return this.http.delete('http://localhost:8080/api/clientes/$(id)')
+  excluir(id: number): Observable<Cliente>{
+    return this.httpClient.delete<Cliente>(this.API+'/delete-id/'+id);
   }
-
 }

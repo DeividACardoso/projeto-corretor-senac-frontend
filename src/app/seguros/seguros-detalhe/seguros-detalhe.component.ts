@@ -7,7 +7,8 @@ import { SeguroService } from '../../shared/service/seguro.service';
 // import { Veiculo } from 'src/app/shared/model/veiculo';
 // import { VeiculoService } from 'src/app/shared/service/veiculo.service';
 // import { VeiculoSeletor } from 'src/app/shared/model/seletor/veiculo.seletor';
-import { Cliente } from '../../shared/model/cliente.interface';  
+import { Cliente } from '../../shared/model/cliente';  
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-seguro-detalhe',
@@ -31,15 +32,15 @@ export class SeguroDetalheComponent implements OnInit{
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // this.carregarListaClientes();
-    // this.route.params.subscribe(params => {
-    //   this.idSeguro = params['id'];
+    this.carregarListaClientes();
+    this.route.params.subscribe(params => {
+      this.idSeguro = params['id'];
 
 
-    //   if(this.idSeguro){
-    //     this.buscarSeguro();
-    //   }
-    // });
+      if(this.idSeguro){
+        this.buscarSeguro();
+      }
+    });
   }
 
   // buscarVeiculosDoCliente(){
@@ -59,64 +60,64 @@ export class SeguroDetalheComponent implements OnInit{
     this.router.navigate(['/seguros/lista'])
   }
 
-  // carregarListaClientes() {
-  //   this.seguroService.getListaClientes().subscribe(
-  //     (clientes) => {
-  //       this.listaClientes = clientes; // Mantém a lista de objetos de cliente
-  //     },
-  //     (error) => {
-  //       console.error('Erro ao obter lista de clientes', error);
-  //     }
-  //   );
-  // }
+  carregarListaClientes() {
+    this.seguroService.getListaClientes().subscribe(
+      (clientes) => {
+        this.listaClientes = clientes; // Mantém a lista de objetos de cliente
+      },
+      (error) => {
+        console.error('Erro ao obter lista de clientes', error);
+      }
+    );
+  }
 
 
-  // buscarSeguro() {
-  //   this.seguroService.pesquisarPorId(this.idSeguro).subscribe(
-  //     resultado =>{
-  //       this.seguro = resultado;
-  //     },
-  //     erro =>{
-  //       Swal.fire('Erro', 'Erro ao buscar seguro com ID (' + this.idSeguro + ') : ', 'error');
-  //       return;
-  //     }
-  //   )
-  // }
+  buscarSeguro() {
+    this.seguroService.pesquisarPorId(this.idSeguro).subscribe(
+      resultado =>{
+        this.seguro = resultado;
+      },
+      erro =>{
+        Swal.fire('Erro', 'Erro ao buscar seguro com ID (' + this.idSeguro + ') : ', 'error');
+        return;
+      }
+    )
+  }
 
-// salvar(form: NgForm){
-//   if(form.invalid){
-//     Swal.fire("Erro", "Formulário inválido", 'error');
-//   }
-//   if(this.idSeguro){
-//     this.atualizar();
-//   } else {
-//     this.inserirSeguro();
-//   }
-// }
+salvar(form: NgForm){
+  if(form.invalid){
+    Swal.fire("Erro", "Formulário inválido", 'error');
+  }
+  if(this.idSeguro){
+    this.atualizar();
+  } else {
+    this.inserirSeguro();
+  }
+}
 
 public compareById(r1: any, r2: any): boolean {
   return r1 && r2 ? r1.id === r2.id : r1 === r2;
 }
 
-// inserirSeguro() {
-//     this.seguroService.salvar(this.seguro).subscribe(
-//     sucesso => {
-//       Swal.fire("Sucesso", "Seguro salvo com sucesso", 'success');
-//       this.seguro = new Seguro();
-//     },
-//     erro => {
-//       Swal.fire("Erro", "Não foi possivel salvar o seguro: " + erro.error.message, 'error');
-//     }
-//   )
-// }
-// atualizar() {
-//   this.seguroService.atualizar(this.seguro).subscribe(
-//     sucesso => {
-//       Swal.fire("Sucesso", "Seguro Atualizado com Sucesso!", 'success');
-//     },
-//     erro => {
-//       Swal.fire("Erro", "Não foi possivel atualizar o seguro", 'error');
-//     }
-//   )
-// }
+inserirSeguro() {
+    this.seguroService.salvar(this.seguro).subscribe(
+    sucesso => {
+      Swal.fire("Sucesso", "Seguro salvo com sucesso", 'success');
+      this.seguro = new Seguro();
+    },
+    erro => {
+      Swal.fire("Erro", "Não foi possivel salvar o seguro: " + erro.error.message, 'error');
+    }
+  )
+}
+atualizar() {
+  this.seguroService.atualizar(this.seguro).subscribe(
+    sucesso => {
+      Swal.fire("Sucesso", "Seguro Atualizado com Sucesso!", 'success');
+    },
+    erro => {
+      Swal.fire("Erro", "Não foi possivel atualizar o seguro", 'error');
+    }
+  )
+}
 }

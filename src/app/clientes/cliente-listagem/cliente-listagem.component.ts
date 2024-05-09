@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ClienteService } from '../../shared/service/cliente.service';
-import { Cliente } from '../../shared/model/cliente.interface';
+import { Cliente } from '../../shared/model/cliente';
 
 @Component({
   selector: 'app-cliente-form',
