@@ -75,7 +75,7 @@
               <div class="form-group col col-md-6">
                 <label for="cep">CEP</label>
                 <input [ngClass]="(!cliente.cep && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.cep" class="shadow-sm rounde border-dark" name="cep" (blur)="viaCep(cliente.cep)" required appOnlyNumbers>
+                  [(ngModel)]="cliente.cep" class="shadow-sm rounde border-dark" name="cep" maxlength="8" (blur)="viaCep(cliente.cep)" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um cep válido</div>
               </div>
               <div class="form-group col col-md-6">
