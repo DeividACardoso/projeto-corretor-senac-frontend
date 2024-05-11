@@ -12,7 +12,7 @@ import { Cliente } from '../../shared/model/cliente';
 export class ClienteListagemComponent implements OnInit {
 seletor: any;
 
-  constructor(private ClienteService: ClienteService, private router: Router){
+  constructor(private clienteService: ClienteService, private router: Router){
   }
 
 public clientes: Array<Cliente> = new Array();
@@ -21,8 +21,12 @@ public clientes: Array<Cliente> = new Array();
     this.buscarClientes();
   }
 
+  editar(id: number){
+    this.router.navigate(['clientes/detalhe', id])
+  }
+  
   buscarClientes() {
-    this.ClienteService.listarTodos().subscribe(
+    this.clienteService.listarTodos().subscribe(
       resultado => {
         this.clientes = resultado;
       },
@@ -31,5 +35,7 @@ public clientes: Array<Cliente> = new Array();
       }
     )
   }
+
+
 }
 

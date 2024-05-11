@@ -5,72 +5,86 @@
         <div class="col-sm-12 text-center">
           <h3>Listagem de Seguros</h3>
         </div>
-        <form class="row align-items-center">
-          <div class="form-group col col-md-6">
-            <label for="nomeCliente">Nome Cliente</label>
-            <input class="form-control shadow-sm rounded border-dark" name="nomeCliente" [(ngModel)]="seletor.nomeCliente">
+        <div class="accordion accordion-flush">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <strong>Filtros</strong>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <form class="row align-items-center form-floating ">
+                  <div class="form-group col col-md-6">
+                    <input class="form-control shadow-sm rounded border-dark" name="nomeCliente" [(ngModel)]="seletor.nomeCliente">
+                    <label for="nomeCliente">Nome Cliente</label>
+                  </div>
+                  
+                  <div class="form-group col col-md-6">
+                    <label for="nomeCorretor">Nome Corretor</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="nomeCorretor" [(ngModel)]="seletor.nomeCorretor">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="dtInicioComecoVigencia">Data Inicial de Inicio de Vigência</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtInicioComecoVigencia" [(ngModel)]="seletor.dtInicioComecoVigencia">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="dtFimComecoVigencia">Data Final de Inicio de Vigência</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimComecoVigencia" [(ngModel)]="seletor.dtFimComecoVigencia">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="dtInicioFimVigencia">Data Inicial de Fim de Vigência</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtInicioFimVigencia" [(ngModel)]="seletor.dtInicioFimVigencia">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="dtFimFimVigencia">Data Final de Fim de Vigência</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimFimVigencia" [(ngModel)]="seletor.dtFimFimVigencia">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="menorRcfDanosMateriais">Menor RCF Danos Materiais</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="menorRcfDanosMateriais" [(ngModel)]="seletor.menorRcfDanosMateriais">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="maiorRcfDanosMateriais">Maior RCF Danos Materiais</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="maiorRcfDanosMateriais" [(ngModel)]="seletor.maiorRcfDanosMateriais">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="menorRofDanosFisicos">Menor ROF Danos Fisicos</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="menorRofDanosFisicos" [(ngModel)]="seletor.menorRofDanosFisicos">
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="maiorRofDanosFisicos">Maior ROF Danos Fissicos</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="maiorRofDanosFisicos" [(ngModel)]="seletor.maiorRofDanosFisicos">
+                  </div>
+                  <div class="form-group col col-md-4">
+                    <label for="menorFranquia">Menor Franquia</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="menorFranquia" [(ngModel)]="seletor.menorFranquia">
+                  </div>
+                  <div class="form-group col col-md-4">
+                    <label for="maiorFranquia">Maior Franquia</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="maiorFranquia" [(ngModel)]="seletor.maiorFranquia">
+                  </div>
+                  <div class="form-group col col-md-4">
+                    <label for="carroReserva">Carro Reserva</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="carroReserva" [(ngModel)]="seletor.carroReserva">
+                  </div>
+                  <div class="form-group col pt-3 col-md-2">
+                    <button type="sumbit" name="btnrelatorio" class="form-control btn btn-success mb-3 rounded shadow-md border-dark">Relatório</button>
+                    <!-- Implementar: (click)="exportExcel()" -->
+                  </div>
+                  <div class="form-group col pt-3 col-md-5">
+                    <button type="sumbit" name="btnsubmit" class="form-control btn btn-warning mb-3 rounded shadow-md border-dark">Limpar</button>
+                    <!-- Implementar: (click)="limpar()" -->
+                  </div>
+                  <div class="form-group col pt-3 col-md-5">
+                    <button type="sumbit" class="form-control btn btn-primary mb-3 rounded shadow-md border-dark" (click)="pesquisar()">Pesquisar</button>
+                    <!-- Implementar: (click)="pesquisar()" -->
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-          <div class="form-group col col-md-6">
-            <label for="nomeCorretor">Nome Corretor</label>
-            <input class="form-control shadow-sm rounded border-dark" name="nomeCorretor" [(ngModel)]="seletor.nomeCorretor">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="dtInicioComecoVigencia">Data Inicial de Inicio de Vigência</label>
-            <input class="form-control shadow-sm rounded border-dark" type="date" name="dtInicioComecoVigencia" [(ngModel)]="seletor.dtInicioComecoVigencia">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="dtFimComecoVigencia">Data Final de Inicio de Vigência</label>
-            <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimComecoVigencia" [(ngModel)]="seletor.dtFimComecoVigencia">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="dtInicioFimVigencia">Data Inicial de Fim de Vigência</label>
-            <input class="form-control shadow-sm rounded border-dark" type="date" name="dtInicioFimVigencia" [(ngModel)]="seletor.dtInicioFimVigencia">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="dtFimFimVigencia">Data Final de Fim de Vigência</label>
-            <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimFimVigencia" [(ngModel)]="seletor.dtFimFimVigencia">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="menorRcfDanosMateriais">Menor RCF Danos Materiais</label>
-            <input class="form-control shadow-sm rounded border-dark" name="menorRcfDanosMateriais" [(ngModel)]="seletor.menorRcfDanosMateriais">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="maiorRcfDanosMateriais">Maior RCF Danos Materiais</label>
-            <input class="form-control shadow-sm rounded border-dark" name="maiorRcfDanosMateriais" [(ngModel)]="seletor.maiorRcfDanosMateriais">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="menorRofDanosFisicos">Menor ROF Danos Fisicos</label>
-            <input class="form-control shadow-sm rounded border-dark" name="menorRofDanosFisicos" [(ngModel)]="seletor.menorRofDanosFisicos">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="maiorRofDanosFisicos">Maior ROF Danos Fissicos</label>
-            <input class="form-control shadow-sm rounded border-dark" name="maiorRofDanosFisicos" [(ngModel)]="seletor.maiorRofDanosFisicos">
-          </div>
-          <div class="form-group col col-md-4">
-            <label for="menorFranquia">Menor Franquia</label>
-            <input class="form-control shadow-sm rounded border-dark" name="menorFranquia" [(ngModel)]="seletor.menorFranquia">
-          </div>
-          <div class="form-group col col-md-4">
-            <label for="maiorFranquia">Maior Franquia</label>
-            <input class="form-control shadow-sm rounded border-dark" name="maiorFranquia" [(ngModel)]="seletor.maiorFranquia">
-          </div>
-          <div class="form-group col col-md-4">
-            <label for="carroReserva">Carro Reserva</label>
-            <input class="form-control shadow-sm rounded border-dark" name="carroReserva" [(ngModel)]="seletor.carroReserva">
-          </div>
-          <div class="form-group col pt-3 col-md-2">
-            <button type="sumbit" name="btnrelatorio" class="form-control btn btn-success mb-3 rounded shadow-md border-dark">Relatório</button>
-            <!-- Implementar: (click)="exportExcel()" -->
-          </div>
-          <div class="form-group col pt-3 col-md-5">
-            <button type="sumbit" name="btnsubmit" class="form-control btn btn-warning mb-3 rounded shadow-md border-dark">Limpar</button>
-            <!-- Implementar: (click)="limpar()" -->
-          </div>
-          <div class="form-group col pt-3 col-md-5">
-            <button type="sumbit" class="form-control btn btn-primary mb-3 rounded shadow-md border-dark" (click)="pesquisar()">Pesquisar</button>
-            <!-- Implementar: (click)="pesquisar()" -->
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>

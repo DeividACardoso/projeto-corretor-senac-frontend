@@ -13,7 +13,7 @@
                 <label for="nome">Nome</label>
                 <input
                   [ngClass]="((!cliente.nome || (cliente.nome && cliente.nome.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.nome" class="shadow-sm rounded border-dark" minlength="3" name="nome" required>
+                  [(ngModel)]="cliente.nome" class="shadow-sm rounded border-dark" minlength="3" placeholder="Nome" name="nome" required>
                 <div class="invalid-feedback">Informe um nome com no mínimo 3 caracteres.</div>
               </div>
               <div class="form-group col col-md-3">
