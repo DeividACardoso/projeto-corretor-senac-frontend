@@ -5,8 +5,8 @@
         <div class="col-sm-12 text-center">
           <h3>Listagem de Seguros</h3>
         </div>
-        <div class="accordion accordion-flush">
-          <div class="accordion-item">
+        <div class="accordion">
+          <div class="accordion-item border-dark">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <strong>Filtros</strong>
@@ -16,8 +16,8 @@
               <div class="accordion-body">
                 <form class="row align-items-center form-floating ">
                   <div class="form-group col col-md-6">
-                    <input class="form-control shadow-sm rounded border-dark" name="nomeCliente" [(ngModel)]="seletor.nomeCliente">
                     <label for="nomeCliente">Nome Cliente</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="nomeCliente" [(ngModel)]="seletor.nomeCliente">
                   </div>
                   
                   <div class="form-group col col-md-6">

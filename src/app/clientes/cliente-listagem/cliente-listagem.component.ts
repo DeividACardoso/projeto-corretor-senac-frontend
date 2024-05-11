@@ -22,10 +22,6 @@ public clientes: Array<Cliente> = new Array();
     this.buscarClientes();
   }
 
-  editar(id: number){
-    this.router.navigate(['clientes/detalhe', id])
-  }
-  
   buscarClientes() {
     this.clienteService.listarTodos().subscribe(
       resultado => {
@@ -47,7 +43,7 @@ public clientes: Array<Cliente> = new Array();
       icon: 'warning',
       showCancelButton: true,
     }).then(r => {
-      this.ClienteService.excluir(id).subscribe(
+      this.clienteService.excluir(id).subscribe(
         sucesso => {
           Swal.fire("Sucesso", "Cliente excluido com sucesso!", 'success');
           this.buscarClientes();
