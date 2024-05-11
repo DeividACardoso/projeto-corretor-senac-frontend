@@ -53,7 +53,7 @@
                 <input
                   [ngClass]="((!cliente.estadoCivil || (cliente.estadoCivil.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   class="shadow-sm rounde border-2 border-secondary" [ngModel]="cliente.estadoCivil"
-                  (ngModelChange)="cliente.estadoCivil=$event" placeholder="Solteiro/Casado" name="email" required
+                  (ngModelChange)="cliente.estadoCivil=$event" placeholder="Solteiro/Casado" name="estadoCivil" required
                   appOnlyNumbers>
                 <div class="invalid-feedback">Informe um estado civil válido</div>
               </div>
