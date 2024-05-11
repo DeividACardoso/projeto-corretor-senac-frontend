@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ClienteService } from '../../shared/service/cliente.service';
 import { Cliente } from '../../shared/model/cliente';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cliente-form',
@@ -35,7 +36,27 @@ public clientes: Array<Cliente> = new Array();
       }
     )
   }
+  editar(id: number){
+    this.router.navigate(['clientes/detalhe', id])
+  }
 
-
+  excluir(id: number){
+    Swal.fire({
+      title: 'Você está certo disso?',
+      text: 'Deseja excluir o cliente #' + id + "?",
+      icon: 'warning',
+      showCancelButton: true,
+    }).then(r => {
+      this.ClienteService.excluir(id).subscribe(
+        sucesso => {
+          Swal.fire("Sucesso", "Cliente excluido com sucesso!", 'success');
+          this.buscarClientes();
+        },
+        erro => {
+          Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error')
+        }
+      )
+    })
+  }
 }
 

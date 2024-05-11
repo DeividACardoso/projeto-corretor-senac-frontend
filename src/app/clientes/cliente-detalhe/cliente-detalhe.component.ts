@@ -30,12 +30,11 @@ export class ClienteDetalheComponent implements OnInit{
   public ngForm: NgForm;
 
   constructor(private clienteService : ClienteService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private http: HttpClient) {}
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit(): void {
-  this.route.params.subscribe(params => {
+   this.route.params.subscribe(params => {
     this.idCliente = params['id'];
 
     if(this.idCliente){
@@ -64,6 +63,7 @@ salvar(form: NgForm){
     this.atualizar();
   } else {
     this.inserirCliente();
+    
   }
 }
 inserirCliente() {
