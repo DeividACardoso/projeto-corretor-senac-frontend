@@ -1,4 +1,4 @@
-import { Cliente } from "./cliente.interface"
+import { Cliente } from "./cliente"
 
 export class Seguro {
   id: number;

@@ -12,11 +12,10 @@ export class Cliente {
   genero: string;
   rua:string;
   bairro:string;
-  numero:number;
+  numero:string;
   complemento:string;
   cidade:string;
   uf:string;
-  cep:number;
-  corretor_id:number
+  cep:string;
 
 }
