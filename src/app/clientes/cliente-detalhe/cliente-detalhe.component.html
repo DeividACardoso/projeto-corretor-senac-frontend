@@ -13,13 +13,13 @@
                 <label for="nome">Nome</label>
                 <input
                   [ngClass]="((!cliente.nome || (cliente.nome && cliente.nome.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.nome" class="shadow-sm rounded border-dark" minlength="3" placeholder="Nome" name="nome" required>
+                  [(ngModel)]="cliente.nome" class="shadow-sm rounded border border-secondary" minlength="3" placeholder="Nome" name="nome" required>
                 <div class="invalid-feedback">Informe um nome com no mínimo 3 caracteres.</div>
               </div>
               <div class="form-group col col-md-3">
                 <label for="cpf">CPF</label>
                 <input [ngClass]="((!cliente.cpf || (cliente.cpf && cliente.cpf.length != 14)) && ngForm.submitted)
-                  ? 'form-control is-invalid' : 'form-control'" class="shadow-sm rounde border-dark"
+                  ? 'form-control is-invalid' : 'form-control'" class="shadow-sm rounded border border-secondary"
                   [ngModel]="cliente.cpf | numberMask: 'cpf'" (ngModelChange)="cliente.cpf=$event"
                   placeholder="xxx.xxx.xxx-xx" maxlength="14" name="cpf" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe um CPF válido</div>
@@ -28,7 +28,7 @@
                 <label for="cnh">CNH</label>
                 <input
                   [ngClass]="((!cliente.cnh || (cliente.cnh.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounde border-dark" [ngModel]="cliente.cnh" (ngModelChange)="cliente.cnh=$event"
+                  class="shadow-sm rounded border border-secondary" [ngModel]="cliente.cnh" (ngModelChange)="cliente.cnh=$event"
                   placeholder="xxxxxxxxx" maxlength="9" name="cnh" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe um CNH válido</div>
               </div>
@@ -36,7 +36,7 @@
                 <label for="email">E-mail</label>
                 <input
                   [ngClass]="((!cliente.email || (cliente.email.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounde border-dark" [ngModel]="cliente.email" (ngModelChange)="cliente.email=$event"
+                  class="shadow-sm rounded border border-secondary" [ngModel]="cliente.email" (ngModelChange)="cliente.email=$event"
                   placeholder="Insira seu e-mail" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                 <div class="invalid-feedback">Informe um e-mail válido</div>
               </div>
@@ -44,7 +44,7 @@
                 <label for="genero">Gênero</label>
                 <input
                   [ngClass]="((!cliente.genero || (cliente.genero.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounde border-dark" [ngModel]="cliente.genero" (ngModelChange)="cliente.genero=$event"
+                  class="shadow-sm rounded border border-secondary" [ngModel]="cliente.genero" (ngModelChange)="cliente.genero=$event"
                   name="genero" required>
                 <div class="invalid-feedback">Informe um gênero válido</div>
               </div>
@@ -52,8 +52,8 @@
                 <label for="estadoCivil">Estado Civil</label>
                 <input
                   [ngClass]="((!cliente.estadoCivil || (cliente.estadoCivil.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounde border-2 border-secondary" [ngModel]="cliente.estadoCivil"
-                  (ngModelChange)="cliente.estadoCivil=$event" placeholder="Solteiro/Casado" name="estadoCivil" required
+                  class="shadow-sm rounded border border-secondary" [ngModel]="cliente.estadoCivil"
+                  (ngModelChange)="cliente.estadoCivil=$event" placeholder="Solteiro/Casado" name="estadoCivilhttps://www.youtube.com/watch?v=HVD4lnfz0-M&pp=ygURd2h5IGkgbG92ZSB5b3Ugc28%3D" required
                   appOnlyNumbers>
                 <div class="invalid-feedback">Informe um estado civil válido</div>
               </div>
@@ -61,57 +61,57 @@
                 <label for="telefone">Telefone (com DDD)</label>
                 <input [ngClass]="((!cliente.telefone || (cliente.telefone && cliente.telefone.length != 15) || (cliente.telefone && cliente.telefone.length != 14)) && ngForm.submitted)
                   ? 'form-control is-invalid' : 'form-control'" [ngModel]="cliente.telefone | phone"
-                  (ngModelChange)="cliente.telefone=$event" placeholder="(xx) #xxxx-xxxx" class="shadow-sm rounde border-dark"
+                  (ngModelChange)="cliente.telefone=$event" placeholder="(xx) #xxxx-xxxx" class="shadow-sm rounded border border-secondary"
                   maxlength="19" name="telefone" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um telefone válido</div>
               </div>
               <div class="form-group col col-md-3">
                 <label for="dataNascimento">Data de Nascimento</label>
                 <input [ngClass]="(!cliente.dtNascimento) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.dtNascimento" class="shadow-sm rounde border-dark" type="date" name="dataNascimento"
+                  [(ngModel)]="cliente.dtNascimento" class="shadow-sm rounded border border-secondary" type="date" name="dataNascimento"
                   required>
                 <div class="invalid-feedback">Insira uma data de nascimento válida.</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="cep">CEP</label>
                 <input [ngClass]="(!cliente.cep && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.cep" class="shadow-sm rounde border-dark" name="cep" maxlength="8" (blur)="viaCep(cliente.cep)" required appOnlyNumbers>
+                  [(ngModel)]="cliente.cep" class="shadow-sm rounded border border-secondary" name="cep" maxlength="8" (blur)="viaCep(cliente.cep)" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um cep válido</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="numeroCasa">Número da Casa</label>
                 <input [ngClass]="(!cliente.numero && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.numero" class="shadow-sm rounde border-dark" name="numeroCasa" required appOnlyNumbers>
+                  [(ngModel)]="cliente.numero" class="shadow-sm rounded border border-secondary" name="numeroCasa" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um número de casa válido</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="complemento">Complemento</label>
                 <input [ngClass]="(!cliente.complemento && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.complemento" class="shadow-sm rounde border-dark" name="complemento" required>
+                  [(ngModel)]="cliente.complemento" class="shadow-sm rounded border border-secondary" name="complemento" required>
                 <div class="invalid-feedback">Insira um complemento válido</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="rua">Rua</label>
                 <input [ngClass]="(!cliente.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.rua" class="shadow-sm rounde border-dark" name="rua" required>
+                  [(ngModel)]="cliente.rua" class="shadow-sm rounded border border-secondary" name="rua" required>
                 <div class="invalid-feedback">Insira uma rua válida</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="bairro">Bairro</label>
                 <input [ngClass]="(!cliente.bairro && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.bairro" class="shadow-sm rounde border-dark" name="bairro" required>
+                  [(ngModel)]="cliente.bairro" class="shadow-sm rounded  border border-secondary" name="bairro" required>
                 <div class="invalid-feedback">Insira um Bairro válido</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="cidade">Cidade</label>
                 <input [ngClass]="(!cliente.cidade && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.cidade" class="shadow-sm rounde border-dark" name="cidade" required>
+                  [(ngModel)]="cliente.cidade" class="shadow-sm rounded  border border-secondary" name="cidade" required>
                 <div class="invalid-feedback">Insira uma cidade válida</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="estado">Estado</label>
                 <input [ngClass]="(!cliente.uf && ngForm.submitted)  ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.uf" class="shadow-sm rounded border-dark"  name="estado" required>
+                  [(ngModel)]="cliente.uf" class="shadow-sm rounded border border-secondary"  name="estado" required>
                 <div class="invalid-feedback">Insira um estado válido</div>
               </div>
               <div class="form-group col-md-6 pt-4">
@@ -119,7 +119,7 @@
                   (click)="voltar()">Voltar</button>
               </div>
               <div class="form-group col-md-6 pt-4">
-                <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-secondary"
+                <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
                   (click)="salvar(ngForm)">Cadastrar</button>
               </div>
             </div>

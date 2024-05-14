@@ -34,7 +34,7 @@ export class ClienteDetalheComponent implements OnInit{
     private router: Router) {}
 
   ngOnInit(): void {
-   this.route.params.subscribe(params => {
+  this.route.params.subscribe(params => {
     this.idCliente = params['id'];
 
     if(this.idCliente){

@@ -38,7 +38,7 @@ public clientes: Array<Cliente> = new Array();
 
   excluir(id: number){
     Swal.fire({
-      title: 'Você está certo disso?',
+      title: 'Você tem certeza?',
       text: 'Deseja excluir o cliente #' + id + "?",
       icon: 'warning',
       showCancelButton: true,
