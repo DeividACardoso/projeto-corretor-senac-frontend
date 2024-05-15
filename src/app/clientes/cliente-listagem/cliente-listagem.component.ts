@@ -43,15 +43,17 @@ public clientes: Array<Cliente> = new Array();
       icon: 'warning',
       showCancelButton: true,
     }).then(r => {
+      if(r.isConfirmed){
       this.clienteService.excluir(id).subscribe(
         sucesso => {
-          Swal.fire("Sucesso", "Cliente excluido com sucesso!", 'success');
+          Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
           this.buscarClientes();
         },
         erro => {
-          Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error')
+          Swal.fire("Erro", "Erro ao excluir o cliente: " + erro.error.message, 'error')
         }
       )
+    }
     })
   }
 }

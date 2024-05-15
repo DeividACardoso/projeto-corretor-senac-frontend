@@ -12,10 +12,10 @@
               <div class="row align-items-start">
                 <div class="form-group col col-md-6">
                   <label for="cliente">Cliente</label>
-                  <select  [ngClass]="(!seguro.idCliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                  <select  [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
                   [ngModelOptions]="{standalone: true}"
                   [compareWith]="compareById"
-                  [(ngModel)]="seguro.idCliente" name="cliente" required>
+                  [(ngModel)]="seguro.cliente" name="cliente" required>
                     <option value="" disabled selected>Selecione um cliente</option>
                     <!-- <option *ngFor="let cliente of listaClientes" [ngValue]="cliente"> Nome: {{ cliente.nome }} - CPF: {{ cliente.cpf | numberMask: 'cpf' }}</option> -->
                   </select>
