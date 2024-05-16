@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Seguradora } from '../../shared/model/seguradora';
 
 @Component({
   selector: 'app-seguradora-detalhe',
-  standalone: true,
-  imports: [],
   templateUrl: './seguradora-detalhe.component.html',
   styleUrl: './seguradora-detalhe.component.scss'
 })
