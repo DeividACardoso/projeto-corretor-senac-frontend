@@ -26,6 +26,8 @@ export class ClienteDetalheComponent implements OnInit{
   public idCliente: number;
   dados: DadosDoJSON;
 
+  listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"]; 
+
   @ViewChild('ngForm')
   public ngForm: NgForm;
 

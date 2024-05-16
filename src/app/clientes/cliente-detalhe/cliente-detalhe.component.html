@@ -50,11 +50,17 @@
               </div>
               <div class="form-group col col-md-3">
                 <label for="estadoCivil">Estado Civil</label>
-                <input
+                <select
                   [ngClass]="((!cliente.estadoCivil || (cliente.estadoCivil.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounded border border-secondary" [ngModel]="cliente.estadoCivil"
-                  (ngModelChange)="cliente.estadoCivil=$event" placeholder="Solteiro/Casado" name="estadoCivilhttps://www.youtube.com/watch?v=HVD4lnfz0-M&pp=ygURd2h5IGkgbG92ZSB5b3Ugc28%3D" required
-                  appOnlyNumbers>
+                  class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example" [ngModel]="cliente.estadoCivil"
+                  (ngModelChange)="cliente.estadoCivil=$event" placeholder="Estado Civil" name="estadoCivil" required>
+                  <option selected disabled>Selecione um estado civil</option>
+                  <option value="Solteiro">Solteiro</option>
+                  <option value="Casado">Casado</option>
+                  <option value="Separado">Separado</option>
+                  <option value="Divorciado">Divorciado</option>
+                  <option value="Viúvo">Viúvo</option>
+                </select>
                 <div class="invalid-feedback">Informe um estado civil válido</div>
               </div>
               <div class="form-group col col-md-3">
@@ -79,6 +85,12 @@
                 <div class="invalid-feedback">Insira um cep válido</div>
               </div>
               <div class="form-group col col-md-6">
+                <label for="logradouro">Logradouro</label>
+                <input [ngClass]="(!cliente.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="cliente.rua" class="shadow-sm rounded border border-secondary" name="logradouro" required>
+                <div class="invalid-feedback">Insira uma rua válida</div>
+              </div>
+              <div class="form-group col col-md-6">
                 <label for="numeroCasa">Número da Casa</label>
                 <input [ngClass]="(!cliente.numero && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="cliente.numero" class="shadow-sm rounded border border-secondary" name="numeroCasa" required appOnlyNumbers>
@@ -89,12 +101,6 @@
                 <input [ngClass]="(!cliente.complemento && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="cliente.complemento" class="shadow-sm rounded border border-secondary" name="complemento" required>
                 <div class="invalid-feedback">Insira um complemento válido</div>
-              </div>
-              <div class="form-group col col-md-6">
-                <label for="rua">Rua</label>
-                <input [ngClass]="(!cliente.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.rua" class="shadow-sm rounded border border-secondary" name="rua" required>
-                <div class="invalid-feedback">Insira uma rua válida</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="bairro">Bairro</label>
