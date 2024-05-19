@@ -1,8 +1,7 @@
-export class Seguradora {
+export class Sinistro {
 
   id: number;
   tipo: string;
-  cnpj: string;
   dataHora: Date;
   descricao: string;
 }
