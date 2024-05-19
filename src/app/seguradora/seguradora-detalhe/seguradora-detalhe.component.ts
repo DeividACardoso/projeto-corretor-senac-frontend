@@ -9,4 +9,6 @@ import { Seguradora } from '../../shared/model/seguradora';
 })
 export class SeguradoraDetalheComponent {
 
+  public seguradora:Seguradora = new Seguradora();
+
 }
