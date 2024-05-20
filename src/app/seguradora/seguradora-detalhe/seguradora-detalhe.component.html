@@ -16,11 +16,9 @@
                 <div class="invalid-feedback">Informe um nome com no mínimo 3 caracteres.</div>
               </div>
               <div class="form-group col col-md-3">
-                <label for="cpf">CPF</label>
-                <input [ngClass]="((!seguradora.cnpj || (seguradora.cnpj && seguradora.cnpj.length != 18)) && ngForm.submitted)
-                  ? 'form-control is-invalid' : 'form-control'" class="shadow-sm rounded border border-secondary"
-                  [ngModel]="seguradora.cnpj | numberMask: 'cnpj'" (ngModelChange)="seguradora.cnpj=$event"
-                  placeholder="xx.xxx.xxx/xxxx-xx" maxlength="18" name="cnpj" required appOnlyNumbers>
+                <label for="cnpj">CNPJ</label>
+                <input [ngClass]="((!seguradora.cnpj || (seguradora.cnpj && seguradora.cnpj.length <= 14)) && ngForm.submitted)
+                  ? 'form-control is-invalid' : 'form-control'" class="shadow-sm rounded border border-secondary">
                 <div class="invalid-feedback">Informe um cnpj válido</div>
               </div>
               <div class="form-group col col-md-6">
@@ -34,7 +32,7 @@
               <div class="form-group col col-md-3">
                 <label for="telefone">Telefone (com DDD)</label>
                 <input [ngClass]="((!seguradora.telefone || (seguradora.telefone && seguradora.telefone.length != 15) || (seguradora.telefone && seguradora.telefone.length != 14)) && ngForm.submitted)
-                  ? 'form-control is-invalid' : 'form-control'" [ngModel]="cliente.telefone | phone"
+                  ? 'form-control is-invalid' : 'form-control'" [ngModel]="seguradora.telefone | phone"
                   (ngModelChange)="seguradora.telefone=$event" placeholder="(xx) #xxxx-xxxx" class="shadow-sm rounded border border-secondary"
                   maxlength="19" name="telefone" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um telefone válido</div>

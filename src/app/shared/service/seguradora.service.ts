@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { Seguro } from "../model/seguro";
 import { Observable } from "rxjs";
 // import { SeguroSeletor } from 'src/app/shared/model/seletor/seguro.seletor'
-import { Cliente } from "../model/cliente";
+import { Seguradora as Seguradora } from "../model/seguradora";
 import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 
 @Injectable({
@@ -14,30 +13,30 @@ export class SeguradoraService{
 
   constructor(private httpClient: HttpClient) {}
 
-  listarTodos(): Observable<Array<Seguro>>{
+  listarTodos(): Observable<Array<Seguradora>>{
     return this.httpClient.get<Array<Seguradora>>(this.API+'/todos');
   }
-  getListaClientes(): Observable<Array<Cliente>> {
-    return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');;
+  getListaSeguradora(): Observable<Array<Seguradora>> {
+    return this.httpClient.get<Array<Seguradora>>('http://localhost:8080/api/seguradora/todos');;
   }
 
   pesquisarPorId(id: number){
-    return this.httpClient.get<Seguro>(this.API+'/'+id)
+    return this.httpClient.get<Seguradora>(this.API+'/'+id)
   }
 
-  listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguro>>{
-    return this.httpClient.post<Array<Seguro>>(this.API+'/filtro', seletor);
+  listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguradora>>{
+    return this.httpClient.post<Array<Seguradora>>(this.API+'/filtro', seletor);
   }
 
-  salvar(seguro: Seguro): Observable<Seguro>{
-    return this.httpClient.post<Seguro>(this.API, seguro);
+  salvar(seguradora: Seguradora): Observable<Seguradora>{
+    return this.httpClient.post<Seguradora>(this.API, seguradora);
   }
 
-  atualizar(seguro : Seguro): Observable<Seguro>{
-    return this.httpClient.post<Seguro>(this.API, seguro);
+  atualizar(seguradora : Seguradora): Observable<Seguradora>{
+    return this.httpClient.post<Seguradora>(this.API, seguradora);
   }
 
-  excluir(id: number): Observable<Seguro>{
-    return this.httpClient.delete<Seguro>(this.API+'/delete-id/'+id);
+  excluir(id: number): Observable<Seguradora>{
+    return this.httpClient.delete<Seguradora>(this.API+'/delete-id/'+id);
   }
 }
