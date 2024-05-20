@@ -5,12 +5,14 @@ import { SegurosRoutingModule } from './seguros-routing.module';
 import { SegurosListagemComponent } from './seguros-listagem/seguros-listagem.component';
 import { SeguroDetalheComponent } from './seguros-detalhe/seguros-detalhe.component'
 import { FormsModule } from '@angular/forms';
+import { NumberMaskPipe } from '../shared/number-mask-pipe/number-mask.pipe';
 
 
 @NgModule({
   declarations: [
     SegurosListagemComponent,
-    SeguroDetalheComponent
+    SeguroDetalheComponent,
+    NumberMaskPipe,
   ],
   imports: [
     CommonModule,
