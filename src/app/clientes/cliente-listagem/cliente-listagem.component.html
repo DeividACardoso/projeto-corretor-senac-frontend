@@ -69,8 +69,8 @@
   <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-md pt-2">
-        <div class="table-responsive rounded-0 border border-light">
-          <table id="tabelaSeguros" class="table table-responsive table-striped table-hover table-sm table-bordered">
+        <div class="table-responsive rounded-0 border">
+          <table id="tabelaSeguros" class="table table-responsive table-striped table-hover table-sm table-bordered border-dark">
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
@@ -84,7 +84,7 @@
                 <td class="text-center align-middle">{{c.id}}</td>
                 <td class="text-center align-middle">{{c.nome}}</td>
                 <!-- <td class="text-center align-middle">{{s.veiculo.placaVeiculo}}</td> -->
-                <td class="text-center align-middle">{{c.cpf}}</td>
+                <td class="text-center align-middle">{{c.cpf | numberMask: 'cpf'}}</td>
                 <td class="text-center align-middle">
                   <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
                     data-placement="top" title="Inspecionar" disabled>
@@ -94,12 +94,12 @@
                   <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" data-toggle="tooltip"
                     data-placement="top" title="Editar">
                     <!-- Implementar: (click)="editar(s.id)" -->
-                    <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
+                    <img src="https://i.imgur.com/9H2mwRv.png" width="15" (click)="editar(c.id)" class="pb-1 align-items-center" />
                   </button>
                   <button name="deletar" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip"
                     data-placement="top" title="Excluir">
-                    <!-- Implementar: (click)="excluir(s.id)" -->
-                    <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
+                    <!-- Implementar: (click)="excluir(c.id)" -->
+                    <img src="https://i.imgur.com/JnmcPWf.png" width="15" (click)="excluir(c.id)" class="pb-1 align-items-center">
                   </button>
                 </td>
               </tr>
