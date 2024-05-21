@@ -35,7 +35,7 @@
               <div class="form-group col col-md-6">
                 <label for="email">E-mail</label>
                 <input
-                  [ngClass]="((!cliente.email || (cliente.email.length != 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [ngClass]="((!cliente.email || (cliente.email.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   class="shadow-sm rounded border border-secondary" [ngModel]="cliente.email" (ngModelChange)="cliente.email=$event"
                   placeholder="Insira seu e-mail" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                 <div class="invalid-feedback">Informe um e-mail válido</div>
