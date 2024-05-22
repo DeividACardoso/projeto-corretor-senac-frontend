@@ -7,12 +7,14 @@ import { SegurosListagemComponent } from './seguros-listagem/seguros-listagem.co
 import { SegurosRoutingModule } from './seguros-routing.module';
 import { SharingModule } from '../shared/shared.module';
 import { Title } from '@angular/platform-browser';
+import { SegurosInspecaoComponent } from './seguros-inspecao/seguros-inspecao.component';
 
 
 @NgModule({
   declarations: [
     SegurosListagemComponent,
     SeguroDetalheComponent,
+    SegurosInspecaoComponent,
   ],
   imports: [
     CommonModule,

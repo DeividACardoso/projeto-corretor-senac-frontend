@@ -7,7 +7,7 @@ import { SegurosInspecaoComponent } from './seguros-inspecao/seguros-inspecao.co
 const routes: Routes = [
   { path: 'lista', component: SegurosListagemComponent },
   { path: 'detalhe', component: SeguroDetalheComponent },
-  { path: 'inspecao', component: SegurosInspecaoComponent }
+  { path: 'inspecao/:id', component: SegurosInspecaoComponent }
 ];
 
 @NgModule({

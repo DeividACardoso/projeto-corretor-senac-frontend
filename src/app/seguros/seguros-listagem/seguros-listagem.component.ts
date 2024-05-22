@@ -44,4 +44,7 @@ export class SegurosListagemComponent implements OnInit{
       }
     )
   }
+  inspecionar(id: number){
+    this.router.navigate(['seguros/inspecao', id])
+  }
 }
