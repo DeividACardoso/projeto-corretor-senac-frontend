@@ -6,6 +6,7 @@ import { SeguroDetalheComponent } from './seguros-detalhe/seguros-detalhe.compon
 import { SegurosListagemComponent } from './seguros-listagem/seguros-listagem.component';
 import { SegurosRoutingModule } from './seguros-routing.module';
 import { SharingModule } from '../shared/shared.module';
+import { Title } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -19,6 +20,9 @@ import { SharingModule } from '../shared/shared.module';
     SegurosRoutingModule,
     //Import abaixo necessário para utilizar de Pipes
     SharingModule
+  ],
+  providers: [
+    Title
   ]
 })
 export class SegurosModule { }
