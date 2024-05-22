@@ -33,7 +33,7 @@ export class SeguradoraService{
   }
 
   atualizar(seguradora : Seguradora): Observable<Seguradora>{
-    return this.httpClient.post<Seguradora>(this.API, seguradora);
+    return this.httpClient.post<Seguradora>(this.API+'/atualizar-id/', seguradora);
   }
 
   excluir(id: number): Observable<Seguradora>{

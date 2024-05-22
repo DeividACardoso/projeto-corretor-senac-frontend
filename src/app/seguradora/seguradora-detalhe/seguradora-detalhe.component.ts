@@ -23,6 +23,16 @@ export class SeguradoraDetalheComponent {
     private router: Router) { }
 
 
+    ngOnInit(): void {
+      this.route.params.subscribe(params => {
+        this.idSeguradora = params['id'];
+
+        if(this.idSeguradora){
+          this.buscarSeguradora();
+        }
+      });
+    }
+
   salvar(form: NgForm) {
     if (form.invalid) {
       Swal.fire("Erro", "Formulário inválido", 'error');
@@ -57,6 +67,18 @@ export class SeguradoraDetalheComponent {
       },
       erro => {
         Swal.fire("Erro", "Não foi possivel atualizar a Seguradora", 'error');
+      }
+    )
+  }
+
+  buscarSeguradora() {
+    this.seguradoraService.pesquisarPorId(this.idSeguradora).subscribe(
+      resultado =>{
+        this.seguradora = resultado;
+      },
+      erro =>{
+        Swal.fire('Erro', 'Erro ao buscar Seguradora com ID (' + this.idSeguradora + ') : ', 'error');
+        return;
       }
     )
   }
