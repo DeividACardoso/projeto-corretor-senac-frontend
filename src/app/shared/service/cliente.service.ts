@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from "@angular/core";
+import { Injectable, booleanAttribute } from "@angular/core";
 import { Observable } from "rxjs";
 import { Cliente } from "../model/cliente";
 // import { ClienteSeletor } from 'src/app/shared/model/seletor/cliente.seletor'
