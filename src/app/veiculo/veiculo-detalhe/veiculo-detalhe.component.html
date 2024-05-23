@@ -1,0 +1,79 @@
+<!-- <pre>{{veiculo | json}}</pre> -->
+<div class="bg-light" style="height: 100vh">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 pt-2">
+          <div class="col-sm-12 text-center">
+            <h3>Cadastro de Veiculo</h3>
+          </div>
+          <div class="card-body card-info">
+            <form #ngForm="ngForm">
+              <div class="row align-items-start">
+                <div class="form-group col col-md-6">
+                  <label for="marca">Marca</label>
+                  <input
+                    [ngClass]="((!veiculo.marca || (veiculo.marca && veiculo.marca.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.marca" class="shadow-sm rounded border border-secondary" minlength="2" placeholder="Marca" name="marca" required>
+                  <div class="invalid-feedback">Informe uma marca com no mínimo 2 caracteres.</div>
+                </div>
+                <div class="form-group col col-md-6">
+                    <label for="modelo">Modelo</label>
+                    <input
+                      [ngClass]="((!veiculo.modelo || (veiculo.modelo && veiculo.modelo.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                      [(ngModel)]="veiculo.modelo" class="shadow-sm rounded border border-secondary" minlength="2" placeholder="Modelo" name="modelo" required>
+                    <div class="invalid-feedback">Informe um modelo com no mínimo 2 caracteres.</div>
+                  </div>
+                  <div class="form-group col col-md-6">
+                    <label for="modelo">Tipo de Combustível</label>
+                    <input
+                      [ngClass]="((!veiculo.tipoCombustivel || (veiculo.tipoCombustivel && veiculo.tipoCombustivel.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                      [(ngModel)]="veiculo.tipoCombustivel" class="shadow-sm rounded border border-secondary" minlength="2" placeholder="tipoCombustivel" name="tipoCombustivel" required>
+                    <div class="invalid-feedback">Informe um tipo de combustivel.</div>
+                  </div>
+                  <div class="form-group col col-md-3">
+                  <label for="telefone">Telefone (com DDD)</label>
+                  <input [ngClass]="((!veiculo.telefone || (veiculo.telefone && veiculo.telefone.length != 15) || (veiculo.telefone && veiculo.telefone.length != 14)) && ngForm.submitted)
+                    ? 'form-control is-invalid' : 'form-control'" [ngModel]="veiculo.telefone | phone"
+                    (ngModelChange)="veiculo.telefone=$event" placeholder="(xx) #xxxx-xxxx" class="shadow-sm rounded border border-secondary"
+                    maxlength="19" name="telefone" required appOnlyNumbers>
+                  <div class="invalid-feedback">Insira um telefone válido</div>
+                </div>
+                <div class="form-group col col-md-6">
+                  <label for="cep">CEP</label>
+                  <input [ngClass]="(!veiculo.cep && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.cep" class="shadow-sm rounded border border-secondary" name="cep" maxlength="8" (blur)="viaCep(veiculo.cep)" required appOnlyNumbers>
+                  <div class="invalid-feedback">Insira um cep válido</div>
+                </div>
+                <div class="form-group col col-md-6">
+                  <label for="bairro">Bairro</label>
+                  <input [ngClass]="(!veiculo.bairro && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.bairro" class="shadow-sm rounded  border border-secondary" name="bairro" required>
+                  <div class="invalid-feedback">Insira um Bairro válido</div>
+                </div>
+                <div class="form-group col col-md-6">
+                  <label for="cidade">Cidade</label>
+                  <input [ngClass]="(!veiculo.cidade && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.cidade" class="shadow-sm rounded  border border-secondary" name="cidade" required>
+                  <div class="invalid-feedback">Insira uma cidade válida</div>
+                </div>
+                <div class="form-group col col-md-6">
+                  <label for="estado">Estado</label>
+                  <input [ngClass]="(!veiculo.uf && ngForm.submitted)  ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.uf" class="shadow-sm rounded border border-secondary"  name="estado" required>
+                  <div class="invalid-feedback">Insira um estado válido</div>
+                </div>
+                <div class="form-group col-md-6 pt-4">
+                  <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
+                    (click)="voltar()">Voltar</button>
+                </div>
+                <div class="form-group col-md-6 pt-4">
+                  <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
+                    (click)="salvar(ngForm)">Cadastrar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
