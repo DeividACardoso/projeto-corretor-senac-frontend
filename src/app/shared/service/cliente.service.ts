@@ -5,7 +5,7 @@ import { Cliente } from "../model/cliente";
 // import { ClienteSeletor } from 'src/app/shared/model/seletor/cliente.seletor'
 
 @Injectable({
-  providedIn :'root'
+  providedIn :'root'  
 })
 export class ClienteService{
   private readonly API = 'http://localhost:8080/api/clientes'
