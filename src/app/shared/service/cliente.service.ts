@@ -29,7 +29,7 @@ export class ClienteService{
   }
 
   atualizar(cliente : Cliente): Observable<Cliente>{
-    return this.httpClient.post<Cliente>(this.API, cliente);
+    return this.httpClient.put<Cliente>(this.API, cliente);
   }
 
   excluir(id: number): Observable<Cliente>{
