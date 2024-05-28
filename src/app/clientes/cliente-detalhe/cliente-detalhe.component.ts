@@ -21,12 +21,12 @@ interface DadosDoJSON {
   styleUrls: ['./cliente-detalhe.component.scss']
 })
 export class ClienteDetalheComponent implements OnInit{
-  
+
   public cliente:Cliente = new Cliente();
   public idCliente: number;
   dados: DadosDoJSON;
 
-  listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"]; 
+  listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"];
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
@@ -65,7 +65,7 @@ salvar(form: NgForm){
     this.atualizar();
   } else {
     this.inserirCliente();
-    
+
   }
 }
 inserirCliente() {
