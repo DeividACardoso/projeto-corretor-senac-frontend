@@ -1,16 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid justify-content-center">
-    <h2 class="text-white">Login</h2>
-  </div>
-</nav>
 <div class="container d-flex justify-content-center">
   <div class="col-4">
     <div class="card shadow round mt-5">
       <div class="card-header">
-        <h3 class="text-center">App Investimentos</h3>
+        <h3 class="text-center">Entrar</h3>
       </div>
       <div class="card-body">
-        <form [formGroup]="formLogin">
+        <!-- [formGroup]="formLogin" -->
+        <form>
           <div class="mb-3">
             <label class="form-label">Username</label>
             <input type="text" class="form-control" formControlName="username">
@@ -36,27 +32,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mb-3,
-  .text-center {
-    width: 100%;
-  }
-</style>
