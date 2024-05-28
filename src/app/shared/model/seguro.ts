@@ -3,7 +3,7 @@ import { Cliente } from "./cliente"
 export class Seguro {
   id: number;
   // corretor: Corretor;
-  idCliente: number;
+  cliente: Cliente;
   rcfDanosMateriais: number;
   rofDanosFisicos: number;
   dtInicioVigencia: Date;

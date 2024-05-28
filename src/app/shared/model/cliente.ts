@@ -6,7 +6,6 @@ export class Cliente {
   dtNascimento:Date;
   email:string;
   cnh:string;
-  ddd:string;
   telefone: string;
   estadoCivil:string;
   genero: string;

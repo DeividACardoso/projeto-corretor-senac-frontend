@@ -26,13 +26,14 @@ export class ClienteDetalheComponent implements OnInit{
   public idCliente: number;
   dados: DadosDoJSON;
 
+  listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"]; 
+
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
   constructor(private clienteService : ClienteService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private http: HttpClient) {}
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit(): void {
   this.route.params.subscribe(params => {
@@ -64,6 +65,7 @@ salvar(form: NgForm){
     this.atualizar();
   } else {
     this.inserirCliente();
+    
   }
 }
 inserirCliente() {
