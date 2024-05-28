@@ -6,6 +6,7 @@ import { SeguradoraDetalheComponent } from './seguradora-detalhe/seguradora-deta
 const routes: Routes = [
   { path: 'lista', component: SeguradoraListagemComponent },
   { path: 'detalhe', component: SeguradoraDetalheComponent},
+  { path: 'detalhe/:id', component: SeguradoraDetalheComponent},
 ];
 
 @NgModule({

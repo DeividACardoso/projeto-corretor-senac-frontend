@@ -10,7 +10,7 @@ import { SeguradoraService } from '../../shared/service/seguradora.service';
   templateUrl: './seguradora-detalhe.component.html',
   styleUrl: './seguradora-detalhe.component.scss'
 })
-export class SeguradoraDetalheComponent {
+export class SeguradoraDetalheComponent implements OnInit {
 
   public seguradora: Seguradora = new Seguradora();
   public idSeguradora: number;
@@ -61,7 +61,7 @@ export class SeguradoraDetalheComponent {
   }
 
   atualizar() {
-    this.seguradoraService.atualizar(this.seguradora).subscribe(
+    this.seguradoraService.atualizar(this.idSeguradora).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Seguradora Atualizada com Sucesso!", 'success');
       },

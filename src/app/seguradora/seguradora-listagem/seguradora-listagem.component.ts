@@ -50,8 +50,7 @@ export class SeguradoraListagemComponent {
   }
 
   editar(id: number){
-    this.seguradoraService.atualizar(this.seguradora);
-    this.router.navigate(['seguradoras/detalhe', id])
+    this.router.navigate(['seguradora/detalhe', id])
   }
 
   excluir(id: number){

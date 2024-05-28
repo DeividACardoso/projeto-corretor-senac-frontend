@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 // import { SeguroSeletor } from 'src/app/shared/model/seletor/seguro.seletor'
-import { Seguradora as Seguradora } from "../model/seguradora";
+import { Seguradora as Seguradora} from '../model/seguradora';
 import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 
 @Injectable({
@@ -16,9 +16,10 @@ export class SeguradoraService{
   listarTodos(): Observable<Array<Seguradora>>{
     return this.httpClient.get<Array<Seguradora>>(this.API+'/todos');
   }
-  getListaSeguradora(): Observable<Array<Seguradora>> {
-    return this.httpClient.get<Array<Seguradora>>('http://localhost:8080/api/seguradora/todos');;
-  }
+
+  // getListaSeguradora(): Observable<Array<Seguradora>> {
+  //   return this.httpClient.get<Array<Seguradora>>('http://localhost:8080/api/seguradora/todos');;
+  // }
 
   pesquisarPorId(id: number){
     return this.httpClient.get<Seguradora>(this.API+'/'+id)
@@ -32,8 +33,8 @@ export class SeguradoraService{
     return this.httpClient.post<Seguradora>(this.API, seguradora);
   }
 
-  atualizar(seguradora : Seguradora): Observable<Seguradora>{
-    return this.httpClient.post<Seguradora>(this.API+'/atualizar/', seguradora);
+  atualizar(id: number): Observable<Seguradora>{
+    return this.httpClient.put<Seguradora>(this.API+'/atualizar/',id);
   }
 
   excluir(id: number): Observable<Seguradora>{
