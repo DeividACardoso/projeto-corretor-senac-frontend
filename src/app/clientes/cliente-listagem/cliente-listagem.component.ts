@@ -56,9 +56,5 @@ public clientes: Array<Cliente> = new Array();
     }
     })
   }
-
-  verificarSeguro(id: number){
-    return this.router.navigate(['clientes/verificar-seg/', id])
-  }
 }
 

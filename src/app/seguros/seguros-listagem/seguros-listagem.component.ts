@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Seguro } from '../../shared/model/seguro';
 import { SeguroService } from '../../shared/service/seguro.service';
 import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-seguros-listagem',
@@ -12,15 +11,13 @@ import { Title } from '@angular/platform-browser';
 })
 export class SegurosListagemComponent implements OnInit{
 
-  constructor(private SeguroService: SeguroService, private router: Router, private titleService: Title){
+  constructor(private SeguroService: SeguroService, private router: Router){
   }
 
   public seguros: Array<Seguro> = new Array();
   public seletor: SeguroSeletor = new SeguroSeletor();
-  title = "Listagem de Seguros"
 
   ngOnInit(): void {
-    this.titleService.setTitle(this.title)
     this.buscarSeguros();
   }
 
@@ -43,8 +40,5 @@ export class SegurosListagemComponent implements OnInit{
         console.log('Erro ao buscar Seguros com filtros: ', erro);
       }
     )
-  }
-  inspecionar(id: number){
-    this.router.navigate(['seguros/inspecao', id])
   }
 }

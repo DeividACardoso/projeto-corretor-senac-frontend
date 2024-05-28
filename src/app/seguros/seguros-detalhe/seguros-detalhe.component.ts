@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Seguro } from '../../shared/model/seguro'; 
 import { SeguroService } from '../../shared/service/seguro.service';
-import { Title } from '@angular/platform-browser';
 // import Swal from sweetalert2';
 // import { Veiculo } from 'src/app/shared/model/veiculo';
 // import { VeiculoService } from 'src/app/shared/service/veiculo.service';
@@ -25,15 +24,14 @@ export class SeguroDetalheComponent implements OnInit{
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
-  title = "Cadastro de Seguros"
+
+
   constructor(private seguroService : SeguroService,
               // private veiculoService: VeiculoService,
               private router: Router,
-              private route: ActivatedRoute,
-              private titleService: Title) {}
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle(this.title)
     this.carregarListaClientes();
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
