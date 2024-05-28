@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Cliente } from '../../shared/model/cliente';
 import { ClienteService } from '../../shared/service/cliente.service';
 import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './cliente-listagem.component.html',
   styleUrl: './cliente-listagem.component.scss'
 })
+
 export class ClienteListagemComponent implements OnInit {
 seletor: any;
 
