@@ -16,7 +16,10 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveForeground": "#e7e7e799",
         "activityBarBadge.background": "#d4a96a",
-        "activityBarBadge.foreground": "#15202b"
+        "activityBarBadge.foreground": "#15202b",
+        "panel.border": "#9e57cf",
+        "sideBar.border": "#9e57cf",
+        "tab.activeBorder": "#9e57cf"
     },
     "peacock.color": "#8636bd",
     "window.autoDetectColorScheme": true
