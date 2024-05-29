@@ -1,24 +1,25 @@
 <pre>{{seguro | json}}</pre>
 <div class="bg-light" style="height: 100vh">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12 pt-2">
-          <div class="col-sm-12 text-center">
-            <h3>Cadastro de Seguros</h3>
-          </div>
-          <div class="card-body card-info">
-            <form #ngForm="ngForm">
-              <div class="row align-items-start">
-                <div class="form-group col col-md-6 ">
-                  <label for="cliente">Cliente</label>
-                    <select  [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
-                        [ngModelOptions]="{standalone: true}"
-                        [compareWith]="compareById"
-                        [(ngModel)]="seguro.cliente" class="shadow-sm rounded border-dark" name="cliente" required>
-                      <option value="" disabled selected>Selecione um cliente</option>
-                      <option *ngFor="let cliente of listaClientes" [ngValue]="cliente"> Nome: {{ cliente.nome }} - CPF: {{ cliente.cpf | numberMask: 'cpf' }}</option>
-                  </select>
-                  <div class="invalid-feedback">Informe o cliente</div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 pt-2 align-items-center">
+        <div class="col-sm-12 text-center">
+          <h3>Cadastro de Seguros</h3>
+        </div>
+        <div class="card-body card-info">
+          <form #ngForm="ngForm">
+            <div class="row align-items-start">
+              <div class="form-group col col-md-6 ">
+                <label for="cliente">Cliente</label>
+                <form>
+                  <input [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
+                    class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
+                    <datalist id="dataListOptions">
+                      <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
+                    </datalist>
+                </form>
+                <div class="invalid-feedback">Informe o cliente</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="veiculo">Veículo</label>
@@ -32,66 +33,79 @@
                 </select>
                 <div class="invalid-feedback">Informe o veículo</div>
               </div>
-                <div class="form-group col col-md-6">
-                  <label for="nome">Número da proposta</label>
-                    <input class="shadow-sm rounded border-dark" 
-                      [ngClass]="((!seguro.numeroProposta || (seguro.numeroProposta && seguro.numeroProposta.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                      [(ngModel)]="seguro.numeroProposta" minlength="3" name="numeroProposta" required>
-                  <div class="invalid-feedback">Informe o número da proposta</div>
-                </div>
-                <div class="form-group col col-md-6">
-                  <label for="nome">Franquia</label>
-                    <input class="shadow-sm rounded border-dark"  minlength="3" name="franquia"
-                      [ngClass]="(!seguro.franquia && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                      [(ngModel)]="seguro.franquia" required>
+              <div class="form-group col col-md-6">
+                <label for="nome">Número da proposta</label>
+                <input class="shadow-sm rounded border-dark"
+                  [ngClass]="((!seguro.numeroProposta || (seguro.numeroProposta && seguro.numeroProposta.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="seguro.numeroProposta" minlength="3" name="numeroProposta" required>
+                <div class="invalid-feedback">Informe o número da proposta</div>
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="nome">Franquia</label>
+                <div class="input-group">
+                  <span class="input-group-text">R$</span>
+                  <input class="shadow-sm rounded border-dark" type="number" placeholder="0.00" value="0" step=".05" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" minlength="3" name="franquia"
+                    [ngClass]="(!seguro.franquia && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="seguro.franquia" required>
                   <div class="invalid-feedback">Informe a franquia</div>
                 </div>
-                <div class="form-group col col-md-3">
-                  <label for="nome">Data de início de vigência</label>
-                    <input class="shadow-sm rounded border-dark"  type="date" name="dtInicioVigencia" 
-                      [ngClass]="(!seguro.dtInicioVigencia && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                        [(ngModel)]="seguro.dtInicioVigencia" required>
-                  <div class="invalid-feedback">Informe a data de inicio de vigência</div>
+              </div>
+              <div class="form-group col col-md-3">
+                <label for="nome">Data de início de vigência</label>
+                <input class="shadow-sm rounded border-dark" type="date" name="dtInicioVigencia"
+                  [ngClass]="(!seguro.dtInicioVigencia && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="seguro.dtInicioVigencia" required>
+                <div class="invalid-feedback">Informe a data de inicio de vigência</div>
+              </div>
+              <div class="form-group col col-md-3">
+                <label for="nome">Data de fim de vigência</label>
+                <input class="shadow-sm rounded border-dark" type="date" name="dtFimVigencia"
+                  [ngClass]="(!seguro.dtFimVigencia && (seguro.dtFimVigencia && ngForm.submitted)) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="seguro.dtFimVigencia" required>
+                <div class="invalid-feedback">Informe a data de fim de vigência</div>
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="nome">RCF Danos Materiais</label>
+                <div class="input-group">
+                  <span class="input-group-text">R$</span>
+                  <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0" step=".05" name="rcfDanosMateriais"
+                    [ngClass]="((!seguro.rcfDanosMateriais|| (seguro.rcfDanosMateriais && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="seguro.rcfDanosMateriais" required>
+                  <div class="invalid-feedback">Informe RCF de danos materiais</div>
                 </div>
-                <div class="form-group col col-md-3">
-                  <label for="nome">Data de fim de vigência</label>
-                    <input class="shadow-sm rounded border-dark"  type="date" name="dtFimVigencia"
-                      [ngClass]="(!seguro.dtFimVigencia && (seguro.dtFimVigencia && ngForm.submitted)) ? 'form-control is-invalid' : 'form-control'"
-                      [(ngModel)]="seguro.dtFimVigencia" required>
-                  <div class="invalid-feedback">Informe a data de fim de vigência</div>
-                </div>
-                <div class="form-group col col-md-6">
-                  <label for="nome">RCF Danos Materiais</label>
-                    <input class="shadow-sm rounded border-dark"  minlength="3" name="rcfDanosMateriais"
-                      [ngClass]="((!seguro.rcfDanosMateriais|| (seguro.rcfDanosMateriais && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                      [(ngModel)]="seguro.rcfDanosMateriais" required>
-                    <div class="invalid-feedback">Informe RCF de danos materiais</div>
-                </div>
-                <div class="form-group col col-md-6">
-                  <label for="nome">ROF Danos Físicos</label>
-                  <input class="shadow-sm rounded border-dark"  minlength="3" name="rcfDanosCorporais"
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="nome">ROF Danos Físicos</label>
+                <div class="input-group">
+                  <span class="input-group-text">R$</span>
+                  <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0" step=".05" name="rcfDanosCorporais"
                     [ngClass]="(((!seguro.rofDanosFisicos)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.rofDanosFisicos" required>
                   <div class="invalid-feedback">Informe ROF de danos físicos</div>
                 </div>
-                <div class="form-group col col-md-6">
-                  <label for="nome">Carro reserva</label>
-                    <input class="shadow-sm rounded border-dark"  minlength="3" name="carroReserva"
-                      [ngClass]="((!seguro.carroReserva|| (seguro.carroReserva && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                      [(ngModel)]="seguro.carroReserva" required>
-                    <div class="invalid-feedback">Carro reserva</div>
-                </div>
-                <div class="form-group col-md-6 pt-4">
-                  <button type="submit" class="form-control btn btn-warning rounded border-dark shadow-sm" (click)="voltar()">Voltar</button>
-                </div>
-                <div class="form-group col-md-6 pt-4">
-                  <!-- Implementar: (click)="salvar(ngForm)" -->
-                  <button type="submit" class="form-control btn btn-primary rounded border-dark shadow-sm">Cadastrar</button>
-                </div>
               </div>
-            </form>
-          </div>
+              <div class="form-group col col-md-6 pt-4">
+                <div class="form-check form-switch form-switch-md">
+                  <input class="shadow-sm rounded border-dark form-check-input" type="checkbox" role="switch" name="carroReserva"
+                  [ngClass]="((!seguro.carroReserva|| (seguro.carroReserva && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="seguro.carroReserva" required>
+                  <label for="nome" class="p-1">Carro reserva</label>
+                </div>
+                <div class="invalid-feedback">Carro reserva</div>
+              </div>
+              <div class="form-group col-md-6 pt-4">
+                <button type="submit" class="form-control btn btn-warning rounded border-dark shadow-sm"
+                  (click)="voltar()">Voltar</button>
+              </div>
+              <div class="form-group col-md-6 pt-4">
+                <!-- Implementar: (click)="salvar(ngForm)" -->
+                <button type="submit"
+                  class="form-control btn btn-primary rounded border-dark shadow-sm">Cadastrar</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -20,6 +20,7 @@ export class SeguroDetalheComponent implements OnInit{
   public seguros: Array<Seguro> = new Array();
   public idSeguro: number;
   public listaClientes: Array<Cliente> = new Array();
+  displayCliente: string;
   // public listaVeiculos: Array<Veiculo> = new Array();
 
   @ViewChild('ngForm')
@@ -41,6 +42,24 @@ export class SeguroDetalheComponent implements OnInit{
         this.buscarSeguro();
       }
     });
+  }
+
+  onInputChange(event: any) {
+    const input = event.target.value;
+    const selectedClient = this.listaClientes.find(cliente =>
+      `${cliente.nome}` === input
+    );
+    if (selectedClient) {
+      this.seguro.cliente = selectedClient;
+    } else {
+    }
+  }
+  ngOnChanges() {
+    if (this.seguro.cliente) {
+      this.displayCliente = `${this.seguro.cliente.cpf}`;
+    } else {
+      this.displayCliente = '';
+    }
   }
 
   // buscarVeiculosDoCliente(){
