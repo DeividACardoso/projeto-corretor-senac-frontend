@@ -5,7 +5,8 @@ import { SinistroDetalheComponent } from './sinistro-detalhe/sinistro-detalhe.co
 
 const routes: Routes = [
   {path: 'lista', component: SinistroListagemComponent },
-  { path: 'detalhe', component: SinistroDetalheComponent }
+  { path: 'detalhe', component: SinistroDetalheComponent},
+  { path: 'detalhe/:id', component: SinistroDetalheComponent},
 ];
 
 @NgModule({
