@@ -61,7 +61,7 @@ export class SeguradoraDetalheComponent implements OnInit {
   }
 
   atualizar() {
-    this.seguradoraService.atualizar(this.seguradora).subscribe(
+    this.seguradoraService.atualizar(this.idSeguradora, this.seguradora).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Seguradora Atualizada com Sucesso!", 'success');
       },
