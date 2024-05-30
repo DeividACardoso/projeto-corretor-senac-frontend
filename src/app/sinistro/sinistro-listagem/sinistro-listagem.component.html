@@ -1,1 +1,51 @@
-<p>sinistro-listagem works!</p>
+<div class="bg-light" style="height: 100vh;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pt-2">
+        <div class="col-sm-12 text-center">
+          <h3>Listagem de Sinistros</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md pt-2">
+        <div class="table-responsive rounded-0 border">
+          <table id="tabelaSeguros" class="table table-responsive table-striped table-hover table-sm table-bordered border-dark">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Tipo</th>
+                <th scope="col" class="text-center">Data e Hora</th>
+                <th scope="col" class="text-center">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let si of sinistro">
+                <td class="text-center align-middle">{{si.id}}</td>
+                <td class="text-center align-middle">{{si.tipo}}</td>
+                 <td class="text-center align-middle">{{si.dataHora}}</td>
+                <td class="text-center align-middle">{{si.descricao}}</td>
+                <td class="text-center align-middle">
+                  <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
+                    data-placement="top" title="Inspecionar" disabled>
+                    <img src="https://imgur.com/FSJgeji.png" width="15" class="pb-1 align-items-center" />
+                  </button>
+                  <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" (click)="editar(si.id)" data-toggle="tooltip"
+                    data-placement="top" title="Editar">
+                    <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
+                  </button>
+                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(si.id)" data-toggle="tooltip"
+                    data-placement="top" title="Excluir">
+                    <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
