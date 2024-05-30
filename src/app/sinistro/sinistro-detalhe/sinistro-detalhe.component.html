@@ -1,1 +1,49 @@
-<p>sinistro-detalhe works!</p>
+<div class="bg-light" style="height: 100vh">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 pt-2">
+        <div class="col-sm-12 text-center">
+          <h3>Cadastro de Seguradoras</h3>
+        </div>
+        <div class="card-body card-info">
+          <form #ngForm="ngForm">
+            <div class="row align-items-start">
+              <div class="form-group col col-md-6">
+                <label for="nome">Tipo</label>
+                <input
+                [ngClass]="((!sinistro.tipo || (sinistro.tipo && sinistro.tipo.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="sinistro.tipo" class="shadow-sm rounded border border-secondary" minlength="3"
+                  placeholder="Tipo do Sinistro" name="tipo" required>
+                <div class="invalid-feedback">Informe o tipo do Sinistro.</div>
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="datahora">Data e Hora</label>
+                <input
+                [ngClass]="((!sinistro.dataHora || (sinistro.dataHora && sinistro.dataHora.length < 12)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                [(ngModel)]="sinistro.dataHora" class="shadow-sm rounded border border-secondary" minlength="12"
+                placeholder="Data e Hora do Sinistro" name="tipo" required>
+              <div class="invalid-feedback">Informe a data e hora do Sinistro.</div>
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="descricao">Descrição</label>
+                <input
+                  [ngClass]="((!sinistro.descricao || (sinistro.descricao.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  class="shadow-sm rounded border border-secondary" [ngModel]="sinistro.descricao"
+                  (ngModelChange)="sinistro.descricao=$event" placeholder="Insira a descrição" name="descricao" type="descricao">
+                <div class="invalid-feedback">Informe uma descrição de Sinistro válida</div>
+              </div>
+              <div class="form-group col-md-6 pt-4">
+                <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
+                  (click)="voltar()">Voltar</button>
+              </div>
+              <div class="form-group col-md-6 pt-4">
+                <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
+                  (click)="salvar(ngForm)">Cadastrar</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

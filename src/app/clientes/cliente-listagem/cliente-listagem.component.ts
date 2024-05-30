@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cliente } from '../../shared/model/cliente';
 import { ClienteService } from '../../shared/service/cliente.service';
 import Swal from 'sweetalert2';
 
@@ -56,4 +57,3 @@ public clientes: Array<Cliente> = new Array();
     })
   }
 }
-
