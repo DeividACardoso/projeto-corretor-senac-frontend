@@ -7,37 +7,37 @@ import { Cliente } from "../model/cliente";
 import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 
 @Injectable({
-  providedIn :'root'
+  providedIn: 'root'
 })
-export class SeguroService{
+export class SeguroService {
   private readonly API = 'http://localhost:8080/api/seguros'
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
-  listarTodos(): Observable<Array<Seguro>>{
-    return this.httpClient.get<Array<Seguro>>(this.API+'/todos');
+  listarTodos(): Observable<Array<Seguro>> {
+    return this.httpClient.get<Array<Seguro>>(this.API + '/todos');
   }
   getListaClientes(): Observable<Array<Cliente>> {
     return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
   }
 
-  pesquisarPorId(id: number){
-    return this.httpClient.get<Seguro>(this.API+'/'+id)
+  pesquisarPorId(id: number) {
+    return this.httpClient.get<Seguro>(this.API + '/' + id)
   }
 
-  listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguro>>{
-    return this.httpClient.post<Array<Seguro>>(this.API+'/filtro', seletor);
+  listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguro>> {
+    return this.httpClient.post<Array<Seguro>>(this.API + '/filtro', seletor);
   }
 
-  salvar(seguro: Seguro): Observable<Seguro>{
+  salvar(seguro: Seguro): Observable<Seguro> {
     return this.httpClient.post<Seguro>(this.API, seguro);
   }
 
-  atualizar(seguro : Seguro): Observable<Seguro>{
+  atualizar(seguro: Seguro): Observable<Seguro> {
     return this.httpClient.post<Seguro>(this.API, seguro);
   }
 
-  excluir(id: number): Observable<Seguro>{
-    return this.httpClient.delete<Seguro>(this.API+'/delete-id/'+id);
+  excluir(id: number): Observable<Seguro> {
+    return this.httpClient.delete<Seguro>(this.API + '/delete-id/' + id);
   }
 }
