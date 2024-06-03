@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Cliente } from '../../shared/model/cliente';
 import { ClienteService } from '../../shared/service/cliente.service';
 import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './cliente-listagem.component.html',
   styleUrl: './cliente-listagem.component.scss'
 })
+
 export class ClienteListagemComponent implements OnInit {
 seletor: any;
 
@@ -43,15 +44,17 @@ public clientes: Array<Cliente> = new Array();
       icon: 'warning',
       showCancelButton: true,
     }).then(r => {
+      if(r.isConfirmed){
       this.clienteService.excluir(id).subscribe(
         sucesso => {
-          Swal.fire("Sucesso", "Cliente excluido com sucesso!", 'success');
+          Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
           this.buscarClientes();
         },
         erro => {
-          Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error')
+          Swal.fire("Erro", "Erro ao excluir o cliente: " + erro.error.message, 'error')
         }
       )
+    }
     })
   }
 }

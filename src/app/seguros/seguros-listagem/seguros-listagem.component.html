@@ -49,11 +49,11 @@
                     <input class="form-control shadow-sm rounded border-dark" name="maiorRcfDanosMateriais" [(ngModel)]="seletor.maiorRcfDanosMateriais">
                   </div>
                   <div class="form-group col col-md-6">
-                    <label for="menorRofDanosFisicos">Menor ROF Danos Fisicos</label>
+                    <label for="menorRofDanosFisicos">Menor ROF Danos Físicos</label>
                     <input class="form-control shadow-sm rounded border-dark" name="menorRofDanosFisicos" [(ngModel)]="seletor.menorRofDanosFisicos">
                   </div>
                   <div class="form-group col col-md-6">
-                    <label for="maiorRofDanosFisicos">Maior ROF Danos Fissicos</label>
+                    <label for="maiorRofDanosFisicos">Maior ROF Danos Físicos</label>
                     <input class="form-control shadow-sm rounded border-dark" name="maiorRofDanosFisicos" [(ngModel)]="seletor.maiorRofDanosFisicos">
                   </div>
                   <div class="form-group col col-md-4">
@@ -106,11 +106,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let s of seguros">
-                <td class="text-center align-middle">{{s.idCliente}}</td>
+                <td class="text-center align-middle">{{s.cliente.nome}}</td>
                 <td class="text-center align-middle">{{s.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{s.dtFimVigencia | date: 'dd/MM/yyyy'}}</td>
-                <td class="text-center align-middle">{{s.rcfDanosMateriais}}</td>
-                <td class="text-center align-middle">{{s.rofDanosFisicos}}</td>
-                <td class="text-center align-middle">{{s.franquia}}</td>
+                <td class="text-center align-middle">{{s.rcfDanosMateriais | currency: 'BRL'}}</td>
+                <td class="text-center align-middle">{{s.rofDanosFisicos | currency: 'BRL'}}</td>
+                <td class="text-center align-middle">{{s.franquia | currency: 'BRL'}}</td>
                 <td class="text-center align-middle">{{((s.carroReserva) ? 'Sim' : 'Não')}}</td>
                 <td class="text-center align-middle">
                   <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip" data-placement="top" title="Inspecionar"  disabled>
