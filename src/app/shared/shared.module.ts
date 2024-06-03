@@ -4,16 +4,17 @@ import { NumberMaskPipe } from "./number-mask-pipe/number-mask.pipe";
 import { PhonePipe } from "./phone-pipe/phone.pipe";
 import { ClienteService } from "./service/cliente.service";
 import { CNPJPipe } from './cnpj-mask/cnpj-mask.pipe';
+import { OnlyNumbersDirective } from "./only-number/only-numbers.directive";
 
 @NgModule({
 imports: [
     CommonModule,
 ],
 declarations: [
-    NumberMaskPipe, PhonePipe, CNPJPipe
+    NumberMaskPipe, PhonePipe, CNPJPipe, OnlyNumbersDirective
 ],
 exports: [
-    NumberMaskPipe, PhonePipe, CNPJPipe
+    NumberMaskPipe, PhonePipe, CNPJPipe, OnlyNumbersDirective
 ]
 })
 export class SharingModule {

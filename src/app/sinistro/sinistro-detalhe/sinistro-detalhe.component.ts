@@ -4,12 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
+
 @Component({
   selector: 'app-sinistro-detalhe',
   templateUrl: './sinistro-detalhe.component.html',
   styleUrl: './sinistro-detalhe.component.scss',
 })
-export class SeguradoraDetalheComponent implements OnInit {
+
+export class SinistroDetalheComponent implements OnInit {
   public sinistro: Sinistro = new Sinistro();
   public idSinistro: number;
 
@@ -20,7 +22,7 @@ export class SeguradoraDetalheComponent implements OnInit {
     private sinistroService: SinistroService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -31,6 +33,7 @@ export class SeguradoraDetalheComponent implements OnInit {
       }
     });
   }
+
 
   salvar(form: NgForm) {
     if (form.invalid) {
@@ -88,4 +91,6 @@ export class SeguradoraDetalheComponent implements OnInit {
       }
     );
   }
+
+
 }
