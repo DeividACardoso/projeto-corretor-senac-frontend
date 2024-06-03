@@ -1,9 +1,10 @@
 import { Cliente } from "./cliente"
+import { Seguradora } from "./seguradora";
 
 export class Seguro {
   id: number;
-  // corretor: Corretor;
   cliente: Cliente;
+  seguradora: Seguradora;
   rcfDanosMateriais: number;
   rofDanosFisicos: number;
   dtInicioVigencia: Date;
