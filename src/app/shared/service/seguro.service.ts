@@ -17,6 +17,7 @@ export class SeguroService {
   listarTodos(): Observable<Array<Seguro>> {
     return this.httpClient.get<Array<Seguro>>(this.API + '/todos');
   }
+  
   getListaClientes(): Observable<Array<Cliente>> {
     return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
   }

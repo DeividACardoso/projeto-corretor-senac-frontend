@@ -28,6 +28,7 @@ export class SegurosListagemComponent implements OnInit{
     this.SeguroService.listarTodos().subscribe(
       resultado => {
         this.seguros = resultado;
+        console.log(this.seguros)
       },
       erro => {
         console.log('Erro ao buscar Seguros: ', erro);
@@ -44,7 +45,12 @@ export class SegurosListagemComponent implements OnInit{
       }
     )
   }
+  
   inspecionar(id: number){
     this.router.navigate(['seguros/inspecao', id])
+  }
+
+  editar(id: number){
+    this.router.navigate(['seguros/detalhe', id]);
   }
 }
