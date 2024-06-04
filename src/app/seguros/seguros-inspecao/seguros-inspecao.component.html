@@ -3,19 +3,27 @@
         <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="seguro-tab" data-bs-toggle="tab" data-bs-target="#seguro"
-                    type="button" role="tab" aria-controls="seguro" aria-selected="true">Seguro</button>
+                    type="button" role="tab" aria-controls="seguro" aria-selected="true">
+                    Seguro
+                </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="cliente-tab" data-bs-toggle="tab" data-bs-target="#cliente" type="button"
-                    role="tab" aria-controls="cliente" aria-selected="false">Cliente</button>
+                    role="tab" aria-controls="cliente" aria-selected="false">
+                    Cliente
+                </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="seguradora-tab" data-bs-toggle="tab" data-bs-target="#seguradora"
-                    type="button" role="tab" aria-controls="seguradora" aria-selected="false">Seguradora</button>
+                    type="button" role="tab" aria-controls="seguradora" aria-selected="false">
+                    Seguradora
+                </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="veiculo-tab" data-bs-toggle="tab" data-bs-target="#veiculo" type="button"
-                    role="tab" aria-controls="veiculo" aria-selected="false">Veículo</button>
+                    role="tab" aria-controls="veiculo" aria-selected="false">
+                    Veículo
+                </button>
             </li>
         </ul>
         <div class="tab-content p-2">
@@ -27,53 +35,31 @@
                             <div class="card-body text-center">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Código da Apólice:
-                                        </span>
-                                        {{seguro.numApolice}}
+                                        <span class="fw-bold"> Código da Apólice: </span>
+                                        {{ seguro.numApolice }}
                                         |
-                                        <span class="fw-bold">
-                                            Código da Proposta:
-                                        </span>
-                                        {{seguro.numeroProposta}}
+                                        <span class="fw-bold"> Código da Proposta: </span>
+                                        {{ seguro.numeroProposta }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Inicio da Vigência:
-                                        </span>
-                                        {{seguro.dtInicioVigencia}}
+                                        <span class="fw-bold"> Inicio da Vigência: </span>
+                                        {{ seguro.dtInicioVigencia }}
                                         -
-                                        <span class="fw-bold">
-                                            Data Fim da Vigência:
-                                        </span>
-                                        {{seguro.dtFimVigencia}}
+                                        <span class="fw-bold"> Data Fim da Vigência: </span>
+                                        {{ seguro.dtFimVigencia }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Franquia:
-                                        </span>
-                                        {{seguro.franquia | currency: 'BRL'}} | RCD
-                                        <span class="fw-bold">
-                                            Danos
-                                            Materiais:
-                                        </span>
-                                        {{seguro.rcfDanosMateriais |
-                                        currency: 'BRL'}}
+                                        <span class="fw-bold"> Franquia: </span>
+                                        {{ seguro.franquia | currency : "BRL" }} | RCD
+                                        <span class="fw-bold"> Danos Materiais: </span>
+                                        {{ seguro.rcfDanosMateriais | currency : "BRL" }}
                                         |
-                                        <span class="fw-bold">
-                                            ROF
-                                            Danos
-                                            Físicos:
-                                        </span>{{seguro.rofDanosFisicos |
-                                        currency: 'BRL'}}
+                                        <span class="fw-bold"> ROF Danos Físicos: </span>{{ seguro.rofDanosFisicos |
+                                        currency : "BRL" }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Carro
-                                            Reserva:
-                                        </span>
-                                        {{(seguro.carroReserva) ? 'Sim' :
-                                        'Não'}}
+                                        <span class="fw-bold"> Carro Reserva: </span>
+                                        {{ seguro.carroReserva ? "Sim" : "Não" }}
                                     </li>
                                 </ul>
                             </div>
@@ -89,51 +75,32 @@
                             <div class="card-body text-center">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Nome:
-                                        </span>
-                                        {{seguro.cliente.nome}}
+                                        <span class="fw-bold"> Nome: </span>
+                                        {{ seguro.cliente.nome }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            E-mail:
-                                        </span>
-                                        {{seguro.cliente.email}}
+                                        <span class="fw-bold"> E-mail: </span>
+                                        {{ seguro.cliente.email }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            CPF:
-                                        </span>
-                                        {{seguro.cliente.cpf | numberMask:
-                                        'cpf'}}
+                                        <span class="fw-bold"> CPF: </span>
+                                        {{ seguro.cliente.cpf | numberMask : "cpf" }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Gênero:
-                                        </span>
-                                        {{seguro.cliente.genero}}
+                                        <span class="fw-bold"> Gênero: </span>
+                                        {{ seguro.cliente.genero }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Estado
-                                            Civil:
-                                        </span>
-                                        {{seguro.cliente.estadoCivil}}
+                                        <span class="fw-bold"> Estado Civil: </span>
+                                        {{ seguro.cliente.estadoCivil }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Data
-                                            de
-                                            Nascimento:
-                                        </span>
-                                        {{seguro.cliente.dtNascimento}}
+                                        <span class="fw-bold"> Data de Nascimento: </span>
+                                        {{ seguro.cliente.dtNascimento }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Telefone:
-                                        </span>
-                                        {{seguro.cliente.telefone | numberMask:
-                                        'phone'}}
+                                        <span class="fw-bold"> Telefone: </span>
+                                        {{ seguro.cliente.telefone | numberMask : "phone" }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3"></li>
                                 </ul>
@@ -146,41 +113,28 @@
                             <div class="card-body text-center">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            CEP:
-                                        </span>
-                                        {{seguro.cliente.cep | numberMask:
-                                        'cep'}}
+                                        <span class="fw-bold"> CEP: </span>
+                                        {{ seguro.cliente.cep | numberMask : "cep" }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Logradouro:
-                                        </span>
-                                        {{seguro.cliente.rua}}
+                                        <span class="fw-bold"> Logradouro: </span>
+                                        {{ seguro.cliente.rua }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Complemento:
-                                        </span>
-                                        {{seguro.cliente.complemento}}
+                                        <span class="fw-bold"> Complemento: </span>
+                                        {{ seguro.cliente.complemento }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Bairro:
-                                        </span>
-                                        {{seguro.cliente.bairro}}
+                                        <span class="fw-bold"> Bairro: </span>
+                                        {{ seguro.cliente.bairro }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Cidade:
-                                        </span>
-                                        {{seguro.cliente.cidade}}
+                                        <span class="fw-bold"> Cidade: </span>
+                                        {{ seguro.cliente.cidade }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            UF:
-                                        </span>
-                                        {{seguro.cliente.uf}}
+                                        <span class="fw-bold"> UF: </span>
+                                        {{ seguro.cliente.uf }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3"></li>
                                 </ul>
@@ -197,29 +151,20 @@
                             <div class="card-body text-center">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Nome:
-                                        </span>
-                                        {{seguro.seguradora.nome}}
+                                        <span class="fw-bold"> Nome: </span>
+                                        {{ seguro.seguradora.nome }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            E-mail:
-                                        </span>
-                                        {{seguro.seguradora.email}}
+                                        <span class="fw-bold"> E-mail: </span>
+                                        {{ seguro.seguradora.email }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            Telefone:
-                                        </span>
-                                        {{seguro.seguradora.telefone | numberMask:
-                                        'phone'}}
+                                        <span class="fw-bold"> Telefone: </span>
+                                        {{ seguro.seguradora.telefone | numberMask : "phone" }}
                                     </li>
                                     <li class="list-group-item align-items-center p-3">
-                                        <span class="fw-bold">
-                                            CNPJ:
-                                        </span>
-                                        {{seguro.seguradora.cnpj | cnpjMask}}
+                                        <span class="fw-bold"> CNPJ: </span>
+                                        {{ seguro.seguradora.cnpj | cnpjMask }}
                                     </li>
                                 </ul>
                             </div>
