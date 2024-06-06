@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
-  authService: any;
-  router: any;
+  authService: AuthService;
+  router: Router;
 
   constructor(private fb: FormBuilder ) {}
 
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   isFormControlInvalid(controlName: string): boolean {
     const control = this.formLogin.get(controlName);
-    return control && control.invalid && (control.dirty || control.touched);
+    return !!(control && control.invalid && (control.dirty || control.touched));
   }
 
   submitForm() {
