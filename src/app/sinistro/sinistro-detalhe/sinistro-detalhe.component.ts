@@ -68,7 +68,7 @@ export class SinistroDetalheComponent implements OnInit {
   atualizar() {
     this.sinistroService.atualizar(this.idSinistro, this.sinistro).subscribe(
       (sucesso) => {
-        Swal.fire('Sucesso', 'Sinistro Atualizad com Sucesso!', 'success');
+        Swal.fire('Sucesso', 'Sinistro Atualizado com Sucesso!', 'success');
       },
       (erro) => {
         Swal.fire('Erro', 'Não foi possivel atualizar o Sinistro', 'error');

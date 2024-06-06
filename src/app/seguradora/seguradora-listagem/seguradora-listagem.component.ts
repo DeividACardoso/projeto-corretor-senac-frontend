@@ -63,7 +63,7 @@ export class SeguradoraListagemComponent {
       if(r.isConfirmed){
       this.seguradoraService.excluir(id).subscribe(
         sucesso => {
-          Swal.fire("Sucesso", "Seguradora excluído com sucesso!", 'success');
+          Swal.fire("Sucesso", "Seguradora excluída com sucesso!", 'success');
           this.buscarSeguradora();
         },
         erro => {

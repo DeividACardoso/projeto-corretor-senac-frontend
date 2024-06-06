@@ -10,12 +10,20 @@
           <form #ngForm="ngForm">
             <div class="row align-items-start">
               <div class="form-group col col-md-3">
-                <label for="nome">Tipo</label>
-                <input
-                [ngClass]="((!sinistro.tipo || (sinistro.tipo && sinistro.tipo.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="sinistro.tipo" class="shadow-sm rounded border border-secondary" minlength="3"
-                  placeholder="Tipo do Sinistro" type="text" name="tipo" required>
-                <div class="invalid-feedback">Informe o tipo do Sinistro.</div>
+                <label for="tipo">Tipo de Sinistro</label>
+                <select
+                  [ngClass]="((!sinistro.tipo || (sinistro.tipo.length != 18)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example" [ngModel]="sinistro.tipo"
+                  (ngModelChange)="sinistro.tipo=$event" placeholder="Tipo" name="tipo" required>
+                  <option selected disabled>Selecione um tipo de Sinistro</option>
+                  <option value="Colisão">Colisão</option>
+                  <option value="Roubo ou Furto">Roubo ou Furto</option>
+                  <option value="Causas naturais">Causas naturais</option>
+                  <option value="Danos a terceiros">Danos a terceiros</option>
+                  <option value="Problemas mecânicos">Problemas mecânicos</option>
+
+                </select>
+                <div class="invalid-feedback">Informe um tipo de Sinistro válido</div>
               </div>
               <div class="form-group col col-md-3">
                 <label for="dataHora">Data e Hora</label>

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Sinistro as Sinistro} from '../model/sinistro';
+import { SinistroSeletor } from "../model/seletor/sinistro.seletor";
 
 @Injectable({
   providedIn :'root'
@@ -19,16 +20,17 @@ export class SinistroService{
     return this.httpClient.get<Sinistro>(this.API+'/'+id)
   }
 
-  // listarComFiltro(seletor: SinistroSeletor): Observable<Array<Sinistro>>{
-  //   return this.httpClient.post<Array<Sinistro>>(this.API+'/filtro', seletor);
-  // }
+  listarComFiltro(seletor: SinistroSeletor): Observable<Array<Sinistro>>{
+    return this.httpClient.post<Array<Sinistro>>(this.API+'/filtro', seletor);
+  }
 
   salvar(sinistro: Sinistro): Observable<Sinistro>{
     return this.httpClient.post<Sinistro>(this.API + '/novo', sinistro);
   }
 
   atualizar(idSinistro: number, sinistro: Sinistro): Observable<Sinistro>{
-    return this.httpClient.put<Sinistro>(this.API, sinistro +'/atualizar/'+idSinistro);
+    let url = this.API + '/atualizar/' + idSinistro;
+    return this.httpClient.put<Sinistro>(url, sinistro);
   }
 
   excluir(id: number): Observable<Sinistro>{

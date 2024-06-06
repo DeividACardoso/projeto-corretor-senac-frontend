@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
+import { SinistroSeletor } from '../../shared/model/seletor/sinistro.seletor';
 
 @Component({
   selector: 'app-sinistro-listagem',
@@ -11,6 +12,8 @@ import { SinistroService } from '../../shared/service/sinistro.service';
 })
 export class SinistroListagemComponent {
   public sinistro: Sinistro = new Sinistro();
+  public seletor: SinistroSeletor = new SinistroSeletor();
+
   public idSinistro: number;
 
   constructor(
@@ -55,6 +58,17 @@ export class SinistroListagemComponent {
 
   editar(id: number) {
     this.router.navigate(['sinistro/detalhe', id]);
+  }
+
+  pesquisar(){
+    this.sinistroService.listarComFiltro(this.seletor).subscribe(
+      resultado => {
+        this.sinistros = resultado;
+      },
+      erro =>{
+        console.log('Erro ao buscar os Sinistros com filtros: ', erro);
+      }
+    )
   }
 
   excluir(id: number) {
