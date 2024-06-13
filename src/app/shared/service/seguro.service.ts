@@ -11,14 +11,14 @@ import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 })
 export class SeguroService{
   private readonly API = 'http://localhost:8080/api/seguros'
-  
+
   constructor(private httpClient: HttpClient) {}
-  
+
   listarTodos(): Observable<Array<Seguro>>{
     return this.httpClient.get<Array<Seguro>>(this.API+'/todos');
   }
   getListaClientes(): Observable<Array<Cliente>> {
-    return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');;
+    return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
   }
 
   pesquisarPorId(id: number){
