@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cliente } from '../../shared/model/cliente';
 import { ClienteService } from '../../shared/service/cliente.service';
 import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
