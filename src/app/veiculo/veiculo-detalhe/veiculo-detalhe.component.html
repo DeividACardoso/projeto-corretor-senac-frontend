@@ -28,7 +28,7 @@
                     <input
                       [ngClass]="((!veiculo.tipoCombustivel || (veiculo.tipoCombustivel && veiculo.tipoCombustivel.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                       [(ngModel)]="veiculo.tipoCombustivel" class="shadow-sm rounded border border-secondary" minlength="2" placeholder="tipoCombustivel" name="tipoCombustivel" required>
-                    <div class="invalid-feedback">Informe um tipo de combustivel.</div>
+                    <div class="invalid-feedback">Informe o tipo de combustivel.</div>
                   </div>
                   <div class="form-group col col-md-3">
                   <label for="telefone">Telefone (com DDD)</label>
@@ -39,7 +39,7 @@
                   <div class="invalid-feedback">Insira um telefone válido</div>
                 </div>
                 <div class="form-group col col-md-6">
-                  <label for="cep">CEP</label>
+                  <label for="cep">CEP de pernoite</label>
                   <input [ngClass]="(!veiculo.cep && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="veiculo.cep" class="shadow-sm rounded border border-secondary" name="cep" maxlength="8" (blur)="viaCep(veiculo.cep)" required appOnlyNumbers>
                   <div class="invalid-feedback">Insira um cep válido</div>
