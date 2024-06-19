@@ -100,7 +100,9 @@
               <div class="form-group col-md-6 pt-4">
                 <!-- Implementar: (click)="salvar(ngForm)" -->
                 <button type="submit"
-                  class="form-control btn btn-primary rounded border-dark shadow-sm">Cadastrar</button>
+                  class="form-control btn btn-primary rounded border-dark shadow-sm">
+                  {{ idSeguro ? 'Atualizar' : 'Cadastrar' }}
+                </button>
               </div>
             </div>
           </form>
