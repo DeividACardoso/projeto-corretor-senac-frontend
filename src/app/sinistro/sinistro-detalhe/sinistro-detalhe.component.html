@@ -42,10 +42,6 @@
                   (ngModelChange)="sinistro.descricao=$event" placeholder="Insira a descrição" name="descricao" type="descricao">
                 <div class="invalid-feedback">Informe uma descrição de Sinistro válida</div>
               </div>
-              <!-- <div class="form-group col-md-6 pt-4">
-                <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
-                  (click)="voltar()">Voltar</button>
-              </div> -->
               <div> </div>
                 <div class="form-group col-md-6 pt-4">
                   <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
@@ -53,8 +49,10 @@
                 </div>
                 <div class="form-group col-md-6 pt-4">
                   <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
-                    (click)="salvar(ngForm)">Cadastrar</button>
-                  </div>
+                    (click)="salvar(ngForm)">
+                    {{ idSinistro ? 'Atualizar' : 'Cadastrar' }}
+                  </button>
+                </div>
             </div>
           </form>
         </div>
