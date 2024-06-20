@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from '../../shared/service/cliente.service';
-import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
+import { Cliente } from '../../shared/model/cliente';
 
 @Component({
   selector: 'app-cliente-form',
@@ -57,4 +57,3 @@ public clientes: Array<Cliente> = new Array();
     })
   }
 }
-
