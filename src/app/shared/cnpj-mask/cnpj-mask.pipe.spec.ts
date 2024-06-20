@@ -1,8 +1,8 @@
-import { CnpjMaskPipe } from './cnpj-mask.pipe';
+import { CNPJPipe } from './cnpj-mask.pipe';
 
-describe('CnpjMaskPipe', () => {
+describe('CNPJPipe', () => {
   it('create an instance', () => {
-    const pipe = new CnpjMaskPipe();
+    const pipe = new CNPJPipe();
     expect(pipe).toBeTruthy();
   });
 });
