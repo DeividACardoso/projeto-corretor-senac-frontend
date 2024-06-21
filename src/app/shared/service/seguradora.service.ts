@@ -17,20 +17,16 @@ export class SeguradoraService {
     return this.httpClient.get<Array<Seguradora>>(this.API + '/todos');
   }
 
-  // getListaSeguradora(): Observable<Array<Seguradora>> {
-  //   return this.httpClient.get<Array<Seguradora>>('http://localhost:8080/api/seguradora/todos');;
-  // }
-
   pesquisarPorId(id: number) {
     return this.httpClient.get<Seguradora>(this.API + '/' + id)
   }
 
-  listarComFiltro(seletor: SeguroSeletor): Observable<Array<Seguradora>> {
-    return this.httpClient.post<Array<Seguradora>>(this.API + '/filtro', seletor);
+  listarComFiltro(seguradora: Seguradora): Observable<Array<Seguradora>> {
+    return this.httpClient.post<Array<Seguradora>>(this.API + '/filtro', seguradora);
   }
 
   salvar(seguradora: Seguradora): Observable<Seguradora> {
-    return this.httpClient.post<Seguradora>(this.API, seguradora);
+    return this.httpClient.post<Seguradora>(this.API + '/novo', seguradora);
   }
 
   atualizar(id: number, seguradoraPAtualizar: Seguradora): Observable<Seguradora> {

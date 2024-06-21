@@ -20,9 +20,9 @@ interface DadosDoJSON {
   templateUrl: './cliente-detalhe.component.html',
   styleUrls: ['./cliente-detalhe.component.scss']
 })
-export class ClienteDetalheComponent implements OnInit{
+export class ClienteDetalheComponent implements OnInit {
 
-  public cliente:Cliente = new Cliente();
+  public cliente: Cliente = new Cliente();
   public idCliente: number;
   dados: DadosDoJSON;
 
@@ -31,95 +31,95 @@ export class ClienteDetalheComponent implements OnInit{
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
-  constructor(private clienteService : ClienteService,
+  constructor(private clienteService: ClienteService,
     private route: ActivatedRoute,
-    private router: Router) {}
+    private router: Router) { }
 
   ngOnInit(): void {
-  this.route.params.subscribe(params => {
-    this.idCliente = params['id'];
+    this.route.params.subscribe(params => {
+      this.idCliente = params['id'];
 
-    if(this.idCliente){
-      this.buscarCliente();
-    }
-  });
-}
-
-buscarCliente() {
-  this.clienteService.pesquisarPorId(this.idCliente).subscribe(
-    resultado =>{
-      this.cliente = resultado;
-    },
-    erro =>{
-      Swal.fire('Erro', 'Erro ao buscar cliente com ID (' + this.idCliente + ') : ', 'error');
-      return;
-    }
-  )
-}
-
-salvar(form: NgForm){
-  if(form.invalid){
-    Swal.fire("Erro", "Formulário inválido", 'error');
-  }
-  if(this.idCliente){
-    this.atualizar();
-  } else {
-    this.inserirCliente();
-
-  }
-}
-inserirCliente() {
-  this.clienteService.salvar(this.cliente).subscribe(
-    sucesso => {
-      Swal.fire("Sucesso", "Cliente salvo com sucesso", 'success');
-      this.cliente = new Cliente();
-    },
-    erro => {
-      Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro.error.message, 'error');
-    }
-  )
-}
-atualizar() {
-  this.clienteService.atualizar(this.cliente).subscribe(
-    sucesso => {
-      Swal.fire("Sucesso", "Cliente Atualizado com Sucesso!", 'success');
-    },
-    erro => {
-      Swal.fire("Erro", "Não foi possivel atualizar o Cliente", 'error');
-    }
-  )
-}
-
-public viaCep(cepInformado: string){
-  //'document' é uma variável global que representa todo o HTML e seus elementos (a árvore DOM - Document Object Model)
-  var txtCep = document.getElementById('txtCep');
-
-  fetch(`https://viacep.com.br/ws/${cepInformado}/json/`)
-  .then(resultado => resultado.json())
-  .then(json => {
-    if(json.erro){
-      Swal.fire("Erro", "Não foi possível preencher os campos de endereço", 'warning')
-      }else{
-          this.preencherCamposComJSON(json);
+      if (this.idCliente) {
+        this.buscarCliente();
       }
-  })
-  .catch(erro => {
-  })
-}
+    });
+  }
 
-public voltar(){
-  this.router.navigate(['/clientes/lista'])
-}
+  buscarCliente() {
+    this.clienteService.pesquisarPorId(this.idCliente).subscribe(
+      resultado => {
+        this.cliente = resultado;
+      },
+      erro => {
+        Swal.fire('Erro', 'Erro ao buscar cliente com ID (' + this.idCliente + ') : ', 'error');
+        return;
+      }
+    )
+  }
 
-public compareById(r1: any, r2: any): boolean{
-  return r1 && r2 ? r1.id === r2.id : r1 === r2;
-}
+  salvar(form: NgForm) {
+    if (form.invalid) {
+      Swal.fire("Erro", "Formulário inválido", 'error');
+    }
+    if (this.idCliente) {
+      this.atualizar();
+    } else {
+      this.inserirCliente();
 
-public preencherCamposComJSON(json: any) {
-  this.cliente.uf = json.uf;
-  this.cliente.cidade = json.localidade;
-  this.cliente.bairro = json.bairro;
-  this.cliente.rua = json.logradouro;
-}
+    }
+  }
+  inserirCliente() {
+    this.clienteService.salvar(this.cliente).subscribe(
+      sucesso => {
+        Swal.fire("Sucesso", "Cliente salvo com sucesso", 'success');
+        this.cliente = new Cliente();
+      },
+      erro => {
+        Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro.error.message, 'error');
+      }
+    )
+  }
+  atualizar() {
+    this.clienteService.atualizar(this.cliente).subscribe(
+      sucesso => {
+        Swal.fire("Sucesso", "Cliente Atualizado com Sucesso!", 'success');
+      },
+      erro => {
+        Swal.fire("Erro", "Não foi possivel atualizar o Cliente", 'error');
+      }
+    )
+  }
+
+  public viaCep(cepInformado: string) {
+    //'document' é uma variável global que representa todo o HTML e seus elementos (a árvore DOM - Document Object Model)
+    var txtCep = document.getElementById('txtCep');
+
+    fetch(`https://viacep.com.br/ws/${cepInformado}/json/`)
+      .then(resultado => resultado.json())
+      .then(json => {
+        if (json.erro) {
+          Swal.fire("Erro", "Não foi possível preencher os campos de endereço", 'warning')
+        } else {
+          this.preencherCamposComJSON(json);
+        }
+      })
+      .catch(erro => {
+      })
+  }
+
+  public voltar() {
+    this.router.navigate(['/clientes/lista'])
+  }
+
+  public compareById(r1: any, r2: any): boolean {
+    return r1 && r2 ? r1.id === r2.id : r1 === r2;
+  }
+
+  public preencherCamposComJSON(json: any) {
+    this.cliente.uf = json.uf;
+    this.cliente.cidade = json.localidade;
+    this.cliente.bairro = json.bairro;
+    this.cliente.rua = json.logradouro;
+  }
 }
 

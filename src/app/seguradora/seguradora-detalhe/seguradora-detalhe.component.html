@@ -14,7 +14,7 @@
                 <input
                   [ngClass]="((!seguradora.nome || (seguradora.nome && seguradora.nome.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="seguradora.nome" class="shadow-sm rounded border border-secondary" minlength="3"
-                  placeholder="Nome da Seguradora" name="nome" required>
+                  placeholder="Nome da Seguradora" name="nome" maxlength="150" required>
                 <div class="invalid-feedback">Informe um nome com no mínimo 3 caracteres.</div>
               </div>
               <div class="form-group col col-md-6">
@@ -31,7 +31,7 @@
                   [ngClass]="((!seguradora.email || (seguradora.email.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   class="shadow-sm rounded border border-secondary" [ngModel]="seguradora.email"
                   (ngModelChange)="seguradora.email=$event" placeholder="Insira seu e-mail" name="email" type="email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="150" >
                 <div class="invalid-feedback">Informe um e-mail válido (com &#64;)</div>
               </div>
               <div class="form-group col col-md-6">
@@ -48,7 +48,9 @@
               </div>
               <div class="form-group col-md-6 pt-4">
                 <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
-                  (click)="salvar(ngForm)">Cadastrar</button>
+                  (click)="salvar(ngForm)">
+                  {{ idSeguradora ? 'Atualizar' : 'Cadastrar' }}
+                </button>
               </div>
             </div>
           </form>
