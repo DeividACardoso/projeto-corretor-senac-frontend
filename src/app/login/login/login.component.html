@@ -1,3 +1,4 @@
+<pre>{{dto | json}}</pre>
 <div class="container d-flex justify-content-center">
   <div class="col-4">
     <div class="card shadow round mt-5">
@@ -5,27 +6,40 @@
         <h3 class="text-center">Entrar</h3>
       </div>
       <div class="card-body">
-        <!-- [formGroup]="formLogin" -->
-        <form>
+        <form #ngForm="ngForm">
           <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input type="text" class="form-control" formControlName="username">
-            <div class="form-text text-danger" *ngIf="isFormControlInvalid('username')"> O username deve conter pelo
-              menos 6 caracteres.</div>
+            <label class="form-label">E-mail</label>
+            <input
+              [ngClass]="((!dto.login || (dto.login && dto.login.length < 6)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+              [(ngModel)]="dto.login" type="text" class="form-control" name="username" />
+            <div class="invalid-feedback"> O username deve conter pelo menos 6 caracteres.</div>
           </div>
           <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control" formControlName="password">
-            <div class="form-text text-danger" *ngIf="isFormControlInvalid('password')"> O password deve conter pelo
-              menos 6 caracteres.</div>
+            <label class="form-label">Senha</label>
+            <input
+              [ngClass]="((dto.password && (dto.password && dto.password.length < 6)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+              [(ngModel)]="dto.password" type="password" class="form-control" name="password">
+            <div class="invalid-feedback"> O password deve conter pelo menos 6 caracteres.</div>
           </div>
           <div class="mb-3 text-center">
             <a href="#" class="text-primary">Esqueci minha senha</a>
           </div>
           <div class="text-center">
-            <button type="button" class="btn btn-primary" [disabled]="!formLogin.valid" (click)="submitForm()">
+            <button type="button" class="btn btn-primary" (click)="login()" [disabled]="!ngForm.valid">
               Entrar
             </button>
+            <div class="pt-3">
+              <span class="align-items-start">
+                <p class="text-primary">OU</p>
+              </span>
+            </div>
+            <div>
+              <span class="align-items-start">
+                <button type="button" class="btn btn-primary" (click)="cadastro()">
+                  Cadastre-se
+                </button>
+              </span>
+            </div>
           </div>
         </form>
       </div>

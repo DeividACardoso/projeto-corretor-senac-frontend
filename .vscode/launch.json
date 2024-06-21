@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug TypeScript",
+            "program": "${workspaceFolder}/path/to/your/typescript/file.ts",
+            "outFiles": [
+                "${workspaceFolder}/path/to/your/javascript/file.js"
+            ],
+            "sourceMaps": true
+        }
+    ]
+}
