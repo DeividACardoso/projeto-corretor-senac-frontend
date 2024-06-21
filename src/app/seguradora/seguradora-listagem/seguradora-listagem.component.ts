@@ -1,8 +1,9 @@
+import { Seguradora } from './../../shared/model/seguradora';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Seguradora } from '../../shared/model/seguradora';
 import { SeguradoraService } from '../../shared/service/seguradora.service';
 import Swal from 'sweetalert2';
+import { SeguradoraSeletor } from '../../shared/model/seletor/seguradora.seletor';
 
 
 @Component({
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 export class SeguradoraListagemComponent {
   public seguradora: Seguradora = new Seguradora();
   public idSeguradora: number;
+  public seletor: SeguradoraSeletor = new SeguradoraSeletor();
 
   constructor(private seguradoraService: SeguradoraService,
     private route: ActivatedRoute,
@@ -49,6 +51,17 @@ export class SeguradoraListagemComponent {
     )
   }
 
+  pesquisar(){
+    this.seguradoraService.listarComFiltro(this.seletor).subscribe(
+      resultado => {
+        this.seguradoras = resultado;
+      },
+      erro =>{
+        Swal.fire('Erro ao buscar as seguradoras com filtros: ', erro);
+      }
+    )
+  }
+
   editar(id: number){
     this.router.navigate(['seguradora/detalhe', id])
   }
@@ -63,7 +76,7 @@ export class SeguradoraListagemComponent {
       if(r.isConfirmed){
       this.seguradoraService.excluir(id).subscribe(
         sucesso => {
-          Swal.fire("Sucesso", "Seguradora excluído com sucesso!", 'success');
+          Swal.fire("Sucesso", "Seguradora excluída com sucesso!", 'success');
           this.buscarSeguradora();
         },
         erro => {
