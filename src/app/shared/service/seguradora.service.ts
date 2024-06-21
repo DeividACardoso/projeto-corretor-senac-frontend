@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 // import { SeguroSeletor } from 'src/app/shared/model/seletor/seguro.seletor'
-import { Seguradora as Seguradora} from '../model/seguradora';
+import { Seguradora as Seguradora } from '../model/seguradora';
+import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,7 @@
 export class SeguroSeletor{
+    
     nomeSeguradora: string;
-    idCliente: number;
+    nomeCliente: string;
     dtInicioComecoVigencia: Date;
     dtFimComecoVigencia: Date;
     dtInicioFimVigencia: Date;
