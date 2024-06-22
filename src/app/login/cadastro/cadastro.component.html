@@ -1,0 +1,80 @@
+<pre>{{ dto | json }}</pre>
+<div class="container-fluid">
+    <div class="row text-center p-2 align-items-center justify-content-center">
+        <div class="col col-md-6 pt-5">
+            <div class="card border-dark shadow round">
+                <div class="card-header bg-primary">
+                    <h3 class="text-center text-white pt-2">Cadastro</h3>
+                </div>
+                <div class="card-body">
+                    <form #ngForm="ngForm">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-6">
+                                <div class="mb-1">
+                                    <label class="form-label">Nome</label>
+                                    <input
+                                        [ngClass]="((!dto.nome || (dto.nome && dto.nome.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                                        [(ngModel)]="dto.nome" type="text" class="form-control border-dark"
+                                        name="nome" />
+                                    <div class="invalid-feedback"> O nome deve conter pelo menos 3 caracteres.</div>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label">E-mail</label>
+                                    <input
+                                        [ngClass]="((!dto.email || (dto.email && !dto.email.includes('@'))) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                                        [(ngModel)]="dto.email" type="email" class="form-control border-dark"
+                                        name="email" />
+                                    <div class="invalid-feedback"> O e-mail deve ser válido.</div>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label">CPF</label>
+                                    <input
+                                        [ngClass]="((!dto.cpf || (dto.cpf && !dto.cpf.includes('@'))) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                                        [(ngModel)]="dto.cpf" type="cpf" class="form-control border-dark" name="cpf" />
+                                    <div class="invalid-feedback"> O CPF deve ser válido.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-1">
+                                    <label class="form-label">Telefone(DDD)</label>
+                                    <input
+                                        [ngClass]="((!dto.telefone || (dto.telefone && !dto.telefone.includes('@'))) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                                        [(ngModel)]="dto.telefone" type="telefone" class="form-control border-dark"
+                                        name="telefone" />
+                                    <div class="invalid-feedback"> O telefone deve ser válido.</div>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label">Senha</label>
+                                    <input
+                                        [ngClass]="((!dto.senha || (dto.senha && dto.senha.length < 6)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                                        [(ngModel)]="dto.senha" type="password" class="form-control border-dark"
+                                        name="senha">
+                                    <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label">Confirme a senha</label>
+                                    <input
+                                        [ngClass]="((!confirmarSenha || (confirmarSenha && confirmarSenha !== dto.senha)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                                        [(ngModel)]="confirmarSenha" type="password" class="form-control border-dark"
+                                        name="confirmarSenha">
+                                    <div class="invalid-feedback"> As senhas não coincidem.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group pt-3">
+                                <button type="button" class="form-control btn btn-warning border-dark rounded" (click)="voltar()">
+                                    Voltar
+                                </button>
+                            </div>
+                            <div class="col-md-6 form-group pt-3">
+                                <button type="button" class="form-control btn btn-primary border-dark rounded"
+                                    (click)="cadastrar()" [disabled]="!ngForm.valid">
+                                    Cadastrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
