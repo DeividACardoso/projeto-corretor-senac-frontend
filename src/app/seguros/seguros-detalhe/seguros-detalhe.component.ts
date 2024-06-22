@@ -5,6 +5,8 @@ import { Seguro } from '../../shared/model/seguro';
 import { SeguroService } from '../../shared/service/seguro.service';
 import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
+import { VeiculoService } from '../../shared/service/veiculo.service';
+import { Veiculo } from '../../shared/model/veiculo';
 
 @Component({
   selector: 'app-seguro-detalhe',
@@ -16,12 +18,14 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   public seguros: Array<Seguro> = new Array();
   public idSeguro: number;
   public listaClientes: Array<Cliente> = new Array();
+  public listaVeiculos: Array<Veiculo> = new Array();
   displayCliente: string;
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
   constructor(private seguroService: SeguroService,
+    private veiculoService: VeiculoService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -33,6 +37,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
         this.buscarSeguro();
       } else {
         this.carregarListaClientes();
+        this.carregarListaVeiculos();
       }
     });
   }
@@ -41,6 +46,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     // Ensure data is loaded correctly after view initialization
     if (this.idSeguro) {
       this.carregarListaClientes();
+      
     }
   }
 
@@ -70,6 +76,18 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Erro ao obter lista de clientes', error);
+      }
+    );
+  }
+
+  carregarListaVeiculos(){
+    this.veiculoService.listar().subscribe(
+      (veiculos) => {
+        this.listaVeiculos = veiculos;
+        console.log("Lista de veiculos carregada:", this.listaVeiculos);
+      },
+      (error) => {
+        console.error('Erro ao obter lista de veiculos', error);
       }
     );
   }
