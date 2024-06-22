@@ -17,6 +17,10 @@ export class CorretorService {
         return this.httpClient.post(this.API + '/login', authenticationDTO);
     }
 
+    register(registerDTO: any) {
+        return this.httpClient.post(this.API + '/register', registerDTO);
+    }
+
     storeToken(token: string) {
         this.token = token;
         localStorage.setItem('token', token);
