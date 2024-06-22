@@ -7,6 +7,7 @@ import { SegurosListagemComponent } from './seguros-listagem/seguros-listagem.co
 const routes: Routes = [
   { path: 'lista', component: SegurosListagemComponent },
   { path: 'detalhe', component: SeguroDetalheComponent },
+  { path: 'detalhe/:id', component: SeguroDetalheComponent },
   { path: 'inspecao/:id', component: SegurosInspecaoComponent }
 ];
 
