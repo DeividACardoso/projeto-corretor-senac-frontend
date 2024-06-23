@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div class="bg-light" style="height: 100vh">
   <div class="container-fluid">
     <div class="row">
@@ -6,15 +7,16 @@
           <h3>Cadastro de Sinistros</h3>
         </div>
 
-         <div class="card-body card-info">
+        <div class="card-body card-info">
           <form #ngForm="ngForm">
             <div class="row align-items-start">
               <div class="form-group col col-md-3">
                 <label for="tipo">Tipo de Sinistro</label>
                 <select
                   [ngClass]="((!sinistro.tipo || (sinistro.tipo.length != 18)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example" [ngModel]="sinistro.tipo"
-                  (ngModelChange)="sinistro.tipo=$event" placeholder="Tipo" name="tipo" required>
+                  class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example"
+                  [ngModel]="sinistro.tipo" (ngModelChange)="sinistro.tipo=$event" placeholder="Tipo" name="tipo"
+                  required>
                   <option selected disabled>Selecione um tipo de Sinistro</option>
                   <option value="Colisão">Colisão</option>
                   <option value="Roubo ou Furto">Roubo ou Furto</option>
@@ -27,11 +29,10 @@
               </div>
               <div class="form-group col col-md-3">
                 <label for="dataHora">Data e Hora</label>
-                <input
-                [ngClass]="(!sinistro.dataHora) ? 'form-control is-invalid' : 'form-control'"
-                [(ngModel)]="sinistro.dataHora" class="shadow-sm rounded border border-secondary"
-                placeholder="Data e Hora do Sinistro" type="datetime-local" name="dataHora" required appOnlyNumbers>
-              <div class="invalid-feedback">Informe a data e hora do Sinistro.</div>
+                <input [ngClass]="(!sinistro.dataHora) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="sinistro.dataHora" class="shadow-sm rounded border border-secondary"
+                  placeholder="Data e Hora do Sinistro" type="datetime-local" name="dataHora" required appOnlyNumbers>
+                <div class="invalid-feedback">Informe a data e hora do Sinistro.</div>
               </div>
 
               <div class="form-group col col-md-6">
@@ -39,20 +40,21 @@
                 <input
                   [ngClass]="((!sinistro.descricao || (sinistro.descricao.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   class="shadow-sm rounded border border-secondary" [ngModel]="sinistro.descricao"
-                  (ngModelChange)="sinistro.descricao=$event" placeholder="Insira a descrição" name="descricao" type="descricao">
+                  (ngModelChange)="sinistro.descricao=$event" placeholder="Insira a descrição" name="descricao"
+                  type="descricao">
                 <div class="invalid-feedback">Informe uma descrição de Sinistro válida</div>
               </div>
               <div> </div>
-                <div class="form-group col-md-6 pt-4">
-                  <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
-                    (click)="voltar()">Voltar</button>
-                </div>
-                <div class="form-group col-md-6 pt-4">
-                  <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
-                    (click)="salvar(ngForm)">
-                    {{ idSinistro ? 'Atualizar' : 'Cadastrar' }}
-                  </button>
-                </div>
+              <div class="form-group col-md-6 pt-4">
+                <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
+                  (click)="voltar()">Voltar</button>
+              </div>
+              <div class="form-group col-md-6 pt-4">
+                <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
+                  (click)="salvar(ngForm)">
+                  {{ idSinistro ? 'Atualizar' : 'Cadastrar' }}
+                </button>
+              </div>
             </div>
           </form>
         </div>
