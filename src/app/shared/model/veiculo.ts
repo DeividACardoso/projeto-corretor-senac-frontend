@@ -3,7 +3,7 @@ export class Veiculo {
     preco: string;
     modelo: string;
     marca: string;
-    anoModelo: number;
+    anoModelo: string;
     tipoCombustivel: string;
     rua: string;
     bairro: string;
