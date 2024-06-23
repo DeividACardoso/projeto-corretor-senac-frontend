@@ -1,3 +1,5 @@
+import { Cliente } from "./cliente";
+
 export class Veiculo {
     id: number;
     preco: string;
@@ -12,4 +14,5 @@ export class Veiculo {
     cidade: string;
     uf: string;
     cep: string;
+    cliente: Cliente;
 }

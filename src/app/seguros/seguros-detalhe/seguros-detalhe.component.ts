@@ -43,9 +43,9 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Ensure data is loaded correctly after view initialization
     if (this.idSeguro) {
       this.carregarListaClientes();
+      this.carregarListaVeiculos();
       
     }
   }

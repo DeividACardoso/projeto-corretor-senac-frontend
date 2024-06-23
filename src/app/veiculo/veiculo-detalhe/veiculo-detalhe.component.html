@@ -10,6 +10,18 @@
         <div class="card-body card-info">
           <form #ngForm="ngForm">
             <div class="row align-items-start">
+              <div class="form-group col col-md-6 ">
+                <label for="cliente">Cliente</label>
+                <form>
+                  <input [ngClass]="(!veiculo.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
+                    class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
+                  <datalist id="dataListOptions">
+                    <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
+                  </datalist>
+                </form>
+                <div class="invalid-feedback">Informe o cliente</div>
+              </div>
               <div class="form-group col col-md-6">
                 <label for="marca">Marca</label>
                 <input list="marcas"
@@ -67,6 +79,20 @@
                   (blur)="viaCep(veiculo.cep)" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um cep válido</div>
               </div>
+                <div class="form-group col col-md-6">
+                  <label for="numero">Número</label>
+                  <input [ngClass]="(!veiculo.numero && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.numero" class="shadow-sm rounded border border-secondary" name="numero"
+                    required>
+                  <div class="invalid-feedback">Insira um número válido</div>
+                </div>
+              <div class="form-group col col-md-6">
+                <label for="logradouro">Logradouro</label>
+                <input [ngClass]="(!veiculo.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="veiculo.rua" class="shadow-sm rounded border border-secondary" name="logradouro"
+                  required>
+                <div class="invalid-feedback">Insira um logradouro válido</div>
+              </div>
               <div class="form-group col col-md-6">
                 <label for="bairro">Bairro</label>
                 <input [ngClass]="(!veiculo.bairro && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
@@ -88,7 +114,7 @@
                 <div class="invalid-feedback">Insira um estado válido</div>
               </div>
               <div class="form-group col-md-6 pt-4">
-                <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
+                <button type="submit" class="form-control btn btn-warning rounded border-dark shadow-sm"
                   (click)="voltar()">Voltar</button>
               </div>
               <div class="form-group col-md-6 pt-4">

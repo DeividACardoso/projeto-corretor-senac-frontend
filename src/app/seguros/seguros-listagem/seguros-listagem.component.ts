@@ -69,6 +69,7 @@ export class SegurosListagemComponent implements OnInit {
   }
 
   inspecionar(id: number) {
+    console.log('Inspeção do seguro com id: ', id);
     this.router.navigate(['seguros/inspecao', id])
   }
 

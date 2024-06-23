@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Veiculo } from "../model/veiculo";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Veiculo } from "../model/veiculo";
+import { Cliente } from "../model/cliente";
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,10 @@ export class VeiculoService {
         return this.httpClient.get<Array<Veiculo>>(this.API + '/todos');
     }
 
+    pesquisarPorId(id: number): Observable<Veiculo> {
+        return this.httpClient.get<Veiculo>(this.API + '/' + id);
+    }
+
     preencherMarcas(): Observable<string[]> {
         return this.httpClient.get<string[]>(this.API_VEICULO + '/carros/marcas');
     }
@@ -28,7 +33,11 @@ export class VeiculoService {
         return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos');
     }
 
-    procurarVeiculo(marcaCodigo: string, modeloCodigo: string, ano: string): Observable<any>{
-        return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/'+ marcaCodigo +'/modelos/'+ modeloCodigo +'/anos/' + ano);
+    procurarVeiculo(marcaCodigo: string, modeloCodigo: string, ano: string): Observable<any> {
+        return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos/' + modeloCodigo + '/anos/' + ano);
+    }
+
+    getListaClientes(): Observable<Array<Cliente>> {
+        return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
     }
 }
