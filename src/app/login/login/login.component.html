@@ -1,34 +1,53 @@
-<div class="container d-flex justify-content-center">
-  <div class="col-4">
-    <div class="card shadow round mt-5">
-      <div class="card-header">
-        <h3 class="text-center">Tela de Login</h3>
+<div class="container-fluid g-5">
+  <div class="row text-center p-2 align-items-center justify-content-center">
+    <div class="col col-md-4 pt-5">
+      <div class="card border-dark shadow round">
+        <div class="card-header bg-primary">
+          <h3 class="text-center text-white pt-2">Tela de Login</h3>
+        </div>
+        <div class="card-body">
+          <form #ngForm="ngForm">
+            <div class="mb-1">
+              <label class="form-label">E-mail</label>
+              <input
+                [ngClass]="((!dto.login || (dto.login && dto.login.length < 6)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                [(ngModel)]="dto.login" type="text" class="form-control border-dark" name="username" />
+              <div class="invalid-feedback"> O username deve conter pelo menos 6 caracteres.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input
+                [ngClass]="((dto.password && (dto.password && dto.password.length < 6)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                [(ngModel)]="dto.password" type="password" class="form-control border-dark" name="password">
+              <div class="invalid-feedback"> O password deve conter pelo menos 6 caracteres.</div>
+            </div>
+            <div class="mb-3 text-center">
+              <a href="#" class="text-primary">Esqueci minha senha</a>
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary border-dark" (click)="login()" [disabled]="!ngForm.valid">
+                Entrar
+              </button>
+              <div class="pt-3">
+                <span class="align-items-start">
+                  <p class="text-primary">OU</p>
+                </span>
+              </div>
+              <div>
+                <span class="align-items-start">
+                  <button type="button" class="btn btn-warning border-dark" (click)="cadastro()">
+                    Cadastre-se
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="card-body">
-        <!-- [formGroup]="formLogin" -->
-        <form>
-          <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input type="text" class="form-control" formControlName="username">
-            <div class="form-text text-danger" *ngIf="isFormControlInvalid('username')"> O username deve conter pelo
-              menos 6 caracteres.</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control" formControlName="password">
-            <div class="form-text text-danger" *ngIf="isFormControlInvalid('password')"> O password deve conter pelo
-              menos 8 caracteres.</div>
-          </div>
-          <div class="mb-3 text-center">
-            <a href="#" class="text-primary">Esqueci minha senha</a>
-          </div>
-          <div class="text-center">
-            <button type="button" class="btn btn-primary" [disabled]="formLogin.valid" (click)="submitForm()">
-              Entrar
-            </button>
-          </div>
-        </form>
-      </div>
+    </div>
+    <div class="col col-md-7">
+      <h1>Boas vindas a FATE Corretoria.</h1>
+      <p class="text-center">Sistema de corretoria de veículos</p>
     </div>
   </div>
 </div>

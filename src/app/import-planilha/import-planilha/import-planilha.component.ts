@@ -4,7 +4,7 @@ import { ClienteService } from '../../shared/service/cliente.service';
 @Component({
   selector: 'app-upload-file',
   templateUrl: './import-planilha.component.html',
-  styleUrls: ['./import-planilha.component.scss']
+  styleUrl: './import-planilha.component.scss'
 })
 export class ImportPlanilhaComponent {
 

@@ -4,47 +4,79 @@ import { Seguro } from '../../shared/model/seguro';
 import { SeguroService } from '../../shared/service/seguro.service';
 import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
 import { Title } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seguros-listagem',
   templateUrl: './seguros-listagem.component.html',
   styleUrl: './seguros-listagem.component.scss'
 })
-export class SegurosListagemComponent implements OnInit{
+export class SegurosListagemComponent implements OnInit {
 
-  constructor(private SeguroService: SeguroService, private router: Router, private titleService: Title){
+  constructor(private SeguroService: SeguroService, private router: Router, private titleService: Title) {
   }
 
   public seguros: Array<Seguro> = new Array();
+  public idSeguro: number;
+  public seguro: Seguro = new Seguro();
+
   public seletor: SeguroSeletor = new SeguroSeletor();
   title = "Listagem de Seguros"
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title)
     this.buscarSeguros();
+
+    if (this.idSeguro) {
+      this.buscarSeguro();
+    }
   }
 
   buscarSeguros() {
     this.SeguroService.listarTodos().subscribe(
       resultado => {
         this.seguros = resultado;
+
       },
       erro => {
         console.log('Erro ao buscar Seguros: ', erro);
       }
     )
   }
-  pesquisar(){
+
+  buscarSeguro() {
+    this.SeguroService.pesquisarPorId(this.idSeguro).subscribe(
+      resultado => {
+        this.seguro = resultado;
+        console.log(this.seguro.cliente.nome)
+      },
+      erro => {
+        Swal.fire('Erro', 'Erro ao buscar Seguro com ID (' + this.idSeguro + ') : ', 'error');
+        return;
+      }
+    )
+  }
+
+  pesquisar() {
     this.SeguroService.listarComFiltro(this.seletor).subscribe(
       resultado => {
         this.seguros = resultado;
       },
-      erro =>{
+      erro => {
         console.log('Erro ao buscar Seguros com filtros: ', erro);
       }
     )
   }
-  inspecionar(id: number){
+
+  inspecionar(id: number) {
     this.router.navigate(['seguros/inspecao', id])
+  }
+
+  editar(id: number) {
+    this.router.navigate(['seguros/detalhe', id]);
+  }
+
+  limpar() {
+    this.seletor = new SeguroSeletor();
   }
 }

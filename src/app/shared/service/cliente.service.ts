@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, withInterceptors } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map, tap } from "rxjs";
 import { Cliente } from "../model/cliente";
 // import { ClienteSeletor } from 'src/app/shared/model/seletor/cliente.seletor'
 

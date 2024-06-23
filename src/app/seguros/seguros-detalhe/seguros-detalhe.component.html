@@ -1,4 +1,4 @@
-<pre>{{seguro | json}}</pre>
+<app-nav-bar></app-nav-bar>
 <div class="bg-light" style="height: 100vh">
   <div class="container-fluid">
     <div class="row">
@@ -15,9 +15,9 @@
                   <input [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
                     [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
                     class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
-                    <datalist id="dataListOptions">
-                      <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
-                    </datalist>
+                  <datalist id="dataListOptions">
+                    <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
+                  </datalist>
                 </form>
                 <div class="invalid-feedback">Informe o cliente</div>
               </div>
@@ -44,7 +44,8 @@
                 <label for="nome">Franquia</label>
                 <div class="input-group">
                   <span class="input-group-text">R$</span>
-                  <input class="shadow-sm rounded border-dark" type="number" placeholder="0.00" value="0" step=".05" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" minlength="3" name="franquia"
+                  <input class="shadow-sm rounded border-dark" type="number" placeholder="0.00" value="0" step=".05"
+                    ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" minlength="3" name="franquia"
                     [ngClass]="(!seguro.franquia && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.franquia" required>
                   <div class="invalid-feedback">Informe a franquia</div>
@@ -68,7 +69,8 @@
                 <label for="nome">RCF Danos Materiais</label>
                 <div class="input-group">
                   <span class="input-group-text">R$</span>
-                  <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0" step=".05" name="rcfDanosMateriais"
+                  <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0"
+                    step=".05" name="rcfDanosMateriais"
                     [ngClass]="((!seguro.rcfDanosMateriais|| (seguro.rcfDanosMateriais && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.rcfDanosMateriais" required>
                   <div class="invalid-feedback">Informe RCF de danos materiais</div>
@@ -78,7 +80,8 @@
                 <label for="nome">ROF Danos Físicos</label>
                 <div class="input-group">
                   <span class="input-group-text">R$</span>
-                  <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0" step=".05" name="rcfDanosCorporais"
+                  <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0"
+                    step=".05" name="rcfDanosCorporais"
                     [ngClass]="(((!seguro.rofDanosFisicos)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.rofDanosFisicos" required>
                   <div class="invalid-feedback">Informe ROF de danos físicos</div>
@@ -86,9 +89,10 @@
               </div>
               <div class="form-group col col-md-6 pt-4">
                 <div class="form-check form-switch form-switch-md">
-                  <input class="shadow-sm rounded border-dark form-check-input" type="checkbox" role="switch" name="carroReserva"
-                  [ngClass]="((!seguro.carroReserva|| (seguro.carroReserva && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="seguro.carroReserva" required>
+                  <input class="shadow-sm rounded border-dark form-check-input" type="checkbox" role="switch"
+                    name="carroReserva"
+                    [ngClass]="((!seguro.carroReserva|| (seguro.carroReserva && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="seguro.carroReserva" required>
                   <label for="nome" class="p-1">Carro reserva</label>
                 </div>
                 <div class="invalid-feedback">Carro reserva</div>

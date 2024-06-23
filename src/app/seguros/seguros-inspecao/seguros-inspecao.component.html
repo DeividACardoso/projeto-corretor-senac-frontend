@@ -1,125 +1,215 @@
-<div class="bg-light" style="height: 100%">
+<app-nav-bar></app-nav-bar>
+<div class="bg-light" style="height: 100vh">
     <div class="container-fluid">
-        <div class="row justify-content-start p-2">
-            <div class="card border-dark col-md-4">
-                <h5 class="card-header">Seguro</h5>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Código da
-                            Apólice: {{seguro.numApolice}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Código da
-                            Proposta: {{seguro.numeroProposta}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Data Inicio da
-                            Vigência: {{seguro.dtInicioVigencia}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Data Fim da
-                            Vigência: {{seguro.dtFimVigencia}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Franquia:
-                            {{seguro.franquia | currency: 'BRL'}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">RCD Danos
-                            Materiais: {{seguro.rcfDanosMateriais | currency: 'BRL'}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">ROF Danos
-                            Físicos: {{seguro.rofDanosFisicos | currency: 'BRL'}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Carro Reserva:
-                            {{(seguro.carroReserva) ? 'Sim' : 'Não'}}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-group col-md-8">
-                <div class="card border-dark">
-                    <h5 class="card-header">Cliente</h5>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Nome:
-                                {{seguro.cliente.nome}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">E-mail:
-                                {{seguro.cliente.email}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">CPF:
-                                {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Gênero:
-                                {{seguro.cliente.genero}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Estado
-                                Civil: {{seguro.cliente.estadoCivil}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Data de
-                                Nascimento: {{seguro.cliente.dtNascimento}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Telefone:
-                                {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3"></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card border-dark">
-                    <h5 class="card-header">Endereço do Cliente</h5>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">CEP:
-                                {{seguro.cliente.cep | numberMask: 'cep'}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                Logradouro: {{seguro.cliente.rua}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                Complemento: {{seguro.cliente.complemento}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Bairro:
-                                {{seguro.cliente.bairro}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Cidade:
-                                {{seguro.cliente.cidade}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">UF:
-                                {{seguro.cliente.uf}}</li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row ps-2 pb-2">
-            <div class="card border-dark col-md-4">
-                <h5 class="card-header">Seguradora</h5>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Nome:
-                            {{seguro.seguradora.nome}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">E-mail:
-                            {{seguro.seguradora.email}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">Telefone:
-                            {{seguro.seguradora.telefone | numberMask: 'phone'}}</li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">CNPJ:
-                            {{seguro.seguradora.cnpj | cnpjMask}}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-group col-md-6">
-                <div class="card border-dark">
-                    <h5 class="card-header">Veículo</h5>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush align-items-center">
-                            <div class="text-secondary">
-                                <span>Em desenvolvimento</span>
+        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="seguro-tab" data-bs-toggle="tab" data-bs-target="#seguro"
+                    type="button" role="tab" aria-controls="seguro" aria-selected="true">
+                    Seguro
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cliente-tab" data-bs-toggle="tab" data-bs-target="#cliente" type="button"
+                    role="tab" aria-controls="cliente" aria-selected="false">
+                    Cliente
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="seguradora-tab" data-bs-toggle="tab" data-bs-target="#seguradora"
+                    type="button" role="tab" aria-controls="seguradora" aria-selected="false">
+                    Seguradora
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="veiculo-tab" data-bs-toggle="tab" data-bs-target="#veiculo" type="button"
+                    role="tab" aria-controls="veiculo" aria-selected="false">
+                    Veículo
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content p-2">
+            <div class="tab-pane active" id="seguro" role="tabpanel" aria-labelledby="seguro-tab">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-6">
+                        <div class="card border-dark">
+                            <h5 class="card-header">Seguro</h5>
+                            <div class="card-body text-center">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Código da Apólice: </span>
+                                        {{ seguro.numApolice }}
+                                        |
+                                        <span class="fw-bold"> Código da Proposta: </span>
+                                        {{ seguro.numeroProposta }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Inicio da Vigência: </span>
+                                        {{ seguro.dtInicioVigencia }}
+                                        -
+                                        <span class="fw-bold"> Data Fim da Vigência: </span>
+                                        {{ seguro.dtFimVigencia }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Franquia: </span>
+                                        {{ seguro.franquia | currency : "BRL" }} | RCD
+                                        <span class="fw-bold"> Danos Materiais: </span>
+                                        {{ seguro.rcfDanosMateriais | currency : "BRL" }}
+                                        |
+                                        <span class="fw-bold"> ROF Danos Físicos: </span>{{ seguro.rofDanosFisicos |
+                                        currency : "BRL" }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Carro Reserva: </span>
+                                        {{ seguro.carroReserva ? "Sim" : "Não" }}
+                                    </li>
+                                </ul>
                             </div>
-                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center p-3">Nome: {{seguro.cliente.nome}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">E-mail: {{seguro.cliente.email}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">CPF: {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Gênero: {{seguro.cliente.genero}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Estado Civil: {{seguro.cliente.estadoCivil}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Data de Nascimento: {{seguro.cliente.dtNascimento}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">Telefone: {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3"></li> -->
-                        </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="card border-dark">
-                    <h5 class="card-header">Endereço do Veículo</h5>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush align-items-center">
-                            <div class="text-secondary">
-                                <span>Em desenvolvimento</span>
+            </div>
+            <div class="tab-pane" id="cliente" role="tabpanel" aria-labelledby="cliente-tab">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 m-1">
+                        <div class="card border-dark">
+                            <h5 class="card-header">Cliente</h5>
+                            <div class="card-body text-center">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Nome: </span>
+                                        {{ seguro.cliente.nome }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> E-mail: </span>
+                                        {{ seguro.cliente.email }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> CPF: </span>
+                                        {{ seguro.cliente.cpf | numberMask : "cpf" }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Gênero: </span>
+                                        {{ seguro.cliente.genero }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Estado Civil: </span>
+                                        {{ seguro.cliente.estadoCivil }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Data de Nascimento: </span>
+                                        {{ seguro.cliente.dtNascimento }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Telefone: </span>
+                                        {{ seguro.cliente.telefone | numberMask : "phone" }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3"></li>
+                                </ul>
                             </div>
-                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center p-3">Nome: {{seguro.cliente.nome}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">E-mail: {{seguro.cliente.email}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">CPF: {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">Gênero: {{seguro.cliente.genero}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">Estado Civil: {{seguro.cliente.estadoCivil}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">Data de Nascimento: {{seguro.cliente.dtNascimento}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">Telefone: {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center p-3"></li> -->
-                        </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-5 m-1">
+                        <div class="card border-dark">
+                            <h5 class="card-header">Endereço do Cliente</h5>
+                            <div class="card-body text-center">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> CEP: </span>
+                                        {{ seguro.cliente.cep | numberMask : "cep" }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Logradouro: </span>
+                                        {{ seguro.cliente.rua }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Complemento: </span>
+                                        {{ seguro.cliente.complemento }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Bairro: </span>
+                                        {{ seguro.cliente.bairro }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Cidade: </span>
+                                        {{ seguro.cliente.cidade }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> UF: </span>
+                                        {{ seguro.cliente.uf }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="seguradora" role="tabpanel" aria-labelledby="seguradora-tab">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card border-dark">
+                            <h5 class="card-header">Seguradora</h5>
+                            <div class="card-body text-center">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Nome: </span>
+                                        {{ seguro.seguradora.nome }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> E-mail: </span>
+                                        {{ seguro.seguradora.email }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> Telefone: </span>
+                                        {{ seguro.seguradora.telefone | numberMask : "phone" }}
+                                    </li>
+                                    <li class="list-group-item align-items-center p-3">
+                                        <span class="fw-bold"> CNPJ: </span>
+                                        {{ seguro.seguradora.cnpj | cnpjMask }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="veiculo" role="tabpanel" aria-labelledby="veiculo-tab">
+                <div class="card-group col-md-12">
+                    <div class="card border-dark">
+                        <h5 class="card-header">Veículo</h5>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush align-items-center">
+                                <div class="text-secondary">
+                                    <span>Em desenvolvimento</span>
+                                </div>
+                                <!-- <li class="list-group-item align-items-center p-3">Nome: {{seguro.cliente.nome}}</li>
+                                                <li class="list-group-item align-items-center p-3">E-mail: {{seguro.cliente.email}}</li>
+                                                <li class="list-group-item align-items-center p-3">CPF: {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
+                                                <li class="list-group-item align-items-center p-3">Gênero: {{seguro.cliente.genero}}</li>
+                                                <li class="list-group-item align-items-center p-3">Estado Civil: {{seguro.cliente.estadoCivil}}</li>
+                                                <li class="list-group-item align-items-center p-3">Data de Nascimento: {{seguro.cliente.dtNascimento}}</li>
+                                                <li class="list-group-item align-items-center p-3">Telefone: {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
+                                                <li class="list-group-item align-items-center p-3"></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card border-dark">
+                        <h5 class="card-header">Endereço do Veículo</h5>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush align-items-center">
+                                <div class="text-secondary">
+                                    <span>Em desenvolvimento</span>
+                                </div>
+                                <!-- <li class="list-group-item align-items-center p-3">Nome: {{seguro.cliente.nome}}</li>
+                                                    <li class="list-group-item align-items-center p-3">E-mail: {{seguro.cliente.email}}</li>
+                                                    <li class="list-group-item align-items-center p-3">CPF: {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
+                                                    <li class="list-group-item align-items-center p-3">Gênero: {{seguro.cliente.genero}}</li>
+                                                    <li class="list-group-item align-items-center p-3">Estado Civil: {{seguro.cliente.estadoCivil}}</li>
+                                                    <li class="list-group-item align-items-center p-3">Data de Nascimento: {{seguro.cliente.dtNascimento}}</li>
+                                                    <li class="list-group-item align-items-center p-3">Telefone: {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
+                                                    <li class="list-group-item align-items-center p-3"></li> -->
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

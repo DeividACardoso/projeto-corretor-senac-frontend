@@ -1,59 +1,59 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, OnInit, ViewChild, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Seguro } from '../../shared/model/seguro'; 
+import { ActivatedRoute, Router } from '@angular/router';
+import { Seguro } from '../../shared/model/seguro';
 import { SeguroService } from '../../shared/service/seguro.service';
-// import Swal from sweetalert2';
-// import { Veiculo } from 'src/app/shared/model/veiculo';
-// import { VeiculoService } from 'src/app/shared/service/veiculo.service';
-// import { VeiculoSeletor } from 'src/app/shared/model/seletor/veiculo.seletor';
-import { Cliente } from '../../shared/model/cliente';  
-import Swal from 'sweetalert2'
+import { Cliente } from '../../shared/model/cliente';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seguro-detalhe',
   templateUrl: './seguros-detalhe.component.html',
   styleUrls: ['./seguros-detalhe.component.scss']
 })
-export class SeguroDetalheComponent implements OnInit{
+export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   public seguro: Seguro = new Seguro();
   public seguros: Array<Seguro> = new Array();
   public idSeguro: number;
   public listaClientes: Array<Cliente> = new Array();
   displayCliente: string;
-  // public listaVeiculos: Array<Veiculo> = new Array();
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
-
-  constructor(private seguroService : SeguroService,
-              // private veiculoService: VeiculoService,
-              private router: Router,
-              private route: ActivatedRoute) {}
+  constructor(private seguroService: SeguroService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.carregarListaClientes();
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
 
-
-      if(this.idSeguro){
+      if (this.idSeguro) {
         this.buscarSeguro();
+      } else {
+        this.carregarListaClientes();
       }
     });
   }
 
+  ngAfterViewInit(): void {
+    // Ensure data is loaded correctly after view initialization
+    if (this.idSeguro) {
+      this.carregarListaClientes();
+    }
+  }
+
   onInputChange(event: any) {
     const input = event.target.value;
-    const selectedClient = this.listaClientes.find(cliente =>
-      `${cliente.nome}` === input
-    );
+    const selectedClient = this.listaClientes.find(cliente => `${cliente.nome}` === input);
     if (selectedClient) {
       this.seguro.cliente = selectedClient;
     } else {
+      this.seguro.cliente = null;
     }
   }
+
   ngOnChanges() {
     if (this.seguro.cliente) {
       this.displayCliente = `${this.seguro.cliente.cpf}`;
@@ -62,27 +62,11 @@ export class SeguroDetalheComponent implements OnInit{
     }
   }
 
-  // buscarVeiculosDoCliente(){
-  //   let veiculoSeletor: VeiculoSeletor = new VeiculoSeletor();
-  //   veiculoSeletor.idCliente = this.seguro.cliente.id;
-  //   this.veiculoService.listarComFiltro(veiculoSeletor).subscribe(
-  //     (veiculos) => {
-  //       this.listaVeiculos = veiculos; // Mantém a lista de objetos de cliente
-  //     },
-  //     (error) => {
-  //       console.error('Erro ao obter lista de veículos de um cliente', error);
-  //     }
-  //   );
-  // }
-
-  voltar(){
-    this.router.navigate(['/seguros/lista'])
-  }
-
   carregarListaClientes() {
     this.seguroService.getListaClientes().subscribe(
       (clientes) => {
-        this.listaClientes = clientes; // Mantém a lista de objetos de cliente
+        this.listaClientes = clientes;
+        console.log("Lista de clientes carregada:", this.listaClientes);
       },
       (error) => {
         console.error('Erro ao obter lista de clientes', error);
@@ -90,53 +74,60 @@ export class SeguroDetalheComponent implements OnInit{
     );
   }
 
-
   buscarSeguro() {
     this.seguroService.pesquisarPorId(this.idSeguro).subscribe(
-      resultado =>{
+      resultado => {
         this.seguro = resultado;
+        this.displayCliente = this.seguro.cliente ? this.seguro.cliente.nome : '';
+        console.log("Seguro encontrado:", this.seguro);
       },
-      erro =>{
+      erro => {
         Swal.fire('Erro', 'Erro ao buscar seguro com ID (' + this.idSeguro + ') : ', 'error');
         return;
       }
-    )
+    );
   }
 
-salvar(form: NgForm){
-  if(form.invalid){
-    Swal.fire("Erro", "Formulário inválido", 'error');
+  voltar() {
+    this.router.navigate(['/seguros/lista']);
   }
-  if(this.idSeguro){
-    this.atualizar();
-  } else {
-    this.inserirSeguro();
+
+  salvar(form: NgForm) {
+    if (form.invalid) {
+      Swal.fire("Erro", "Formulário inválido", 'error');
+      return;
+    }
+    if (this.idSeguro) {
+      this.atualizar();
+    } else {
+      this.inserirSeguro();
+    }
   }
-}
 
-public compareById(r1: any, r2: any): boolean {
-  return r1 && r2 ? r1.id === r2.id : r1 === r2;
-}
+  public compareById(r1: any, r2: any): boolean {
+    return r1 && r2 ? r1.id === r2.id : r1 === r2;
+  }
 
-inserirSeguro() {
+  inserirSeguro() {
     this.seguroService.salvar(this.seguro).subscribe(
-    sucesso => {
-      Swal.fire("Sucesso", "Seguro salvo com sucesso", 'success');
-      this.seguro = new Seguro();
-    },
-    erro => {
-      Swal.fire("Erro", "Não foi possivel salvar o seguro: " + erro.error.message, 'error');
-    }
-  )
-}
-atualizar() {
-  this.seguroService.atualizar(this.seguro).subscribe(
-    sucesso => {
-      Swal.fire("Sucesso", "Seguro Atualizado com Sucesso!", 'success');
-    },
-    erro => {
-      Swal.fire("Erro", "Não foi possivel atualizar o seguro", 'error');
-    }
-  )
-}
+      sucesso => {
+        Swal.fire("Sucesso", "Seguro salvo com sucesso", 'success');
+        this.seguro = new Seguro();
+      },
+      erro => {
+        Swal.fire("Erro", "Não foi possível salvar o seguro: " + erro.error.message, 'error');
+      }
+    );
+  }
+
+  atualizar() {
+    this.seguroService.atualizar(this.seguro).subscribe(
+      sucesso => {
+        Swal.fire("Sucesso", "Seguro Atualizado com Sucesso!", 'success');
+      },
+      erro => {
+        Swal.fire("Erro", "Não foi possível atualizar o seguro", 'error');
+      }
+    );
+  }
 }
