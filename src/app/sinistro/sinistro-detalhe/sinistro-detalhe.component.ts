@@ -4,6 +4,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
+import { SeguroService } from '../../shared/service/seguro.service';
+
+// interface Seguro {
+//   id: number;
+//   // cliente: Cliente;
+//   // seguradora: Seguradora;
+//   rcfDanosMateriais: number;
+//   rofDanosFisicos: number;
+//   dtInicioVigencia: Date;
+//   dtFimVigencia: Date;
+//   numeroProposta: string;
+//   franquia: number;
+//   carroReserva: boolean;
+//   numApolice: string;
+// }
 
 @Component({
   selector: 'app-sinistro-detalhe',
@@ -15,21 +30,36 @@ export class SinistroDetalheComponent implements OnInit {
   public sinistro: Sinistro = new Sinistro();
   public idSinistro: number;
 
+  listaSeguros: SeguroService[] = [];
+  seguroSelecionado?: SeguroService;
+
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
   constructor(
     private sinistroService: SinistroService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private seguroService: SeguroService
   ) { }
 
+  // ngOnInit(): void {
+  //   this.route.params.subscribe((params) => {
+  //     this.idSinistro = params['id'];
+
+  //     if (this.idSinistro) {
+  //       this.buscarSinistro();
+  //     }
+  //   });
+  // }
   ngOnInit(): void {
+      this.seguroService.listarTodos
+
     this.route.params.subscribe((params) => {
       this.idSinistro = params['id'];
 
       if (this.idSinistro) {
-        this.buscarSeguradora();
+        this.buscarSinistro();
       }
     });
   }
@@ -76,7 +106,7 @@ export class SinistroDetalheComponent implements OnInit {
     );
   }
 
-  buscarSeguradora() {
+  buscarSinistro() {
     this.sinistroService.pesquisarPorId(this.idSinistro).subscribe(
       (resultado) => {
         this.sinistro = resultado;
