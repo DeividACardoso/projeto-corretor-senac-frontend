@@ -25,6 +25,35 @@ export class ClienteDetalheComponent implements OnInit {
   public cliente: Cliente = new Cliente();
   public idCliente: number;
   dados: DadosDoJSON;
+  public listaEstados: string[] = [
+    "AC",
+    "AL",
+    "AP",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO"
+    ];
 
   listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"];
 
@@ -73,6 +102,7 @@ export class ClienteDetalheComponent implements OnInit {
       sucesso => {
         Swal.fire("Sucesso", "Cliente salvo com sucesso", 'success');
         this.cliente = new Cliente();
+        this.router.navigate(['/veiculos/detalhe']);
       },
       erro => {
         Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro.error.message, 'error');
