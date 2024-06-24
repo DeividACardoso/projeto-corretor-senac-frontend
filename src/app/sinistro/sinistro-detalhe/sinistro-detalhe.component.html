@@ -44,6 +44,30 @@
                 <div class="invalid-feedback">Informe a data e hora do Sinistro.</div>
               </div>
 
+              <!-- <div class="form-group col col-md-3">
+                <label for="data">Data</label>
+                <input [ngClass]="(!sinistro.data) ? 'form-control is-invalid' : 'form-control'" [(ngModel)]="sinistro.data"
+                  class="shadow-sm rounded border border-secondary" placeholder="Data do Sinistro" type="date" name="data" required>
+                <div class="invalid-feedback">Informe a data do Sinistro.</div>
+              </div> -->
+
+              <!-- <div class="form-group col col-md-3">
+                <label for="horario">Horário</label>
+                <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'" [(ngModel)]="sinistro.horario"
+                  class="shadow-sm rounded border border-secondary" placeholder="Horário do Sinistro" type="time" name="horario"
+                  required>
+                <div class="invalid-feedback">Informe o horário do Sinistro.</div>
+              </div> -->
+
+              <!-- <div>
+                <label for="data">Data:</label>
+                <input id="data" type="date" [(ngModel)]="sinistro.data" (change)="onDateChange($event)" />
+              </div>
+              <div>
+                <label for="horario">Horário:</label>
+                <input id="horario" type="time" [(ngModel)]="sinistro.horario" (change)="onTimeChange($event)" />
+              </div> -->
+
               <div class="form-group col col-md-6">
                 <label for="descricao">Descrição</label>
                 <input

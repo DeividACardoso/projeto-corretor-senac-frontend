@@ -6,7 +6,7 @@ export class Sinistro {
   tipo: string;
   // data: Date
   data: Date;
-  horario: Time;
+  horario: string;
   dataHora: Date;
   descricao: string;
   seguro: Seguro;

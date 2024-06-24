@@ -6,6 +6,7 @@ import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
 import { SeguroService } from '../../shared/service/seguro.service';
 import { Title } from '@angular/platform-browser';
+import { formatDate } from '@angular/common';
 
 // interface Seguro {
 //   id: number;
@@ -127,5 +128,33 @@ export class SinistroDetalheComponent implements OnInit {
     );
   }
 
+  // formatDate(date: Date): string {
+  //   return formatDate(date, 'yyyy-MM-dd');
+  // }
+
+  formatDate(date: Date): string {
+    return formatDate(date, 'yyyy-MM-dd', 'UTC-8');
+  }
+
+  formatHora(time: string): string {
+    const timeFormat = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+    if (!timeFormat.test(time)) {
+      throw new Error('Invalid time format. Expected format is HH:mm:ss.');
+    }
+    return time;
+  }
+
+  onDateChange(event: any): void {
+    this.sinistro.data = event.target.value;
+  }
+
+  onTimeChange(event: any): void {
+    try {
+      this.sinistro.horario = this.formatHora(event.target.value);
+    } catch (error) {
+      console.error(error.message);
+      // Adicione manipulação de erro apropriada, por exemplo, mostrar uma mensagem de erro ao usuário
+    }
+  }
 
 }
