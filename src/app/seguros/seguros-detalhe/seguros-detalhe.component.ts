@@ -45,7 +45,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     if (this.idSeguro) {
       this.carregarListaClientes();
       this.carregarListaVeiculos();
-      
+
     }
   }
 
@@ -79,7 +79,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     );
   }
 
-  carregarListaVeiculos(){
+  carregarListaVeiculos() {
     this.veiculoService.listarPorCliente(this.seguro.cliente.id).subscribe(
       (veiculos) => {
         this.listaVeiculos = veiculos;
@@ -110,14 +110,16 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   }
 
   salvar(form: NgForm) {
+
     if (form.invalid) {
       Swal.fire("Erro", "Formulário inválido", 'error');
       return;
-    }
-    if (this.idSeguro) {
-      this.atualizar();
     } else {
-      this.inserirSeguro();
+      if (this.idSeguro) {
+        this.atualizar();
+      } else {
+        this.inserirSeguro();
+      }
     }
   }
 
@@ -126,6 +128,9 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   }
 
   inserirSeguro() {
+    if (this.seguro.carroReserva === null) {
+      this.seguro.carroReserva = false;
+    }
     this.seguroService.salvar(this.seguro).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Seguro salvo com sucesso", 'success');

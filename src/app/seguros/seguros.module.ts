@@ -20,7 +20,6 @@ import { SegurosInspecaoComponent } from './seguros-inspecao/seguros-inspecao.co
     CommonModule,
     FormsModule,
     SegurosRoutingModule,
-    //Import abaixo necessário para utilizar de Pipes
     SharingModule
   ],
   providers: [
