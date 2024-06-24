@@ -23,13 +23,13 @@
               </div>
               <div class="form-group col col-md-6">
                 <label for="veiculo">Veículo</label>
-                <!-- [ngClass]="(!seguro.veiculo && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                <select name="veiculo" class="shadow-sm rounded border-dark"
+                [ngClass]="(!seguro.veiculo && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
                         [ngModelOptions]="{standalone: true}"
                         [compareWith]="compareById"
-                        [(ngModel)]="seguro.veiculo" -->
-                <select name="veiculo" class="shadow-sm rounded border-dark" required>
+                        [(ngModel)]="seguro.veiculo" required>
                   <option value="" disabled selected>Selecione um veículo</option>
-                  <!-- <option *ngFor="let veiculo of listaVeiculos" [ngValue]="veiculo">{{veiculo.placaVeiculo}} - {{veiculo.marca}}</option> -->
+                  <option *ngFor="let veiculo of listaVeiculos" [ngValue]="veiculo">{{veiculo.modelo}} - {{veiculo.marca}}</option>
                 </select>
                 <div class="invalid-feedback">Informe o veículo</div>
               </div>

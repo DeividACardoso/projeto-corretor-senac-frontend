@@ -26,7 +26,7 @@ export class SeguradoraService {
   }
 
   salvar(seguradora: Seguradora): Observable<Seguradora> {
-    return this.httpClient.post<Seguradora>(this.API + '/novo', seguradora);
+    return this.httpClient.post<Seguradora>(this.API, seguradora);
   }
 
   atualizar(id: number, seguradoraPAtualizar: Seguradora): Observable<Seguradora> {
