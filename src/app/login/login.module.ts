@@ -18,7 +18,8 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     CommonModule,
     LoginRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
