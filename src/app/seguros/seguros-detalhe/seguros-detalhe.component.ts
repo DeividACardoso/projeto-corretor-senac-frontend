@@ -37,7 +37,6 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
         this.buscarSeguro();
       } else {
         this.carregarListaClientes();
-        this.carregarListaVeiculos();
       }
     });
   }
@@ -81,7 +80,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   }
 
   carregarListaVeiculos(){
-    this.veiculoService.listar().subscribe(
+    this.veiculoService.listarPorCliente(this.seguro.cliente.id).subscribe(
       (veiculos) => {
         this.listaVeiculos = veiculos;
         console.log("Lista de veiculos carregada:", this.listaVeiculos);

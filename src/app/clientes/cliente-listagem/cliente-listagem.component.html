@@ -88,7 +88,7 @@
                   <td class="text-center align-middle">{{c.nome}}</td>
                   <!-- <td class="text-center align-middle">{{s.veiculo.placaVeiculo}}</td> -->
                   <td class="text-center align-middle">{{c.cpf | numberMask: 'cpf'}}</td>
-                  <td class="text-center align-middle">{{(possuiSeguro) ? 'Sim' : 'Não'}}</td>
+                  <td class="text-center align-middle">{{(verificarClienteTemSeguro) ? 'Sim' : 'Não'}}</td>
                   <td class="text-center align-middle">
                     <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
                       data-placement="top" title="Inspecionar" disabled>

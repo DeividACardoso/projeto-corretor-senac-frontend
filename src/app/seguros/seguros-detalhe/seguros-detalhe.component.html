@@ -1,4 +1,5 @@
 <app-nav-bar></app-nav-bar>
+<pre>{{ seguro | json }}</pre>
 <div class="bg-light" style="height: 100vh">
   <div class="container-fluid">
     <div class="row">
@@ -13,7 +14,7 @@
                 <label for="cliente">Cliente</label>
                 <form>
                   <input [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
-                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
+                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" (blur)="carregarListaVeiculos()" [(ngModel)]="displayCliente"
                     class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
                   <datalist id="dataListOptions">
                     <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
@@ -71,7 +72,7 @@
                   <span class="input-group-text">R$</span>
                   <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0"
                     step=".05" name="rcfDanosMateriais"
-                    [ngClass]="((!seguro.rcfDanosMateriais|| (seguro.rcfDanosMateriais && ngForm.submitted)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [ngClass]="(((!seguro.rcfDanosMateriais)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.rcfDanosMateriais" required>
                   <div class="invalid-feedback">Informe RCF de danos materiais</div>
                 </div>

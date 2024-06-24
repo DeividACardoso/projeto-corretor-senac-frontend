@@ -40,4 +40,8 @@ export class VeiculoService {
     getListaClientes(): Observable<Array<Cliente>> {
         return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
     }
+
+    listarPorCliente(id: number): Observable<Array<Veiculo>> {
+        return this.httpClient.get<Array<Veiculo>>(this.API + '/cliente/' + id);
+    }
 }
