@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
 import { SeguroService } from '../../shared/service/seguro.service';
+import { Title } from '@angular/platform-browser';
 
 // interface Seguro {
 //   id: number;
@@ -40,8 +41,11 @@ export class SinistroDetalheComponent implements OnInit {
     private sinistroService: SinistroService,
     private route: ActivatedRoute,
     private router: Router,
-    private seguroService: SeguroService
+    private seguroService: SeguroService,
+    private titleService: Title
   ) { }
+
+  title = "Cadastro de Sinistro"
 
   // ngOnInit(): void {
   //   this.route.params.subscribe((params) => {
@@ -53,6 +57,7 @@ export class SinistroDetalheComponent implements OnInit {
   //   });
   // }
   ngOnInit(): void {
+    this.titleService.setTitle(this.title)
       this.seguroService.listarTodos
 
     this.route.params.subscribe((params) => {

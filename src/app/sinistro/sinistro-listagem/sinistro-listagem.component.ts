@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
 import { SinistroSeletor } from '../../shared/model/seletor/sinistro.seletor';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sinistro-listagem',
@@ -19,12 +20,14 @@ export class SinistroListagemComponent {
   constructor(
     private sinistroService: SinistroService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
-
+  title="Listagem de Sinistros"
   public sinistros: Array<Sinistro> = new Array();
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title)
     this.buscarSinistro();
   }
 
