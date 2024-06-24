@@ -41,6 +41,10 @@
                 </div>
 
 
+
+
+
+
                 </form>
               </div>
             </div>
@@ -57,20 +61,22 @@
             class="table table-responsive table-striped table-hover table-sm table-bordered border-dark">
             <thead>
               <tr>
-                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Marca</th>
+                <th scope="col" class="text-center">Modelo</th>
+                <th scope="col" class="text-center">Ano</th>
                 <th scope="col" class="text-center">Nome</th>
                 <th scope="col" class="text-center">CNPJ</th>
-                <th scope="col" class="text-center">Email</th>
                 <th scope="col" class="text-center">Telefone</th>
                 <th scope="col" class="text-center">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let s of seguradoras">
-                <td class="text-center align-middle">{{s.id}}</td>
+                <td class="text-center align-middle">{{s.marca}}</td>
+                <td class="text-center align-middle">{{s.modelo}}</td>
+                <td class="text-center align-middle">{{s.ano}}</td>
                 <td class="text-center align-middle">{{s.nome}}</td>
                 <td class="text-center align-middle">{{s.cnpj | cnpjMask}}</td>
-                <td class="text-center align-middle">{{s.email}}</td>
                 <td class="text-center align-middle">{{s.telefone | phone}}</td>
                 <td class="text-center align-middle">
 
