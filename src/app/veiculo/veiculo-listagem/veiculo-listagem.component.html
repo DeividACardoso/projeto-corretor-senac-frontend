@@ -31,69 +31,63 @@
                     <input class="form-control shadow-sm rounded border-dark" type="text" name="modelo"
                       [(ngModel)]="seletor.modelo" placeholder="Modelo" maxlength="150">
                   </div>
-                </div>
+              </div>
 
-                <div class="form-group col col-md-12">
-                    <label for="nome">Ano</label>
-                    <input class="form-control shadow-sm rounded border-dark" type="text" name="ano"
-                      [(ngModel)]="seletor.ano" placeholder="Ano" maxlength="150">
-                  </div>
-                </div>
-
-
-
-
-
-
-                </form>
+              <div class="form-group col col-md-12">
+                <label for="nome">Ano</label>
+                <input class="form-control shadow-sm rounded border-dark" type="text" name="ano"
+                  [(ngModel)]="seletor.ano" placeholder="Ano" maxlength="150">
               </div>
             </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="row align-items-center">
-      <div class="col-md pt-2">
-        <div class="table-responsive rounded-0 border">
-          <table id="tabelaSeguros"
-            class="table table-responsive table-striped table-hover table-sm table-bordered border-dark">
-            <thead>
-              <tr>
-                <th scope="col" class="text-center">Marca</th>
-                <th scope="col" class="text-center">Modelo</th>
-                <th scope="col" class="text-center">Ano</th>
-                <th scope="col" class="text-center">Nome</th>
-                <th scope="col" class="text-center">CNPJ</th>
-                <th scope="col" class="text-center">Telefone</th>
-                <th scope="col" class="text-center">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let s of seguradoras">
-                <td class="text-center align-middle">{{s.marca}}</td>
-                <td class="text-center align-middle">{{s.modelo}}</td>
-                <td class="text-center align-middle">{{s.ano}}</td>
-                <td class="text-center align-middle">{{s.nome}}</td>
-                <td class="text-center align-middle">{{s.cnpj | cnpjMask}}</td>
-                <td class="text-center align-middle">{{s.telefone | phone}}</td>
-                <td class="text-center align-middle">
+</div>
+</div>
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <div class="col-md pt-2">
+      <div class="table-responsive rounded-0 border">
+        <table id="tabelaSeguros"
+          class="table table-responsive table-striped table-hover table-sm table-bordered border-dark">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">Marca</th>
+              <th scope="col" class="text-center">Modelo</th>
+              <th scope="col" class="text-center">Ano</th>
+              <th scope="col" class="text-center">Nome</th>
+              <th scope="col" class="text-center">CNPJ</th>
+              <th scope="col" class="text-center">Telefone</th>
+              <th scope="col" class="text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of seguradoras">
+              <td class="text-center align-middle">{{s.marca}}</td>
+              <td class="text-center align-middle">{{s.modelo}}</td>
+              <td class="text-center align-middle">{{s.ano}}</td>
+              <td class="text-center align-middle">{{s.nome}}</td>
+              <td class="text-center align-middle">{{s.cnpj | cnpjMask}}</td>
+              <td class="text-center align-middle">{{s.telefone | phone}}</td>
+              <td class="text-center align-middle">
 
-                  <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" (click)="editar(s.id)"
-                    data-toggle="tooltip" data-placement="top" title="Editar">
-                    <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
-                  </button>
-                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(s.id)"
-                    data-toggle="tooltip" data-placement="top" title="Excluir">
-                    <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" (click)="editar(s.id)"
+                  data-toggle="tooltip" data-placement="top" title="Editar">
+                  <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
+                </button>
+                <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(s.id)"
+                  data-toggle="tooltip" data-placement="top" title="Excluir">
+                  <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
 </div>
