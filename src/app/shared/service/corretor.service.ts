@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthenticationDTO } from '../model/authentication.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class CorretorService {
     private token: string;
     private tokenFromStorage: string;
 
-    login(authenticationDTO: any) {
+    login(authenticationDTO: AuthenticationDTO) {
         return this.httpClient.post(this.API + '/login', authenticationDTO);
     }
 
@@ -31,7 +32,4 @@ export class CorretorService {
         return this.tokenFromStorage;
     }
 
-    initRefresh() {
-        return this.tokenFromStorage;
-    }
 }
