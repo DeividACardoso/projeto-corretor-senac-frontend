@@ -14,5 +14,6 @@ export class Veiculo {
     cidade: string;
     uf: string;
     cep: string;
+    placa: string;
     cliente: Cliente;
 }
