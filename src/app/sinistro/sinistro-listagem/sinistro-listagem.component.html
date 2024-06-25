@@ -81,6 +81,7 @@
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
+                <!-- <th scope="col" class="text-center">Nome e núm. Apólice</th> -->
                 <th scope="col" class="text-center">Tipo</th>
                 <th scope="col" class="text-center">Data</th>
                 <th scope="col" class="text-center">Hora</th>
@@ -92,8 +93,8 @@
               <tr *ngFor="let si of sinistros">
                 <td class="text-center align-middle">{{si.id}}</td>
                 <td class="text-center align-middle">{{si.tipo}}</td>
-                <td class="text-center align-middle">{{si.dataHora | date:'dd/MM/yyyy'}}</td>
-                <td class="text-center align-middle">{{si.dataHora | date:'HH:mm'}}</td>
+                <td class="text-center align-middle">{{si.data| date:'dd/MM/yyyy'}}</td>
+                <td class="text-center align-middle">{{si.horario}}</td>
                 <td class="text-center align-middle">{{si.descricao}}</td>
                 <td class="text-center align-middle">
 

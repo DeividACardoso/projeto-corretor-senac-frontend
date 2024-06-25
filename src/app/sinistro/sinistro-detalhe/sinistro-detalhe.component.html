@@ -11,13 +11,28 @@
           <form #ngForm="ngForm">
             <div class="row align-items-start">
               <div class="form-group col col-md-3">
-                <label for="seguro">Seguro</label>
-                  <select name="seguro" class="shadow-sm rounded border-dark" required>
+                <label for="cliente">Cliente</label>
+                <form>
+                  <input [ngClass]="(!sinistro.seguro.cliente.nome) ? 'form-select is-invalid' : 'form-select'"
+                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
+                    class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
+                  <datalist id="dataListOptions">
+                    <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ sinistro.seguro.cliente.nome }}
+                    </option>
+                  </datalist>
+                </form>
+                <div class="invalid-feedback">Informe o cliente</div>
+              </div>
+              <!-- <div class="form-group col col-md-6">
+                <label for="seguro">Seguro: </label>
+                   <select name="seguro" class="shadow-sm rounded border-dark" required>
                   <option value="" disabled selected>Selecione um seguro</option>
                   <option *ngFor="let seguro of listaSeguros" ></option>
-                  </select>
-              </div>
-              <div></div>
+                  </select> -->
+              <!-- <datalist id="dataListOptions"> -->
+              <!-- <option *ngFor="let seguro of listaSeguros" [ngValue]="seguro">{{ seguro.listarTodos }} | {{seguroSelecionado.getListaClientes.name}}</option> -->
+              <!-- </datalist> -->
+              <!-- </div>  -->
 
               <div class="form-group col col-md-3">
                 <label for="tipo">Tipo de Sinistro</label>
@@ -36,28 +51,23 @@
                 </select>
                 <div class="invalid-feedback">Informe um tipo de Sinistro válido</div>
               </div>
+
               <div class="form-group col col-md-3">
-                <label for="dataHora">Data e Hora</label>
-                <input [ngClass]="(!sinistro.dataHora) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="sinistro.dataHora" class="shadow-sm rounded border border-secondary"
-                  placeholder="Data e Hora do Sinistro" type="datetime-local" name="dataHora" required appOnlyNumbers>
-                <div class="invalid-feedback">Informe a data e hora do Sinistro.</div>
+                <label for="data">Data: </label>
+                <div></div>
+                <input [ngClass]="(!sinistro.data) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="sinistro.data" class="shadow-sm rounded border border-secondary"
+                  placeholder="Data do Sinistro" type="date" name="data" required appOnlyNumbers>
+                <div class="invalid-feedback">Informe a data do Sinistro.</div>
               </div>
 
-              <!-- <div class="form-group col col-md-3">
-                <label for="data">Data</label>
-                <input [ngClass]="(!sinistro.data) ? 'form-control is-invalid' : 'form-control'" [(ngModel)]="sinistro.data"
-                  class="shadow-sm rounded border border-secondary" placeholder="Data do Sinistro" type="date" name="data" required>
-                <div class="invalid-feedback">Informe a data do Sinistro.</div>
-              </div> -->
-
-              <!-- <div class="form-group col col-md-3">
+              <div class="form-group col col-md-3">
                 <label for="horario">Horário</label>
-                <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'" [(ngModel)]="sinistro.horario"
-                  class="shadow-sm rounded border border-secondary" placeholder="Horário do Sinistro" type="time" name="horario"
-                  required>
+                <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="sinistro.horario" class="shadow-sm rounded border border-secondary"
+                  placeholder="Horário do Sinistro" type="time" name="horario" required>
                 <div class="invalid-feedback">Informe o horário do Sinistro.</div>
-              </div> -->
+              </div>
 
               <!-- <div>
                 <label for="data">Data:</label>

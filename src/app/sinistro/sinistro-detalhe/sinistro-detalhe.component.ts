@@ -8,19 +8,6 @@ import { SeguroService } from '../../shared/service/seguro.service';
 import { Title } from '@angular/platform-browser';
 import { formatDate } from '@angular/common';
 
-// interface Seguro {
-//   id: number;
-//   // cliente: Cliente;
-//   // seguradora: Seguradora;
-//   rcfDanosMateriais: number;
-//   rofDanosFisicos: number;
-//   dtInicioVigencia: Date;
-//   dtFimVigencia: Date;
-//   numeroProposta: string;
-//   franquia: number;
-//   carroReserva: boolean;
-//   numApolice: string;
-// }
 
 @Component({
   selector: 'app-sinistro-detalhe',
@@ -32,8 +19,9 @@ export class SinistroDetalheComponent implements OnInit {
   public sinistro: Sinistro = new Sinistro();
   public idSinistro: number;
 
-  listaSeguros: SeguroService[] = [];
-  seguroSelecionado?: SeguroService;
+  public listaClientes: any[] = [];
+  public displayCliente: string;
+  // public seguroSelecionado?: SeguroService;
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
@@ -156,5 +144,23 @@ export class SinistroDetalheComponent implements OnInit {
       // Adicione manipulação de erro apropriada, por exemplo, mostrar uma mensagem de erro ao usuário
     }
   }
+
+  onInputChange(event: any) {
+    const input = event.target.value;
+    const selectedClient = this.listaClientes.find(cliente => `${cliente.nome}` === input);
+    if (selectedClient) {
+        this.sinistro.seguro.cliente = selectedClient;
+    } else {
+        this.sinistro.seguro.cliente = null;
+    }
+  }
+
+  ngOnChanges() {
+    if (this.sinistro.seguro.cliente) {
+        this.displayCliente = `${this.sinistro.seguro.cliente.cpf}`;
+    } else {
+        this.displayCliente = '';
+    }
+}
 
 }

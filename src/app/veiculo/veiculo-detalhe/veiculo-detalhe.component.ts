@@ -84,7 +84,7 @@ export class VeiculoDetalheComponent implements OnInit {
             }
         );
     }
-    
+
     voltar() {
         this.router.navigate(['/veiculo/lista']);
     }
