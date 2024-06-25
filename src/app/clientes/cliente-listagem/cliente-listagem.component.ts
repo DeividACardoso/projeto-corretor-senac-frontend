@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ClienteService } from '../../shared/service/cliente.service';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
+import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cliente-form',
@@ -11,7 +13,7 @@ import { Cliente } from '../../shared/model/cliente';
 })
 
 export class ClienteListagemComponent implements OnInit {
-  seletor: any;
+  seletor: ClienteSeletor = new ClienteSeletor();
   possuiSeguro: boolean = false;
 
   constructor(private clienteService: ClienteService, private router: Router) {
@@ -27,29 +29,35 @@ export class ClienteListagemComponent implements OnInit {
     this.clienteService.listarTodos().subscribe(
       resultado => {
         this.clientes = resultado;
+        this.clientes.forEach(cliente => {
+          this.verificarClienteTemSeguro(cliente.id).subscribe(possuiSeguro => {
+            cliente.temSeguro = possuiSeguro;
+          });
+        });
       },
       erro => {
         console.log('Erro ao buscar Clientes: ', erro);
       }
     )
   }
+
   editar(id: number) {
     this.router.navigate(['clientes/detalhe', id])
   }
 
-  verificarClienteTemSeguro(id: number) {
-    this.clienteService.verificarClienteTemSeguro(id).subscribe(
-      resultado => {
-        if (resultado) {
-          Swal.fire("Atenção", "Cliente possui seguro vinculado, não é possível excluir", 'warning');
-        } else {
-          this.excluir(id);
+  verificarClienteTemSeguro(id: number): Observable<boolean> {
+    return new Observable<boolean>(observer => {
+      this.clienteService.verificarClienteTemSeguro(id).subscribe(
+        resultado => {
+          observer.next(resultado);
+          observer.complete();
+        },
+        erro => {
+          Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
+          observer.error(erro);
         }
-      },
-      erro => {
-        Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
-      }
-    )
+      );
+    });
   }
 
   possuiSeguroAtivo(id: number) {
