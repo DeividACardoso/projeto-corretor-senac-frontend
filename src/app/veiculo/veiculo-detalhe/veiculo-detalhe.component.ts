@@ -11,6 +11,35 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['./veiculo-detalhe.component.scss']
 })
 export class VeiculoDetalheComponent implements OnInit {
+    public listaEstados: string[] = [
+        "AC",
+        "AL",
+        "AP",
+        "AM",
+        "BA",
+        "CE",
+        "DF",
+        "ES",
+        "GO",
+        "MA",
+        "MT",
+        "MS",
+        "MG",
+        "PA",
+        "PB",
+        "PR",
+        "PE",
+        "PI",
+        "RJ",
+        "RN",
+        "RS",
+        "RO",
+        "RR",
+        "SC",
+        "SP",
+        "SE",
+        "TO"
+        ];
 
     constructor(private veiculoService: VeiculoService,
         private router: Router,
