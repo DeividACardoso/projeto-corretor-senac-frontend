@@ -42,7 +42,7 @@ export class LoginComponent {
   }
 
   public recuperarSenha() {
-    this.corretorService.recuperarSenha(this.idCorretor, this.corretor).subscribe(
+    this.corretorService.enviarEmail(this.idCorretor, this.corretor).subscribe(
         (sucesso) => {
           Swal.fire('Sucesso', 'Senha atualizada com Sucesso!', 'success'); },
         (erro) => {

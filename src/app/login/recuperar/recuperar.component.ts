@@ -13,8 +13,8 @@ import { CorretorService } from '../../shared/service/corretor.service';
 })
 export class RecuperarComponent implements OnInit {
 
-  public email: string = '';
-  public message: string = '';
+  // public email: string = '';
+  // public message: string = '';
   public corretor: Corretor = new Corretor();
   public idCorretor: number;
 
@@ -33,20 +33,18 @@ export class RecuperarComponent implements OnInit {
     this.titleService.setTitle(this.title);
   }
 
-  recuperar(form: NgForm) {
+  enviarEmail(form: NgForm) {
     if (form.invalid) {
       Swal.fire("Erro", "Formulário inválido", 'error');
       return;
     }
 
-    this.corretorService.recuperarSenha(this.idCorretor, this.corretor).subscribe(
+    this.corretorService.enviarEmail(this.idCorretor, this.corretor).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Código de recuperação enviado com sucesso", 'success');
-        this.message = 'Código de recuperação enviado com sucesso!';
       },
       erro => {
         Swal.fire("Erro", "Erro ao enviar o código de recuperação. Verifique se o email está cadastrado.", 'error');
-        this.message = 'Erro ao enviar o código de recuperação. Verifique se o email está cadastrado.';
       }
     );
   }

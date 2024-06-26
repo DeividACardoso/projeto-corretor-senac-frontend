@@ -11,15 +11,15 @@
               <div class="form-group col col-md-6 offset-md-3">
                 <label for="email">E-mail</label>
                 <input
-                  [ngClass]="((!email || (email.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounded border border-secondary" [(ngModel)]="email" placeholder="Insira seu e-mail"
-                  name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="150" required>
+                  [ngClass]="((!corretor.email || (corretor.email.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  class="shadow-sm rounded border border-secondary" [(ngModel)]="corretor.email" placeholder="Insira seu e-mail"
+                  name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="100" required>
                 <div class="invalid-feedback">Informe um e-mail válido (com &#64;)</div>
               </div>
               <div class="form-group col-md-6 offset-md-3 pt-4">
                 <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
-                  (click)="recuperar(ngForm)">
-                  Recuperar
+                  (click)="enviarEmail(ngForm)">
+                  Enviar email
                 </button>
               </div>
               <div class="form-group col-md-6 offset-md-3 pt-2 text-center">
