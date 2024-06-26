@@ -25,6 +25,35 @@ export class ClienteDetalheComponent implements OnInit {
   public cliente: Cliente = new Cliente();
   public idCliente: number;
   dados: DadosDoJSON;
+  public listaEstados: string[] = [
+    "AC",
+    "AL",
+    "AP",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO"
+    ];
 
   listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"];
 
@@ -36,6 +65,7 @@ export class ClienteDetalheComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.verificarToken();
     this.route.params.subscribe(params => {
       this.idCliente = params['id'];
 
@@ -43,6 +73,12 @@ export class ClienteDetalheComponent implements OnInit {
         this.buscarCliente();
       }
     });
+  }
+
+  verificarToken(){
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarCliente() {
@@ -73,6 +109,7 @@ export class ClienteDetalheComponent implements OnInit {
       sucesso => {
         Swal.fire("Sucesso", "Cliente salvo com sucesso", 'success');
         this.cliente = new Cliente();
+        this.router.navigate(['/veiculos/detalhe']);
       },
       erro => {
         Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro.error.message, 'error');

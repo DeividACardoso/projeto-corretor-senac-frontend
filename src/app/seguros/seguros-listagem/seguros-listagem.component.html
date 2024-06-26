@@ -19,69 +19,69 @@
                 <form class="row align-items-center justify-content-end form-floating ">
                   <div class="form-group col col-md-6">
                     <label for="nomeCliente">Nome Cliente</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="nomeCliente"
+                    <input class="form-control shadow-sm rounded border-dark" id="nomeCliente" name="nomeCliente"
                       [(ngModel)]="seletor.nomeCliente">
                   </div>
                   <div class="form-group col col-md-6">
                     <label for="nomeCorretor">Nome Seguradora</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="nomeCorretor"
+                    <input class="form-control shadow-sm rounded border-dark" id="nomeCorretor" name="nomeCorretor"
                       [(ngModel)]="seletor.nomeSeguradora">
                   </div>
                   <div class="form-group col col-md-6">
                     <label for="dtInicioComecoVigencia">Data Inicial de Inicio de Vigência</label>
-                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtInicioComecoVigencia"
+                    <input class="form-control shadow-sm rounded border-dark" type="date" id="dtInicioComecoVigencia" name="dtInicioComecoVigencia"
                       [(ngModel)]="seletor.dtInicioComecoVigencia">
                   </div>
                   <div class="form-group col col-md-6">
                     <label for="dtFimComecoVigencia">Data Final de Inicio de Vigência</label>
-                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimComecoVigencia"
+                    <input class="form-control shadow-sm rounded border-dark" type="date" id="dtFimComecoVigencia" name="dtFimComecoVigencia"
                       [(ngModel)]="seletor.dtFimComecoVigencia">
                   </div>
                   <div class="form-group col col-md-6">
                     <label for="dtInicioFimVigencia">Data Inicial de Fim de Vigência</label>
-                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtInicioFimVigencia"
+                    <input class="form-control shadow-sm rounded border-dark" type="date" id="dtInicioFimVigencia" name="dtInicioFimVigencia"
                       [(ngModel)]="seletor.dtInicioFimVigencia">
                   </div>
                   <div class="form-group col col-md-6">
                     <label for="dtFimFimVigencia">Data Final de Fim de Vigência</label>
-                    <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimFimVigencia"
+                    <input class="form-control shadow-sm rounded border-dark" type="date" id="dtFimFimVigencia" name="dtFimFimVigencia"
                       [(ngModel)]="seletor.dtFimFimVigencia">
                   </div>
                   <div class="form-group col col-md-3">
                     <label for="menorRcfDanosMateriais">Menor RCF Danos Materiais</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="menorRcfDanosMateriais"
+                    <input class="form-control shadow-sm rounded border-dark" id="menorRcfDanosMateriais" name="menorRcfDanosMateriais"
                       [(ngModel)]="seletor.menorRcfDanosMateriais">
                   </div>
                   <div class="form-group col col-md-3">
                     <label for="maiorRcfDanosMateriais">Maior RCF Danos Materiais</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="maiorRcfDanosMateriais"
+                    <input class="form-control shadow-sm rounded border-dark" id="maiorRcfDanosMateriais" name="maiorRcfDanosMateriais"
                       [(ngModel)]="seletor.maiorRcfDanosMateriais">
                   </div>
                   <div class="form-group col col-md-3">
                     <label for="menorRofDanosFisicos">Menor ROF Danos Físicos</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="menorRofDanosFisicos"
+                    <input class="form-control shadow-sm rounded border-dark" id="menorRofDanosFisicos" name="menorRofDanosFisicos"
                       [(ngModel)]="seletor.menorRofDanosFisicos">
                   </div>
                   <div class="form-group col col-md-3">
                     <label for="maiorRofDanosFisicos">Maior ROF Danos Físicos</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="maiorRofDanosFisicos"
+                    <input class="form-control shadow-sm rounded border-dark" id="maiorRofDanosFisicos" name="maiorRofDanosFisicos"
                       [(ngModel)]="seletor.maiorRofDanosFisicos">
                   </div>
                   <div class="form-group col col-md-5">
                     <label for="menorFranquia">Menor Franquia</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="menorFranquia"
+                    <input class="form-control shadow-sm rounded border-dark" id="menorFranquia" name="menorFranquia"
                       [(ngModel)]="seletor.menorFranquia">
                   </div>
                   <div class="form-group col col-md-5">
                     <label for="maiorFranquia">Maior Franquia</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="maiorFranquia"
+                    <input class="form-control shadow-sm rounded border-dark" id="maiorFranquia" name="maiorFranquia"
                       [(ngModel)]="seletor.maiorFranquia">
                   </div>
                   <div class="col col-md-2 mt-3 pt-4 ps-5">
                     <div class="form-group form-check form-switch form-switch-md">
                       <label for="carroReserva" class="ps-2 pt-1">Carro Reserva</label>
                       <input class="shadow-sm rounded border-dark form-check-input" type="checkbox" role="switch"
-                        name="carroReserva" [(ngModel)]="seletor.carroReserva">
+                      id="carroReserva" name="carroReserva" [(ngModel)]="seletor.carroReserva">
                     </div>
                   </div>
                   <div class="form-group col pt-3 col-md-2">
@@ -117,6 +117,7 @@
             <thead>
               <tr>
                 <th scope="col" class="text-center">Nome Cliente</th>
+                <th scope="col" class="text-center">Nome Seguradora</th>
                 <th scope="col" class="text-center">Data Início - Fim de Vigência</th>
                 <th scope="col" class="text-center">RCF Danos Materiais</th>
                 <th scope="col" class="text-center">ROF Danos Físicos</th>
@@ -126,10 +127,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let s of seguros">
+              <tr *ngFor="let s of seguros" [ngClass]="{'bg-danger': isNearExpiry(s.dtFimVigencia)}">
                 <td class="text-center align-middle">{{s.cliente.nome}}</td>
-                <td class="text-center align-middle">{{s.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{s.dtFimVigencia |
-                  date: 'dd/MM/yyyy'}}</td>
+                <td class="text-center align-middle">{{s.seguradora.nome}}</td>
+                <td class="text-center align-middle">{{s.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{s.dtFimVigencia | date: 'dd/MM/yyyy'}}</td>
                 <td class="text-center align-middle">{{s.rcfDanosMateriais | currency: 'BRL'}}</td>
                 <td class="text-center align-middle">{{s.rofDanosFisicos | currency: 'BRL'}}</td>
                 <td class="text-center align-middle">{{s.franquia | currency: 'BRL'}}</td>
@@ -137,17 +138,14 @@
                 <td class="text-center align-middle">
                   <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
                     data-placement="top" title="Inspecionar" (click)="inspecionar(s.id)">
-                    <!-- Implementar: (click)="inspecionar()" -->
                     <img src="https://imgur.com/FSJgeji.png" width="15" class="pb-1 align-items-center" />
                   </button>
                   <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" data-toggle="tooltip"
                     data-placement="top" title="Editar" (click)="editar(s.id)">
-                    <!-- Implementar: (click)="editar(s.id)" -->
                     <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
                   </button>
                   <button name="deletar" class="btn btn-sm btn-danger shadow-sm" data-toggle="tooltip"
-                    data-placement="top" title="Excluir">
-                    <!-- Implementar: (click)="excluir(s.id)" -->
+                    data-placement="top" title="Excluir" (click)="excluir(s.id)">
                     <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
                   </button>
                 </td>

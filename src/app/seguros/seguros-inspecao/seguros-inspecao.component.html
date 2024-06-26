@@ -66,6 +66,31 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="card border-dark">
+                            <h5 class="card-header">Sinistros</h5>
+                            <div class="card-body text-center">
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Data</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let sinistro of sinistros">
+                                                <td>{{ sinistro.dtSinistro }}</td>
+                                                <td>{{ sinistro.tipo }}</td>
+                                                <td>{{ sinistro.valor | currency : "BRL" }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane" id="cliente" role="tabpanel" aria-labelledby="cliente-tab">
@@ -235,6 +260,11 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col col-md-1 pt-5">
+                    <button class="btn btn-warning border-dark" (click)="voltar()">Voltar</button>
                 </div>
             </div>
         </div>

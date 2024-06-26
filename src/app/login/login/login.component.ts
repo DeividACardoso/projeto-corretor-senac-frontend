@@ -23,16 +23,28 @@ export class LoginComponent {
     private route: ActivatedRoute
   ) {}
 
+
   public login() {
-    console.log('Fazendo login: ', this.dto);
+    localStorage.removeItem('token');
     this.corretorService.login(this.dto).subscribe(
       (resultado: any) => {
         console.log('Login realizado com sucesso: ', resultado.token);
+        this.wrongAttempts = 0;
         this.corretorService.storeToken(resultado.token);
-        this.router.navigate(['/clientes/lista']);
+        this.router.navigate(['/clientes/lista'])
       },
       (erro: any) => {
-        console.log('Erro ao fazer login: ', erro);
+        if(this.dto.login == '' || this.dto.password == ''){
+          alert('Preencha todos os campos!');
+        }
+        if(erro.status == 403 || erro.status == 400){
+          this.wrongAttempts++;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuário ou senha inválidos!',
+          })
+        }
       }
     );
   }
@@ -49,4 +61,44 @@ export class LoginComponent {
           Swal.fire('Erro', 'Não foi possivel atualizar a sua senha', 'error');}
       );
   }
+
+  private wrongAttempts: number = 0;
+
+  public loginWithTimeout() {
+    if (this.wrongAttempts >= 5) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Você excedeu o número de tentativas de login permitidas. Tente novamente em 1 minuto.',
+      });
+      setTimeout(() => {
+        this.wrongAttempts = 0;
+      }, 60000);
+      return;
+    }
+
+    if (this.wrongAttempts >= 7) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Você excedeu o número de tentativas de login permitidas. Tente novamente em 10 minutos.',
+      });
+      setTimeout(() => {
+        this.wrongAttempts = 0;
+      }, 600000);
+      return;
+    }
+
+    this.login();
+  }
+
+  ngOnInit() {
+    localStorage.removeItem('token');
+    this.wrongAttempts = Number(localStorage.getItem('wrongAttempts')) || 0;
+  }
+
+  ngOnDestroy() {
+    localStorage.setItem('wrongAttempts', String(this.wrongAttempts));
+  }
+
 }

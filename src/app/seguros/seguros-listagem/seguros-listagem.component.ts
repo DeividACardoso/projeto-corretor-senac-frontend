@@ -5,6 +5,7 @@ import { SeguroService } from '../../shared/service/seguro.service';
 import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
 import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import { differenceInCalendarDays } from 'date-fns';
 
 @Component({
   selector: 'app-seguros-listagem',
@@ -24,11 +25,18 @@ export class SegurosListagemComponent implements OnInit {
   title = "Listagem de Seguros"
 
   ngOnInit(): void {
+    this.verificarToken();
     this.titleService.setTitle(this.title)
     this.buscarSeguros();
 
     if (this.idSeguro) {
       this.buscarSeguro();
+    }
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
     }
   }
 
@@ -57,6 +65,11 @@ export class SegurosListagemComponent implements OnInit {
     )
   }
 
+  isNearExpiry(dtFimVigencia: Date): boolean {
+    const today = new Date();
+    return differenceInCalendarDays(new Date(dtFimVigencia), today) <= 7;
+  }
+
   pesquisar() {
     this.SeguroService.listarComFiltro(this.seletor).subscribe(
       resultado => {
@@ -75,6 +88,30 @@ export class SegurosListagemComponent implements OnInit {
 
   editar(id: number) {
     this.router.navigate(['seguros/detalhe', id]);
+  }
+
+  excluir(id: number) {
+    Swal.fire({
+      title: 'Confirma a exclusão do seguro?',
+      text: 'Não será possível reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.SeguroService.excluir(id).subscribe(
+          resultado => {
+            Swal.fire('Sucesso', 'Seguro excluído com sucesso!', 'success');
+            this.buscarSeguros();
+          },
+          erro => {
+            Swal.fire('Erro', 'Erro ao excluir Seguro com ID (' + id + ') : ', 'error');
+            return;
+          }
+        )
+      }
+    })
   }
 
   limpar() {
