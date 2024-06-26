@@ -117,6 +117,7 @@
             <thead>
               <tr>
                 <th scope="col" class="text-center">Nome Cliente</th>
+                <th scope="col" class="text-center">Nome Seguradora</th>
                 <th scope="col" class="text-center">Data Início - Fim de Vigência</th>
                 <th scope="col" class="text-center">RCF Danos Materiais</th>
                 <th scope="col" class="text-center">ROF Danos Físicos</th>
@@ -128,6 +129,7 @@
             <tbody>
               <tr *ngFor="let s of seguros">
                 <td class="text-center align-middle">{{s.cliente.nome}}</td>
+                <td class="text-center align-middle">{{s.seguradora.nome}}</td>
                 <td class="text-center align-middle">{{s.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{s.dtFimVigencia |
                   date: 'dd/MM/yyyy'}}</td>
                 <td class="text-center align-middle">{{s.rcfDanosMateriais | currency: 'BRL'}}</td>
