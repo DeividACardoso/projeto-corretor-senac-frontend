@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Veiculo } from "../model/veiculo";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Veiculo } from "../model/veiculo";
+import { Cliente } from "../model/cliente";
 import { VeiculoSeletor } from "../model/seletor/veiculo.seletor";
 
 @Injectable({
@@ -10,6 +11,8 @@ import { VeiculoSeletor } from "../model/seletor/veiculo.seletor";
 export class VeiculoService {
 
     private readonly API = 'http://localhost:8080/api/veiculo';
+    private readonly API_VEICULO = 'https://parallelum.com.br/fipe/api/v1';
+
     constructor(private httpClient: HttpClient) { }
 
     excluir(id: number) {

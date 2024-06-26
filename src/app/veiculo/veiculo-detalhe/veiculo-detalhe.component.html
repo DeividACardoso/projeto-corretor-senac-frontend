@@ -1,5 +1,5 @@
-<!-- <pre>{{veiculo | json}}</pre> -->
 <app-nav-bar></app-nav-bar>
+<pre>{{veiculo | json}}</pre>
 <div class="bg-light" style="height: 100vh">
   <div class="container-fluid">
     <div class="row">
@@ -10,16 +10,54 @@
         <div class="card-body card-info">
           <form #ngForm="ngForm">
             <div class="row align-items-start">
+              <div class="form-group col col-md-6 ">
+                <label for="cliente">Cliente</label>
+                <form>
+                  <input [ngClass]="(!veiculo.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
+                    class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
+                  <datalist id="dataListOptions">
+                    <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
+                  </datalist>
+                </form>
+                <div class="invalid-feedback">Informe o cliente</div>
+              </div>
               <div class="form-group col col-md-6">
                 <label for="marca">Marca</label>
-                <input
+                <input list="marcas"
                   [ngClass]="((!veiculo.marca || (veiculo.marca && veiculo.marca.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="veiculo.marca" class="shadow-sm rounded border border-secondary" minlength="2"
-                  placeholder="Marca" name="marca" required>
+                  [(ngModel)]="veiculo.marca" (blur)="preencherModelos()"
+                  class="shadow-sm rounded border border-secondary" minlength="2" placeholder="Marca" name="marca"
+                  required>
+                <datalist id="marcas">
+                  <option *ngFor="let marca of marcas" [ngValue]="marca.nome">{{marca.nome}}</option>
+                </datalist>
                 <div class="invalid-feedback">Informe uma marca com no mínimo 2 caracteres.</div>
               </div>
               <div class="form-group col col-md-6">
-                <label for="modelo">Tipo de Combustível</label>
+                <label for="modelo">Modelo</label>
+                <input list="modelo"
+                  [ngClass]="((!veiculo.modelo || (veiculo.modelo && veiculo.modelo.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="veiculo.modelo" class="shadow-sm rounded border border-secondary" minlength="2"
+                  placeholder="Modelo" name="modelo" required>
+                <datalist id="modelo">
+                  <option *ngFor="let modelo of modelos" [ngValue]="modelo.nome">{{modelo.nome}}</option>
+                </datalist>
+                <div class="invalid-feedback">Informe um modelo com no mínimo 2 caracteres.</div>
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="ano">Ano</label>
+                <input list="ano"
+                  [ngClass]="((!veiculo.anoModelo || (veiculo.anoModelo && veiculo.anoModelo.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="veiculo.anoModelo" (blur)="procurarVeiculo()"
+                  class="shadow-sm rounded border border-secondary" minlength="2" placeholder="Ano" name="ano" required>
+                <datalist id="ano">
+                  <option *ngFor="let ano of anos" [ngValue]="ano.nome">{{ano.nome}}</option>
+                </datalist>
+                <div class="invalid-feedback">Informe um ano com no mínimo 4 caracteres.</div>
+              </div>
+              <div class="form-group col col-md-6">
+                <label for="combustivel">Tipo de Combustível</label>
                 <input
                   [ngClass]="((!veiculo.tipoCombustivel || (veiculo.tipoCombustivel && veiculo.tipoCombustivel.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="veiculo.tipoCombustivel" class="shadow-sm rounded border border-secondary" minlength="2"
@@ -27,11 +65,33 @@
                 <div class="invalid-feedback">Informe o tipo de combustivel.</div>
               </div>
               <div class="form-group col col-md-6">
+                <label for="valor">Valor</label>
+                <input
+                  [ngClass]="((!veiculo.preco || (veiculo.preco && veiculo.preco.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="veiculo.preco" class="shadow-sm rounded border border-secondary" minlength="2"
+                  placeholder="Valor" name="valor" required>
+                <div class="invalid-feedback">Informe o valor.</div>
+              </div>
+              <div class="form-group col col-md-6">
                 <label for="cep">CEP de pernoite</label>
                 <input [ngClass]="(!veiculo.cep && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="veiculo.cep" class="shadow-sm rounded border border-secondary" name="cep" maxlength="8"
                   (blur)="viaCep(veiculo.cep)" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um cep válido</div>
+              </div>
+                <div class="form-group col col-md-6">
+                  <label for="numero">Número</label>
+                  <input [ngClass]="(!veiculo.numero && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="veiculo.numero" class="shadow-sm rounded border border-secondary" name="numero"
+                    required>
+                  <div class="invalid-feedback">Insira um número válido</div>
+                </div>
+              <div class="form-group col col-md-6">
+                <label for="logradouro">Logradouro</label>
+                <input [ngClass]="(!veiculo.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="veiculo.rua" class="shadow-sm rounded border border-secondary" name="logradouro"
+                  required>
+                <div class="invalid-feedback">Insira um logradouro válido</div>
               </div>
               <div class="form-group col col-md-6">
                 <label for="bairro">Bairro</label>
@@ -54,7 +114,7 @@
                 <div class="invalid-feedback">Insira um estado válido</div>
               </div>
               <div class="form-group col-md-6 pt-4">
-                <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
+                <button type="submit" class="form-control btn btn-warning rounded border-dark shadow-sm"
                   (click)="voltar()">Voltar</button>
               </div>
               <div class="form-group col-md-6 pt-4">

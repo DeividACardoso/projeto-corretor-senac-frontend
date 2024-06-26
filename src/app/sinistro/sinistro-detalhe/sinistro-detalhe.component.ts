@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
+import { SeguroService } from '../../shared/service/seguro.service';
+import { Title } from '@angular/platform-browser';
+import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-sinistro-detalhe',
@@ -15,21 +19,41 @@ export class SinistroDetalheComponent implements OnInit {
   public sinistro: Sinistro = new Sinistro();
   public idSinistro: number;
 
+  public listaClientes: any[] = [];
+  public displayCliente: string;
+  // public seguroSelecionado?: SeguroService;
+
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
   constructor(
     private sinistroService: SinistroService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private seguroService: SeguroService,
+    private titleService: Title
   ) { }
 
+  title = "Cadastro de Sinistro"
+
+  // ngOnInit(): void {
+  //   this.route.params.subscribe((params) => {
+  //     this.idSinistro = params['id'];
+
+  //     if (this.idSinistro) {
+  //       this.buscarSinistro();
+  //     }
+  //   });
+  // }
   ngOnInit(): void {
+    this.titleService.setTitle(this.title)
+      this.seguroService.listarTodos
+
     this.route.params.subscribe((params) => {
       this.idSinistro = params['id'];
 
       if (this.idSinistro) {
-        this.buscarSeguradora();
+        this.buscarSinistro();
       }
     });
   }
@@ -76,7 +100,7 @@ export class SinistroDetalheComponent implements OnInit {
     );
   }
 
-  buscarSeguradora() {
+  buscarSinistro() {
     this.sinistroService.pesquisarPorId(this.idSinistro).subscribe(
       (resultado) => {
         this.sinistro = resultado;
@@ -92,5 +116,51 @@ export class SinistroDetalheComponent implements OnInit {
     );
   }
 
+  // formatDate(date: Date): string {
+  //   return formatDate(date, 'yyyy-MM-dd');
+  // }
+
+  formatDate(date: Date): string {
+    return formatDate(date, 'yyyy-MM-dd', 'UTC-8');
+  }
+
+  formatHora(time: string): string {
+    const timeFormat = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+    if (!timeFormat.test(time)) {
+      throw new Error('Invalid time format. Expected format is HH:mm:ss.');
+    }
+    return time;
+  }
+
+  onDateChange(event: any): void {
+    this.sinistro.data = event.target.value;
+  }
+
+  onTimeChange(event: any): void {
+    try {
+      this.sinistro.horario = this.formatHora(event.target.value);
+    } catch (error) {
+      console.error(error.message);
+      // Adicione manipulação de erro apropriada, por exemplo, mostrar uma mensagem de erro ao usuário
+    }
+  }
+
+  onInputChange(event: any) {
+    const input = event.target.value;
+    const selectedClient = this.listaClientes.find(cliente => `${cliente.nome}` === input);
+    if (selectedClient) {
+        this.sinistro.seguro.cliente = selectedClient;
+    } else {
+        this.sinistro.seguro.cliente = null;
+    }
+  }
+
+  ngOnChanges() {
+    if (this.sinistro.seguro.cliente) {
+        this.displayCliente = `${this.sinistro.seguro.cliente.cpf}`;
+    } else {
+        this.displayCliente = '';
+    }
+}
 
 }

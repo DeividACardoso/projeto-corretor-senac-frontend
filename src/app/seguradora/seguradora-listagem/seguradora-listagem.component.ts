@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { SeguradoraService } from '../../shared/service/seguradora.service';
 import Swal from 'sweetalert2';
 import { SeguradoraSeletor } from '../../shared/model/seletor/seguradora.seletor';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,12 +19,15 @@ export class SeguradoraListagemComponent {
 
   constructor(private seguradoraService: SeguradoraService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private titleService: Title) {
     }
 
   public seguradoras: Array<Seguradora> = new Array();
+  title="Listagem de Seguradoras"
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title)
     this.buscarSeguradora();
   }
 
