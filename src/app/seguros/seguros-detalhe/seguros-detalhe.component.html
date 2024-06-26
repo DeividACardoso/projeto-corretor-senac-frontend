@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <pre>{{ seguro | json }}</pre>
-<div class="bg-light" style="height: 100vh">
+<div class="bg-light">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 pt-2 align-items-center">
@@ -10,7 +10,7 @@
         <div class="card-body card-info">
           <form #ngForm="ngForm">
             <div class="row align-items-start">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="cliente">Cliente</label>
                 <input [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
                   [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" (blur)="carregarListaVeiculos()"
@@ -21,7 +21,7 @@
                 </datalist>
                 <div class="invalid-feedback">Informe o cliente</div>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label for="veiculo">Veículo</label>
                 <select name="veiculo" class="shadow-sm rounded border-dark"
                   [ngClass]="(!seguro.veiculo && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
@@ -33,12 +33,30 @@
                 </select>
                 <div class="invalid-feedback">Informe o veículo</div>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
+                <label for="seguradora">Seguradora</label>
+                <select name="seguradora" class="shadow-sm rounded border-dark"
+                  [ngClass]="(!seguro.seguradora && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                  [ngModelOptions]="{standalone: true}" [compareWith]="compareById" [(ngModel)]="seguro.seguradora"
+                  required>
+                  <option value="" disabled selected>Selecione um veículo</option>
+                  <option *ngFor="let seguradora of listaSeguradoras" [ngValue]="seguradora">{{seguradora.nome}}</option>
+                </select>
+                <div class="invalid-feedback">Informe o veículo</div>
+              </div>
+              <div class="form-group col-md-3">
                 <label for="nome">Número da proposta</label>
                 <input class="shadow-sm rounded border-dark"
-                  [ngClass]="((!seguro.numeroProposta || (seguro.numeroProposta && seguro.numeroProposta.length < 3)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [ngClass]="(!seguro.numeroProposta && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="seguro.numeroProposta" minlength="3" name="numeroProposta" required>
                 <div class="invalid-feedback">Informe o número da proposta</div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="nome">Número da apólice</label>
+                <input class="shadow-sm rounded border-dark"
+                  [ngClass]="(!seguro.numApolice && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="seguro.numApolice" minlength="3" name="numApolice" required>
+                <div class="invalid-feedback">Informe o número da apólice</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="nome">Data de início de vigência</label>
@@ -50,7 +68,7 @@
               <div class="form-group col-md-3">
                 <label for="nome">Data de fim de vigência</label>
                 <input class="shadow-sm rounded border-dark" type="date" name="dtFimVigencia"
-                  [ngClass]="(!seguro.dtFimVigencia && (seguro.dtFimVigencia && ngForm.submitted)) ? 'form-control is-invalid' : 'form-control'"
+                  [ngClass]="(!seguro.dtFimVigencia && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="seguro.dtFimVigencia" required>
                 <div class="invalid-feedback">Informe a data de fim de vigência</div>
               </div>
@@ -71,7 +89,7 @@
                   <span class="input-group-text border-light rounded-0">R$</span>
                   <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0"
                     step=".05" name="rcfDanosMateriais"
-                    [ngClass]="(((!seguro.rcfDanosMateriais)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [ngClass]="(!seguro.rcfDanosMateriais && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.rcfDanosMateriais" required>
                   <div class="invalid-feedback">Informe RCF de danos materiais</div>
                 </div>
@@ -82,7 +100,7 @@
                   <span class="input-group-text border-light rounded-0">R$</span>
                   <input class="shadow-sm rounded border-dark" minlength="3" type="number" placeholder="0.00" value="0"
                     step=".05" name="rcfDanosCorporais"
-                    [ngClass]="(((!seguro.rofDanosFisicos)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                    [ngClass]="(!seguro.rofDanosFisicos && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                     [(ngModel)]="seguro.rofDanosFisicos" required>
                   <div class="invalid-feedback">Informe ROF de danos físicos</div>
                 </div>

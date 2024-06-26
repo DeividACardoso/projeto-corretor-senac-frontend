@@ -7,6 +7,7 @@ import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
 import { VeiculoService } from '../../shared/service/veiculo.service';
 import { Veiculo } from '../../shared/model/veiculo';
+import { Seguradora } from '../../shared/model/seguradora';
 
 @Component({
   selector: 'app-seguro-detalhe',
@@ -17,6 +18,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   public seguro: Seguro = new Seguro();
   public seguros: Array<Seguro> = new Array();
   public idSeguro: number;
+  public listaSeguradoras: Array<Seguradora> = new Array();
   public listaClientes: Array<Cliente> = new Array();
   public listaVeiculos: Array<Veiculo> = new Array();
   displayCliente: string;
@@ -30,6 +32,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.verificarToken();
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
 
@@ -37,8 +40,15 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
         this.buscarSeguro();
       } else {
         this.carregarListaClientes();
+        this.carregarListaSeguradoras();
       }
     });
+  }
+
+  verificarToken(){
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +97,18 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Erro ao obter lista de veiculos', error);
+      }
+    );
+  }
+
+  carregarListaSeguradoras() {
+    this.seguroService.getListaSeguradoras().subscribe(
+      (seguradoras) => {
+        this.listaSeguradoras = seguradoras;
+        console.log("Lista de seguradoras carregada:", this.listaSeguradoras);
+      },
+      (error) => {
+        console.error('Erro ao obter lista de seguradoras', error);
       }
     );
   }
