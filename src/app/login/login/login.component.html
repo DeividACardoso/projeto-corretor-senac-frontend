@@ -22,7 +22,7 @@
                 [(ngModel)]="dto.password" type="password" class="form-control border-dark" name="password" required>
               <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
             </div>
-            <div class="mb-3 text-center">
+            <div class="mb-3 text-center" (click)="recuperarSenha()">
               <a href="#" class="text-primary">Esqueci minha senha</a>
             </div>
             <div class="text-center">

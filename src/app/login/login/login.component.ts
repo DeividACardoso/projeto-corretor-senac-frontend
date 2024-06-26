@@ -4,6 +4,7 @@ import { AuthenticationDTO } from '../../shared/model/authentication.dto';
 import { CommonModule } from '@angular/common';
 import { CorretorService } from '../../shared/service/corretor.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Corretor } from '../../shared/model/corretor';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,16 +12,16 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-
 export class LoginComponent {
-
   public dto: AuthenticationDTO = new AuthenticationDTO();
-  public form: NgForm;
+  public idCorretor: number;
+  public corretor: Corretor = new Corretor();
 
-  constructor(private corretorService: CorretorService,
+  constructor(
+    private corretorService: CorretorService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
 
   public login() {
@@ -45,11 +46,20 @@ export class LoginComponent {
           })
         }
       }
-    )
+    );
   }
 
   public cadastro() {
-    this.router.navigate(['login/cadastro'])
+    this.router.navigate(['login/cadastro']);
+  }
+
+  public recuperarSenha() {
+    this.corretorService.recuperarSenha(this.idCorretor, this.corretor).subscribe(
+        (sucesso) => {
+          Swal.fire('Sucesso', 'Senha atualizada com Sucesso!', 'success'); },
+        (erro) => {
+          Swal.fire('Erro', 'Não foi possivel atualizar a sua senha', 'error');}
+      );
   }
 
   private wrongAttempts: number = 0;
@@ -92,4 +102,3 @@ export class LoginComponent {
   }
 
 }
-
