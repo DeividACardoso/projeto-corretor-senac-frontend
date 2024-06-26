@@ -24,7 +24,7 @@ export class CorretorService {
     }
 
   recuperarSenha(id: number, corretorAtualizar: Corretor): Observable<Corretor> {
-    const url = this.API + '/atualizar/' + {id};
+    const url = this.API + '/atualizar/' + id;
     return this.httpClient.put<Corretor>(url, corretorAtualizar);
   }
 
