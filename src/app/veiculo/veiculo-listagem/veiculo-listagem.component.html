@@ -1,0 +1,88 @@
+<app-nav-bar></app-nav-bar>
+<div class="bg-light" style="height: 100vh;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pt-2">
+        <div class="col-sm-12 text-center">
+          <h3>Listagem de Veiculos</h3>
+        </div>
+        <div class="accordion">
+          <div class="accordion-item border-dark">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <strong>Filtros</strong>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <form class="row align-items-center form-floating">
+                  <div class="form-group col col-md-3">
+                    <div class="form-group col col-md-12">
+                      <label for="nome">Marca</label>
+                      <input class="form-control shadow-sm rounded border-dark" type="text" name="marca"
+                        [(ngModel)]="seletor.marca" placeholder="Marca" maxlength="150">
+                    </div>
+                  </div>
+                  <div class="form-group col col-md-12">
+                    <label for="nome">Modelo</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="text" name="modelo"
+                      [(ngModel)]="seletor.modelo" placeholder="Modelo" maxlength="150">
+                  </div>
+                  <div class="form-group col col-md-12">
+                    <label for="nome">Ano</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="text" name="ano"
+                      [(ngModel)]="seletor.ano" placeholder="Ano" maxlength="150">
+                  </div>
+                  <div class="form-group col col-md-12">
+                    <label for="nome">Tipo Combustível</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="text" name="ipoCombustivel"
+                      [(ngModel)]="seletor.ano" placeholder="TipoCombustivel" maxlength="150">
+                  </div>
+                </form> <!-- Fechamento da tag <form> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md pt-2">
+            <div class="table-responsive rounded-0 border">
+              <table id="tabelaSeguros"
+                class="table table-responsive table-striped table-hover table-sm table-bordered border-dark">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center">Cliente</th>
+                    <th scope="col" class="text-center">Marca</th>
+                    <th scope="col" class="text-center">Modelo</th>
+                    <th scope="col" class="text-center">Ano</th>
+                    <th scope="col" class="text-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let v of veiculos">
+                    <td class="text-center align-middle">{{v.cliente.nome}}</td>
+                    <td class="text-center align-middle">{{v.marca}}</td>
+                    <td class="text-center align-middle">{{v.modelo}}</td>
+                    <td class="text-center align-middle">{{v.anoModelo}}</td>
+                    <td class="text-center align-middle">
+                      <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" (click)="editar(v.id)"
+                        data-toggle="tooltip" data-placement="top" title="Editar">
+                        <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
+                      </button>
+                      <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(v.id)"
+                        data-toggle="tooltip" data-placement="top" title="Excluir">
+                        <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
