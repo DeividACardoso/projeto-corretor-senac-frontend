@@ -22,7 +22,14 @@ export class ClienteListagemComponent implements OnInit {
   public clientes: Array<Cliente> = new Array();
 
   ngOnInit(): void {
+    this.verificarToken();
     this.buscarClientes();
+  }
+
+  verificarToken(){
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarClientes() {

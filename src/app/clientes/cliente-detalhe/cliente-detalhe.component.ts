@@ -65,6 +65,7 @@ export class ClienteDetalheComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.verificarToken();
     this.route.params.subscribe(params => {
       this.idCliente = params['id'];
 
@@ -72,6 +73,12 @@ export class ClienteDetalheComponent implements OnInit {
         this.buscarCliente();
       }
     });
+  }
+
+  verificarToken(){
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarCliente() {

@@ -24,11 +24,18 @@ export class SegurosListagemComponent implements OnInit {
   title = "Listagem de Seguros"
 
   ngOnInit(): void {
+    this.verificarToken();
     this.titleService.setTitle(this.title)
     this.buscarSeguros();
 
     if (this.idSeguro) {
       this.buscarSeguro();
+    }
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
     }
   }
 

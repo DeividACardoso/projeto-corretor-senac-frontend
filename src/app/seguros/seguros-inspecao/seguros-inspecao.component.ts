@@ -20,11 +20,18 @@ export class SegurosInspecaoComponent implements OnInit {
   public sinistros: Array<any> = new Array();
 
   ngOnInit(): void {
+    this.verificarToken();
     this.titleService.setTitle(this.title);
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
       this.buscarSeguros(this.idSeguro)
     })
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarSeguros(id: number) {
@@ -36,6 +43,10 @@ export class SegurosInspecaoComponent implements OnInit {
         console.log('Erro ao buscar Seguros: ', erro);
       }
     )
+  }
+
+  voltar(){
+    this.router.navigate(['seguros/lista'])
   }
 
   // buscarSinistrosPorSeguro(id: number) {

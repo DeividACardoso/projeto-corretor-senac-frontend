@@ -39,13 +39,14 @@ export class VeiculoDetalheComponent implements OnInit {
         "SP",
         "SE",
         "TO"
-        ];
+    ];
 
     constructor(private veiculoService: VeiculoService,
         private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit(): void {
+        this.verificarToken();
         this.route.params.subscribe(params => {
             this.idVeiculo = params['id'];
 
@@ -56,6 +57,12 @@ export class VeiculoDetalheComponent implements OnInit {
                 this.preencherMarcas();
             }
         });
+    }
+
+    verificarToken() {
+        if (localStorage.getItem('token') == null) {
+            this.router.navigate(['login']);
+        }
     }
 
     public idVeiculo: number;
@@ -113,7 +120,7 @@ export class VeiculoDetalheComponent implements OnInit {
             }
         );
     }
-    
+
     voltar() {
         this.router.navigate(['/veiculo/lista']);
     }
