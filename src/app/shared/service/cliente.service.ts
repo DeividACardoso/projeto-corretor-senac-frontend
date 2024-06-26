@@ -36,6 +36,10 @@ export class ClienteService {
     return this.httpClient.delete<Cliente>(this.API + '/delete-id/' + id);
   }
 
+  verificarClienteTemSeguro(id: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.API + '/verificar-seg/' + id);
+  }
+
   public uploadfile(file: File) {
     let formParams = new FormData();
     formParams.append('file', file);

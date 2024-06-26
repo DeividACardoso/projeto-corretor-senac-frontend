@@ -78,6 +78,7 @@
                   <th scope="col" class="text-center">ID</th>
                   <th scope="col" class="text-center">Nome</th>
                   <th scope="col" class="text-center">CPF</th>
+                  <th scope="col" class="text-center">Seguro Ativo?</th>
                   <th scope="col" class="text-center">Ações</th>
                 </tr>
               </thead>
@@ -87,6 +88,7 @@
                   <td class="text-center align-middle">{{c.nome}}</td>
                   <!-- <td class="text-center align-middle">{{s.veiculo.placaVeiculo}}</td> -->
                   <td class="text-center align-middle">{{c.cpf | numberMask: 'cpf'}}</td>
+                  <td class="text-center align-middle">{{(possuiSeguro) ? 'Sim' : 'Não'}}</td>
                   <td class="text-center align-middle">
                     <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
                       data-placement="top" title="Inspecionar" disabled>
@@ -98,7 +100,7 @@
                       <!-- Implementar: (click)="editar(s.id)" -->
                       <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
                     </button>
-                    <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(c.id)"
+                    <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="verificarClienteTemSeguro(c.id)"
                       data-toggle="tooltip" data-placement="top" title="Excluir">
                       <!-- Implementar: (click)="excluir(c.id)" -->
                       <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">

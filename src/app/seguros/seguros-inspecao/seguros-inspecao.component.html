@@ -179,17 +179,27 @@
                         <h5 class="card-header">Veículo</h5>
                         <div class="card-body">
                             <ul class="list-group list-group-flush align-items-center">
-                                <div class="text-secondary">
-                                    <span>Em desenvolvimento</span>
-                                </div>
-                                <!-- <li class="list-group-item align-items-center p-3">Nome: {{seguro.cliente.nome}}</li>
-                                                <li class="list-group-item align-items-center p-3">E-mail: {{seguro.cliente.email}}</li>
-                                                <li class="list-group-item align-items-center p-3">CPF: {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
-                                                <li class="list-group-item align-items-center p-3">Gênero: {{seguro.cliente.genero}}</li>
-                                                <li class="list-group-item align-items-center p-3">Estado Civil: {{seguro.cliente.estadoCivil}}</li>
-                                                <li class="list-group-item align-items-center p-3">Data de Nascimento: {{seguro.cliente.dtNascimento}}</li>
-                                                <li class="list-group-item align-items-center p-3">Telefone: {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
-                                                <li class="list-group-item align-items-center p-3"></li> -->
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold">Marca: </span>
+                                    {{seguro.veiculo.marca}}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold">Modelo: </span>
+                                    {{seguro.veiculo.modelo}}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold">Ano: </span>
+                                    {{seguro.veiculo.anoModelo}}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold">Combustível: </span>
+                                    {{seguro.veiculo.tipoCombustivel}}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold">Preço: </span>
+                                    {{seguro.veiculo.preco}}
+                                </li>
+                                <li class="list-group-item align-items-center p-3"></li>
                             </ul>
                         </div>
                     </div>
@@ -197,17 +207,31 @@
                         <h5 class="card-header">Endereço do Veículo</h5>
                         <div class="card-body">
                             <ul class="list-group list-group-flush align-items-center">
-                                <div class="text-secondary">
-                                    <span>Em desenvolvimento</span>
-                                </div>
-                                <!-- <li class="list-group-item align-items-center p-3">Nome: {{seguro.cliente.nome}}</li>
-                                                    <li class="list-group-item align-items-center p-3">E-mail: {{seguro.cliente.email}}</li>
-                                                    <li class="list-group-item align-items-center p-3">CPF: {{seguro.cliente.cpf | numberMask: 'cpf'}}</li>
-                                                    <li class="list-group-item align-items-center p-3">Gênero: {{seguro.cliente.genero}}</li>
-                                                    <li class="list-group-item align-items-center p-3">Estado Civil: {{seguro.cliente.estadoCivil}}</li>
-                                                    <li class="list-group-item align-items-center p-3">Data de Nascimento: {{seguro.cliente.dtNascimento}}</li>
-                                                    <li class="list-group-item align-items-center p-3">Telefone: {{seguro.cliente.telefone | numberMask: 'phone'}}</li>
-                                                    <li class="list-group-item align-items-center p-3"></li> -->
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold"> CEP: </span>
+                                    {{ seguro.veiculo.cep | numberMask : "cep" }}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold"> Logradouro: </span>
+                                    {{ seguro.veiculo.rua }}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold"> Complemento: </span>
+                                    {{ seguro.veiculo.complemento }}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold"> Bairro: </span>
+                                    {{ seguro.veiculo.bairro }}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold"> Cidade: </span>
+                                    {{ seguro.veiculo.cidade }}
+                                </li>
+                                <li class="list-group-item align-items-center p-3">
+                                    <span class="fw-bold"> UF: </span>
+                                    {{ seguro.veiculo.uf }}
+                                </li>
+                                <li class="list-group-item align-items-center p-3"></li>
                             </ul>
                         </div>
                     </div>

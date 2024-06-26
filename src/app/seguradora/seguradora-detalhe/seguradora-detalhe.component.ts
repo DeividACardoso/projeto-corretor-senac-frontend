@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { SeguradoraService } from '../../shared/service/seguradora.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-seguradora-detalhe',
@@ -20,10 +21,14 @@ export class SeguradoraDetalheComponent implements OnInit {
 
   constructor(private seguradoraService: SeguradoraService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private titleService: Title) {}
+
+    title="Cadastro de Seguradora"
 
 
     ngOnInit(): void {
+      this.titleService.setTitle(this.title)
       this.route.params.subscribe(params => {
         this.idSeguradora = params['id'];
 
