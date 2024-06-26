@@ -39,7 +39,7 @@
                   [ngClass]="(!seguro.seguradora && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
                   [ngModelOptions]="{standalone: true}" [compareWith]="compareById" [(ngModel)]="seguro.seguradora"
                   required>
-                  <option value="" disabled selected>Selecione um veículo</option>
+                  <option value="" disabled selected>Selecione uma seguradora</option>
                   <option *ngFor="let seguradora of listaSeguradoras" [ngValue]="seguradora">{{seguradora.nome}}</option>
                 </select>
                 <div class="invalid-feedback">Informe o veículo</div>

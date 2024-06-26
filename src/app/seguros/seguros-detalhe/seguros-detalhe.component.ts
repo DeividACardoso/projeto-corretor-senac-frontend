@@ -38,6 +38,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
 
       if (this.idSeguro) {
         this.buscarSeguro();
+        this.carregarListaVeiculos();
       } else {
         this.carregarListaClientes();
         this.carregarListaSeguradoras();
