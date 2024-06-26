@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthenticationDTO } from '../model/authentication.dto';
 import { Corretor as Corretor } from '../model/corretor';
 import { Observable } from 'rxjs';
 
@@ -15,7 +16,7 @@ export class CorretorService {
     private token: string;
     private tokenFromStorage: string;
 
-    login(authenticationDTO: any) {
+    login(authenticationDTO: AuthenticationDTO) {
         return this.httpClient.post(this.API + '/login', authenticationDTO);
     }
 

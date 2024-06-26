@@ -7,6 +7,7 @@ import { Cliente } from '../../shared/model/cliente';
 import Swal from 'sweetalert2';
 import { VeiculoService } from '../../shared/service/veiculo.service';
 import { Veiculo } from '../../shared/model/veiculo';
+import { Seguradora } from '../../shared/model/seguradora';
 
 @Component({
   selector: 'app-seguro-detalhe',
@@ -17,6 +18,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   public seguro: Seguro = new Seguro();
   public seguros: Array<Seguro> = new Array();
   public idSeguro: number;
+  public listaSeguradoras: Array<Seguradora> = new Array();
   public listaClientes: Array<Cliente> = new Array();
   public listaVeiculos: Array<Veiculo> = new Array();
   displayCliente: string;
@@ -30,23 +32,31 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.verificarToken();
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
 
       if (this.idSeguro) {
         this.buscarSeguro();
+        this.carregarListaVeiculos();
       } else {
         this.carregarListaClientes();
-        this.carregarListaVeiculos();
+        this.carregarListaSeguradoras();
       }
     });
+  }
+
+  verificarToken(){
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.idSeguro) {
       this.carregarListaClientes();
       this.carregarListaVeiculos();
-      
+
     }
   }
 
@@ -80,14 +90,26 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     );
   }
 
-  carregarListaVeiculos(){
-    this.veiculoService.listar().subscribe(
+  carregarListaVeiculos() {
+    this.veiculoService.listarPorCliente(this.seguro.cliente.id).subscribe(
       (veiculos) => {
         this.listaVeiculos = veiculos;
         console.log("Lista de veiculos carregada:", this.listaVeiculos);
       },
       (error) => {
         console.error('Erro ao obter lista de veiculos', error);
+      }
+    );
+  }
+
+  carregarListaSeguradoras() {
+    this.seguroService.getListaSeguradoras().subscribe(
+      (seguradoras) => {
+        this.listaSeguradoras = seguradoras;
+        console.log("Lista de seguradoras carregada:", this.listaSeguradoras);
+      },
+      (error) => {
+        console.error('Erro ao obter lista de seguradoras', error);
       }
     );
   }
@@ -111,14 +133,16 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   }
 
   salvar(form: NgForm) {
+
     if (form.invalid) {
       Swal.fire("Erro", "Formulário inválido", 'error');
       return;
-    }
-    if (this.idSeguro) {
-      this.atualizar();
     } else {
-      this.inserirSeguro();
+      if (this.idSeguro) {
+        this.atualizar();
+      } else {
+        this.inserirSeguro();
+      }
     }
   }
 
@@ -127,6 +151,9 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   }
 
   inserirSeguro() {
+    if (this.seguro.carroReserva === null) {
+      this.seguro.carroReserva = false;
+    }
     this.seguroService.salvar(this.seguro).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Seguro salvo com sucesso", 'success');

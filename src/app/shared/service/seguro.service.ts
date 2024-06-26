@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 // import { SeguroSeletor } from 'src/app/shared/model/seletor/seguro.seletor'
 import { Cliente } from "../model/cliente";
 import { SeguroSeletor } from "../model/seletor/seguro.seletor";
+import { Seguradora } from "../model/seguradora";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class SeguroService {
   
   getListaClientes(): Observable<Array<Cliente>> {
     return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
+  }
+
+  getListaSeguradoras(): Observable<Array<Seguradora>> {
+    return this.httpClient.get<Array<Seguradora>>('http://localhost:8080/api/seguradora/todos');
   }
 
   pesquisarPorId(id: number) {

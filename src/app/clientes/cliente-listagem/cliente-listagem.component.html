@@ -6,64 +6,40 @@
           <div class="col-sm-12 text-center">
             <h3>Listagem de Clientes</h3>
           </div>
-          <!-- <form class="row align-items-center">
+          <form class="row align-items-center">
           <div class="form-group col col-md-6">
-            <label for="nomeCliente">CPF do Cliente</label>
-            <input class="form-control shadow-sm rounded-0" name="nomeCliente" [(ngModel)]="seletor.cpfCliente">
+            <label for="nomeCliente">Nome do Cliente</label>
+            <input class="form-control shadow-sm rounded border-dark" name="nomeCliente" [(ngModel)]="seletor.nomeCliente">
           </div>
-          <div class="form-group col col-md-6">
-            <label for="placaVeiculo">Placa Veículo</label>
-            <input class="form-control shadow-sm rounded-0" name="placaVeiculo" [(ngModel)]="seletor.placaVeiculo">
+          <div class="form-group col col-md-3">
+            <label for="cpf">CPF</label>
+            <input class="form-control shadow-sm rounded border-dark" name="cpf" [(ngModel)]="seletor.cpf">
           </div>
-          <div class="form-group col col-md-6">
-            <label for="dtInicioComecoVigencia">Data Inicial de Inicio de Vigência</label>
-            <input class="form-control shadow-sm rounded-0" type="date" name="dtInicioComecoVigencia" [(ngModel)]="seletor.dtInicioComecoVigencia">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="dtFimComecoVigencia">Data Final de Inicio de Vigência</label>
-            <input class="form-control shadow-sm rounded-0" type="date" name="dtFimComecoVigencia" [(ngModel)]="seletor.dtFimComecoVigencia">
+          <div class="form-group col col-md-3">
+            <label for="cnh">CNH</label>
+            <input class="form-control shadow-sm rounded border-dark" type="text" name="cnh" [(ngModel)]="seletor.cnh">
           </div>
           <div class="form-group col col-md-6">
-            <label for="dtInicioFimVigencia">Data Inicial de Fim de Vigência</label>
-            <input class="form-control shadow-sm rounded-0" type="date" name="dtInicioFimVigencia" [(ngModel)]="seletor.dtInicioFimVigencia">
+            <label for="dtFimComecoVigencia">Data Inicio de Nascimento</label>
+            <input class="form-control shadow-sm rounded border-dark" type="date" name="dtFimComecoVigencia" [(ngModel)]="seletor.dtNascimentoInicio">
           </div>
           <div class="form-group col col-md-6">
-            <label for="dtFimFimVigencia">Data Final de Fim de Vigência</label>
-            <input class="form-control shadow-sm rounded-0" type="date" name="dtFimFimVigencia" [(ngModel)]="seletor.dtFimFimVigencia">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="rcfDanosMateriais">RCF Danos Materiais</label>
-            <input class="form-control shadow-sm rounded-0" name="rcfDanosMateriais" [(ngModel)]="seletor.rcfDanosMateriais">
-          </div>
-          <div class="form-group col col-md-6">
-            <label for="rcfDanosCorporais">RCF Danos Corporais</label>
-            <input class="form-control shadow-sm rounded-0" name="rcfDanosCorporais" [(ngModel)]="seletor.rcfDanosCorporais">
-          </div>
-          <div class="form-group col col-md-4">
-            <label for="franquia">Franquia</label>
-            <input class="form-control shadow-sm rounded-0" name="franquia" [(ngModel)]="seletor.franquia">
-          </div>
-          <div class="form-group col col-md-4">
-            <label for="assistencia">Assistência</label>
-            <input class="form-control shadow-sm rounded-0" name="assistencia" [(ngModel)]="seletor.assistencia">
-          </div>
-          <div class="form-group col col-md-4">
-            <label for="carroReserva">Carro Reserva</label>
-            <input class="form-control shadow-sm rounded-0" name="carroReserva" [(ngModel)]="seletor.carroReserva">
+            <label for="dtNascimentoFim">Data Fim de Nascimento</label>
+            <input class="form-control shadow-sm rounded border-dark" type="date" name="dtNascimentoFim" [(ngModel)]="seletor.dtNascimentoFim">
           </div>
           <div class="form-group col pt-3 col-md-2">
-            <button type="sumbit" name="btnrelatorio" class="form-control btn btn-success mb-3 rounded-0 shadow-sm">Relatório</button>
-            <-- Implementar: (click)="exportExcel()" -->
-          <!-- </div>
+            <button type="sumbit" name="btnrelatorio" class="form-control btn btn-success mb-3 rounded border-dark shadow-sm">Relatório</button>
+            <!-- <-- Implementar: (click)="exportExcel()" -->
+          </div>
           <div class="form-group col pt-3 col-md-5">
-            <button type="sumbit" name="btnsubmit" class="form-control btn btn-warning mb-3 rounded-0 shadow-sm">Limpar</button>
-            <-- Implementar: (click)="limpar()" -->
-          <!-- </div>
+            <button type="sumbit" name="btnsubmit" class="form-control btn btn-warning mb-3 rounded border-dark shadow-sm">Limpar</button>
+            <!-- <-- Implementar: (click)="limpar()" -->
+          </div>
           <div class="form-group col pt-3 col-md-5">
-            <button type="sumbit" class="form-control btn btn-primary mb-3 rounded-0 shadow-sm">Pesquisar</button> -->
+            <button type="sumbit" class="form-control btn btn-primary mb-3 rounded border-dark shadow-sm">Pesquisar</button>
           <!-- Implementar: (click)="pesquisar()" -->
-          <!-- </div> -->
-          <!-- </form> -->
+          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -86,18 +62,11 @@
                 <tr *ngFor="let c of clientes">
                   <td class="text-center align-middle">{{c.id}}</td>
                   <td class="text-center align-middle">{{c.nome}}</td>
-                  <!-- <td class="text-center align-middle">{{s.veiculo.placaVeiculo}}</td> -->
                   <td class="text-center align-middle">{{c.cpf | numberMask: 'cpf'}}</td>
-                  <td class="text-center align-middle">{{(possuiSeguro) ? 'Sim' : 'Não'}}</td>
+                  <td class="text-center align-middle">{{(c.temSeguro) ? 'Sim' : 'Não'}}</td>
                   <td class="text-center align-middle">
-                    <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
-                      data-placement="top" title="Inspecionar" disabled>
-                      <!-- Implementar: (click)="inspecionar()" -->
-                      <img src="https://imgur.com/FSJgeji.png" width="15" class="pb-1 align-items-center" />
-                    </button>
                     <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" (click)="editar(c.id)"
                       data-toggle="tooltip" data-placement="top" title="Editar">
-                      <!-- Implementar: (click)="editar(s.id)" -->
                       <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
                     </button>
                     <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="verificarClienteTemSeguro(c.id)"
