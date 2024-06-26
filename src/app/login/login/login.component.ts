@@ -83,6 +83,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
+    localStorage.removeItem('token');
     this.wrongAttempts = Number(localStorage.getItem('wrongAttempts')) || 0;
   }
 
