@@ -78,6 +78,7 @@
             class="table table-responsive table-hover table-sm table-bordered border-secondary">
             <thead>
               <tr>
+                <th scope="col" class="text-center">Número Apólice</th>
                 <th scope="col" class="text-center">Nome Cliente</th>
                 <th scope="col" class="text-center">Nome Seguradora</th>
                 <th scope="col" class="text-center">Data Início - Fim de Vigência</th>
@@ -91,6 +92,7 @@
             <tbody>
               <tr *ngFor="let s of seguros"
                 [ngClass]="{'fw-bold table-danger border-danger border-2': isNearExpiry(s.dtFimVigencia)}">
+                <td class="text-center align-middle">{{s.numApolice}}</td>
                 <td class="text-center align-middle">{{s.cliente.nome}}</td>
                 <td class="text-center align-middle">{{s.seguradora.nome}}</td>
                 <td class="text-center align-middle">{{s.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{s.dtFimVigencia |
