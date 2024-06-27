@@ -27,7 +27,7 @@ export class CorretorService {
     // enviarEmail
   enviarEmail(corretorAtualizar: Corretor): Observable<Corretor> {
     const url = this.API + '/enviar-email/' + corretorAtualizar;
-    return this.httpClient.put<Corretor>(url, corretorAtualizar); 
+    return this.httpClient.post<Corretor>(url, corretorAtualizar);
   }
 
     storeToken(token: string) {

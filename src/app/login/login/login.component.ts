@@ -54,12 +54,7 @@ export class LoginComponent {
   }
 
   public recuperarSenha() {
-    this.corretorService.enviarEmail(this.idCorretor, this.corretor).subscribe(
-        (sucesso) => {
-          Swal.fire('Sucesso', 'Senha atualizada com Sucesso!', 'success'); },
-        (erro) => {
-          Swal.fire('Erro', 'Não foi possivel atualizar a sua senha', 'error');}
-      );
+    this.router.navigate(['login/recuperar']);
   }
 
   private wrongAttempts: number = 0;

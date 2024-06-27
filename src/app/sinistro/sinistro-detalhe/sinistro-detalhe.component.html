@@ -52,7 +52,7 @@
                 <div class="invalid-feedback">Informe um tipo de Sinistro válido</div>
               </div>
 
-              <div class="form-group col col-md-3">
+              <div class="form-group col col-md-6">
                 <label for="data">Data: </label>
                 <div></div>
                 <input [ngClass]="(!sinistro.data) ? 'form-control is-invalid' : 'form-control'"
@@ -60,8 +60,8 @@
                   placeholder="Data do Sinistro" type="date" name="data" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe a data do Sinistro.</div>
               </div>
-
-              <div class="form-group col col-md-3">
+              <div></div>
+              <div class="form-group col col-md-6">
                 <label for="horario">Horário</label>
                 <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="sinistro.horario" class="shadow-sm rounded border border-secondary"
