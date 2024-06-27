@@ -16,20 +16,20 @@ export class VeiculoService {
     constructor(private httpClient: HttpClient) { }
 
     excluir(id: number) {
-        return this.httpClient.delete<Veiculo>(this.API+'/delete/'+id);
+        return this.httpClient.delete<Veiculo>(this.API + '/delete/' + id);
     }
-    listarComFiltro(seletor: VeiculoSeletor): Observable<Array<Veiculo>>{
-        return this.httpClient.post<Array<Veiculo>>(this.API+'/filtro', seletor);
+    listarComFiltro(seletor: VeiculoSeletor): Observable<Array<Veiculo>> {
+        return this.httpClient.post<Array<Veiculo>>(this.API + '/filtro', seletor);
     }
     listarTodos() {
-        return this.httpClient.get<Array<Veiculo>>(this.API+'/todos');
+        return this.httpClient.get<Array<Veiculo>>(this.API + '/todos');
     }
     pesquisarPorId(idVeiculo: number) {
-        return this.httpClient.get<Veiculo>(this.API+'/'+idVeiculo)
+        return this.httpClient.get<Veiculo>(this.API + '/' + idVeiculo)
     }
-    
-    salvar(veiculo: Veiculo): Observable<Veiculo>{
-        return this.httpClient.post<Veiculo>(this.API + '/novo', veiculo);  
+
+    salvar(veiculo: Veiculo): Observable<Veiculo> {
+        return this.httpClient.post<Veiculo>(this.API + '/novo', veiculo);
     }
 
     listar(): Observable<Array<Veiculo>> {
@@ -43,8 +43,20 @@ export class VeiculoService {
     listarPorCliente(id: number): Observable<Array<Veiculo>> {
         return this.httpClient.get<Array<Veiculo>>(this.API + '/cliente/' + id);
     }
-    atualizar(idVeiculo: number, veiculo: Veiculo): Observable<Veiculo>{
+    atualizar(idVeiculo: number, veiculo: Veiculo): Observable<Veiculo> {
         let url = this.API + '/atualizar/' + idVeiculo;
         return this.httpClient.put<Veiculo>(url, veiculo);
-      }
+    }
+
+    preencherMarcas(): Observable<string[]> {
+        return this.httpClient.get<string[]>(this.API_VEICULO + '/carros/marcas');
+    }
+
+    preencherModelos(marcaCodigo: string): Observable<any> {
+        return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos');
+    }
+
+    procurarVeiculo(marcaCodigo: string, modeloCodigo: string, ano: string): Observable<any> {
+        return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos/' + modeloCodigo + '/anos/' + ano);
+    }
 }

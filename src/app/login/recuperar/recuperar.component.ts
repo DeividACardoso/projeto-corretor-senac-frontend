@@ -39,12 +39,12 @@ export class RecuperarComponent implements OnInit {
       return;
     }
 
-    this.corretorService.enviarEmail(this.idCorretor, this.corretor).subscribe(
+    this.corretorService.enviarEmail(this.corretor).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Código de recuperação enviado com sucesso", 'success');
       },
       erro => {
-        Swal.fire("Erro", "Erro ao enviar o código de recuperação. Verifique se o email está cadastrado.", 'error');
+        Swal.fire("Erro", "Erro ao enviar o código de recuperação. Verifique se o email está correto.", 'error');
       }
     );
   }
