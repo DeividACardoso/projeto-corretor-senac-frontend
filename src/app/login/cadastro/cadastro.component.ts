@@ -23,7 +23,7 @@ export class CadastroComponent {
   public cadastrar(form: NgForm) {
     try {
       console.log(form)
-      if (form.invalid) {
+      if (this.validCPF(this.dto.cpf) || this.validTelefone(this.dto.telefone) || !form.valid) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -75,6 +75,8 @@ export class CadastroComponent {
     cpf = cpf.replace(/\D/g, '');
     if (cpf.length !== 11) {
       return false;
+    } else {
+      return true;
     }
   }
 
@@ -82,6 +84,8 @@ export class CadastroComponent {
     telefone = telefone.replace(/\D/g, '');
     if (telefone.length !== 11) {
       return false;
+    } else {
+      return true;
     }
   }
 

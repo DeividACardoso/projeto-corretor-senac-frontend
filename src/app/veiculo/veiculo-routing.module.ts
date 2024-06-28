@@ -4,8 +4,9 @@ import { VeiculoDetalheComponent } from './veiculo-detalhe/veiculo-detalhe.compo
 import { VeiculoListagemComponent } from './veiculo-listagem/veiculo-listagem.component';
 
 const routes: Routes = [
-    { path: 'detalhe', component: VeiculoDetalheComponent },
     { path: 'lista', component: VeiculoListagemComponent },
+    { path: 'detalhe', component: VeiculoDetalheComponent },
+    { path: 'detalhe/:id', component: VeiculoDetalheComponent },
 ];
 
 @NgModule({
