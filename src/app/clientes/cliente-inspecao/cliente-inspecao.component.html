@@ -1,0 +1,60 @@
+<div class="bg-light">
+    <div class="container-fluid pt-5">
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h5 class="text-white text-center">Seus dados</h5>
+            </div>
+            <div class="card-body border-dark">
+                <ul class="nav border-dark nav-tabs nav-fill" id="myTab" role="tablist">
+                    <li class="nav-item " role="presentation">
+                        <button class="border-secondary nav-link active" id="seguro-tab" data-bs-toggle="tab"
+                            data-bs-target="#seguro" type="button" role="tab" aria-controls="seguro"
+                            aria-selected="true">
+                            Seguros
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content p-2">
+                    <div class="col-md-12 align-items-center">
+                        <table
+                            class="table table-striped table-bordered border-dark table-hover justify-content-center text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Apólice</th>
+                                    <th scope="col">Ativo?</th>
+                                    <th scope="col">Vigência</th>
+                                    <th scope="col">Placa Veículo</th>
+                                    <th scope="col">Modelo Veículo</th>
+                                    <th scope="col">Seguradora</th>
+                                    <th scope="col"># Seguradora</th>
+                                    <th scope="col">Franquia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let seguro of seguros">
+                                    <td>{{ seguro.numApolice }}</td>
+                                    <td>{{ (seguro.ativo) ? 'Sim' : 'Não'}}</td>
+                                    <td>{{ seguro.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{ seguro.dtFimVigencia |
+                                        date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{ seguro.veiculo.placa }}</td>
+                                    <td>{{ seguro.veiculo.modelo }}</td>
+                                    <td>{{ seguro.seguradora.nome }}</td>
+                                    <td>{{ seguro.seguradora.telefone | numberMask: 'phone' }}</td>
+                                    <td>{{ seguro.franquia | currency: 'BRL' }}</td>
+                                </tr>
+                                <tr *ngIf="seguros.length === 0">
+                                    <td colspan="7" class="text-center fw-bold">Nada encontrado.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col col-md-1 pt-5">
+                            <button class="btn btn-warning border-dark" (click)="voltar()">Voltar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

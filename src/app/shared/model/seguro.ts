@@ -14,5 +14,6 @@ export class Seguro {
   numeroProposta: string;
   franquia: number;
   carroReserva: boolean;
+  ativo: boolean;
   numApolice: string;
 }

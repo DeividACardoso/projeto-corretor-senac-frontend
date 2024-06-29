@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-12 pt-2 align-items-center">
         <div class="col-sm-12 text-center">
-          <h3>Cadastro de Seguros</h3>
+          <h3>{{ idSeguro ? 'Atualizar Seguro' : 'Cadastrar Seguro' }}</h3>
         </div>
         <div class="card-body card-info">
           <form #ngForm="ngForm">
@@ -13,7 +13,7 @@
                 <label for="cliente">Cliente</label>
                 <input [ngClass]="(!seguro.cliente && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
                   [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" (blur)="carregarListaVeiculos()"
-                  [(ngModel)]="displayCliente" class="shadow-sm rounded border-dark form-control" name="cliente"
+                  (ngModelChange)="onClienteSelected($event)" [(ngModel)]="displayCliente" class="shadow-sm rounded border-dark form-control" name="cliente"
                   list="dataListOptions" required>
                 <datalist id="dataListOptions">
                   <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ cliente.nome }}</option>
@@ -27,8 +27,8 @@
                   [ngModelOptions]="{standalone: true}" [compareWith]="compareById" [(ngModel)]="seguro.veiculo"
                   required>
                   <option value="" disabled selected>Selecione um veículo</option>
-                  <option *ngFor="let veiculo of listaVeiculos" [ngValue]="veiculo">{{veiculo.modelo}} -
-                    {{veiculo.marca}}</option>
+                  <option *ngFor="let veiculo of listaVeiculos" [ngValue]="veiculo">Placa: {{veiculo.placa}} -
+                    Modelo: {{veiculo.modelo}}</option>
                 </select>
                 <div class="invalid-feedback">Informe o veículo</div>
               </div>

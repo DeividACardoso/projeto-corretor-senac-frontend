@@ -18,7 +18,7 @@ export class SeguroService {
   listarTodos(): Observable<Array<Seguro>> {
     return this.httpClient.get<Array<Seguro>>(this.API + '/todos');
   }
-  
+
   getListaClientes(): Observable<Array<Cliente>> {
     return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
   }
@@ -45,5 +45,9 @@ export class SeguroService {
 
   excluir(id: number): Observable<Seguro> {
     return this.httpClient.delete<Seguro>(this.API + '/delete-id/' + id);
+  }
+
+  public encontrarSeguroPorCliente(id: number): Observable<Seguro[]> {
+    return this.httpClient.get<Array<Seguro>>(this.API + '/seg-cliente/' + id);
   }
 }

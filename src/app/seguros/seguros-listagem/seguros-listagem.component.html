@@ -116,6 +116,9 @@
                   </button>
                 </td>
               </tr>
+              <tr *ngIf="seguros.length === 0">
+                <td colspan="9" class="text-center">Nada encontrado.</td>
+            </tr>
             </tbody>
           </table>
         </div>
