@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Seguro } from '../../shared/model/seguro';
 import { SeguroService } from '../../shared/service/seguro.service';
 import Swal from 'sweetalert2';
+import { Veiculo } from '../../shared/model/veiculo';
+import { VeiculoService } from '../../shared/service/veiculo.service';
 
 @Component({
   selector: 'app-cliente-inspecao',
@@ -12,11 +14,12 @@ import Swal from 'sweetalert2';
 })
 export class ClienteInspecaoComponent implements OnInit {
 
-  constructor(private SeguroService: SeguroService, private route: ActivatedRoute, private router: Router, private titleService: Title) {
+  constructor(private seguroService: SeguroService, private veiculoService: VeiculoService, private route: ActivatedRoute, private router: Router, private titleService: Title) {
   }
 
   title = "Inspeção de Seguro"
   public seguros: Array<Seguro> = new Array();
+  public veiculos: Array<Veiculo> = new Array();
   public idCliente: number;
   public sinistros: Array<any> = new Array();
 
@@ -26,6 +29,7 @@ export class ClienteInspecaoComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.idCliente = params['id'];
       this.buscarSeguros(this.idCliente)
+      this.buscarVeiculos(this.idCliente)
     })
   }
 
@@ -36,7 +40,7 @@ export class ClienteInspecaoComponent implements OnInit {
   }
 
   buscarSeguros(id: number) {
-    this.SeguroService.encontrarSeguroPorCliente(id).subscribe(
+    this.seguroService.encontrarSeguroPorCliente(id).subscribe(
       resultado => {
         this.seguros = resultado;
         console.log('Seguros: ', this.seguros);
@@ -47,9 +51,31 @@ export class ClienteInspecaoComponent implements OnInit {
     )
   }
 
+  buscarSeguroPorVeiculo(id: number){
+    this.seguroService.encontrarSeguroPorVeiculo(id).subscribe(
+      resultado => {
+        console.log('Seguro por Veiculo: ', resultado);
+      },
+      erro => {
+        console.log('Erro ao buscar Seguro por Veiculo: ', erro);
+      }
+    )
+  }
+
+  buscarVeiculos(id: number) {
+    this.veiculoService.listarPorCliente(id).subscribe(
+      resultado => {
+        this.veiculos = resultado;
+      },
+      erro => {
+        console.log('Erro ao buscar Veiculos: ', erro);
+      }
+    )
+  }
+
   voltar(){
     Swal.fire({
-      title: 'Deseja voltar?',
+      title: 'Deseja sair?',
       text: "Você será redirecionado a tela de login!",
       icon: 'question',
       showDenyButton: true,
