@@ -24,10 +24,10 @@ export class CorretorService {
         return this.httpClient.post(this.API + '/register', registerDTO);
     }
 
-  recuperarSenha(id: number, corretorAtualizar: Corretor): Observable<Corretor> {
-    const url = this.API + '/atualizar/' + id;
-    return this.httpClient.put<Corretor>(url, corretorAtualizar);
-  }
+    recuperarSenha(id: number, corretorAtualizar: Corretor): Observable<Corretor> {
+        const url = this.API + '/atualizar/' + id;
+        return this.httpClient.put<Corretor>(url, corretorAtualizar);
+    }
 
     storeToken(token: string) {
         this.token = token;
@@ -41,5 +41,9 @@ export class CorretorService {
 
     initRefresh() {
         return this.tokenFromStorage;
+    }
+
+    encontrarClientePorEmail(email: string) {
+        return this.httpClient.get('http://localhost:8080/api/clientes/email/' + email);
     }
 }

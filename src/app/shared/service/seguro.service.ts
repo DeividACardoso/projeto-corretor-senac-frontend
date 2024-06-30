@@ -50,4 +50,8 @@ export class SeguroService {
   public encontrarSeguroPorCliente(id: number): Observable<Seguro[]> {
     return this.httpClient.get<Array<Seguro>>(this.API + '/seg-cliente/' + id);
   }
+
+  public encontrarSeguroPorVeiculo(id: number): Observable<Seguro> {
+    return this.httpClient.get<Seguro>(this.API + '/seg-veiculo/' + id);
+  }
 }
