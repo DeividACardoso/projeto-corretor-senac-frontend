@@ -6,6 +6,8 @@ import { CorretorService } from '../../shared/service/corretor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Corretor } from '../../shared/model/corretor';
 import Swal from 'sweetalert2';
+import { Cliente } from '../../shared/model/cliente';
+import { LoginResponseDTO } from '../../shared/model/loginResponse.dto';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +16,11 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   public dto: AuthenticationDTO = new AuthenticationDTO();
+  public loginResponseDTO: LoginResponseDTO = new LoginResponseDTO();
   public idCorretor: number;
   public corretor: Corretor = new Corretor();
+  public idCliente: number;
+  public cliente: Cliente = new Cliente();
 
   constructor(
     private corretorService: CorretorService,
@@ -27,23 +32,29 @@ export class LoginComponent {
   public login() {
     localStorage.removeItem('token');
     this.corretorService.login(this.dto).subscribe(
-      (resultado: any) => {
-        console.log('Login realizado com sucesso: ', resultado.token);
+      (resultado: LoginResponseDTO) => {
+        console.log('Login realizado com sucesso: ', resultado.token, ' Role: ', resultado.role);
         this.wrongAttempts = 0;
         this.corretorService.storeToken(resultado.token);
-        this.router.navigate(['/clientes/lista'])
+        if (resultado.role === 'ADMIN') {
+          console.log('Role: ', resultado.role);
+          this.router.navigate(['/clientes/lista']);
+        } else if (resultado.role === '' || resultado.role === 'USER' || resultado.role === null) {
+          console.log('Role: ', resultado.role);
+          this.encontrarClientePorEmail(this.dto.login);
+        }
       },
       (erro: any) => {
-        if(this.dto.login == '' || this.dto.password == ''){
+        if (this.dto.login == '' || this.dto.password == '') {
           alert('Preencha todos os campos!');
         }
-        if(erro.status == 403 || erro.status == 400){
+        if (erro.status == 403 || erro.status == 400) {
           this.wrongAttempts++;
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Usuário ou senha inválidos!',
-          })
+            title: 'Tente novamente!.',
+            text: 'Usuário ou senha inválidos.',
+          });
         }
       }
     );
@@ -101,4 +112,16 @@ export class LoginComponent {
     localStorage.setItem('wrongAttempts', String(this.wrongAttempts));
   }
 
+  encontrarClientePorEmail(login: string) {
+    this.corretorService.encontrarClientePorEmail(login).subscribe(
+      (resultado: Cliente) => {
+        this.idCliente = resultado.id;
+        this.router.navigate(['/clientes/inspecao/',resultado.id]);
+      },
+      (erro: any) => {
+        console.log('Erro ao buscar Cliente por Email: ', erro);
+      }
+    );
+  }
 }
+
