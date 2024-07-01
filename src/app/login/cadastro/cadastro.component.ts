@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrl: './cadastro.component.scss'
+  styleUrls: ['./cadastro.component.scss'] // Corrected this line
 })
 export class CadastroComponent {
 
@@ -21,7 +21,7 @@ export class CadastroComponent {
 
   public cadastrar(form: NgForm) {
     try {
-      if (!this.validCPF(this.dto.cpf) || !this.validTelefone(this.dto.telefone) || !form.valid) {
+      if (!this.validCPF(this.dto.cpf) || !this.validTelefone(this.dto.telefone)) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -69,22 +69,22 @@ export class CadastroComponent {
     }
   }
 
-  validCPF(cpf: string) {
+  validCPF(cpf: string): boolean {
     cpf = cpf.replace(/\D/g, '');
+    console.log('Cpf: ',cpf);
     if (cpf.length !== 11) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
-  validTelefone(telefone: string) {
+  validTelefone(telefone: string): boolean {
     telefone = telefone.replace(/\D/g, '');
+    console.log('Telefone: ',telefone);
     if (telefone.length !== 11) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   voltar() {
