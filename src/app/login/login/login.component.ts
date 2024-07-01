@@ -53,10 +53,6 @@ export class LoginComponent {
     this.router.navigate(['login/cadastro']);
   }
 
-  public recuperarSenha() {
-    this.router.navigate(['login/recuperar']);
-  }
-
   private wrongAttempts: number = 0;
 
   public loginWithTimeout() {
