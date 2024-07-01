@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
 import { Observable } from 'rxjs';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-cliente-form',
@@ -15,6 +17,8 @@ import { Observable } from 'rxjs';
 export class ClienteListagemComponent implements OnInit {
   seletor: ClienteSeletor = new ClienteSeletor();
   possuiSeguro: boolean = false;
+  fileName = "RelatorioClientes.xlsx"
+
 
   constructor(private clienteService: ClienteService, private router: Router) {
   }
@@ -97,5 +101,15 @@ export class ClienteListagemComponent implements OnInit {
         )
       }
     })
+  }
+
+  exportar(){
+    let data = document.getElementById("tabelaClientes");
+    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
   }
 }
