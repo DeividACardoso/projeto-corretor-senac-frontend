@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Sinistro as Sinistro} from '../model/sinistro';
 import { SinistroSeletor } from "../model/seletor/sinistro.seletor";
+import { Cliente } from "../model/cliente";
+import { Seguro } from "../model/seguro";
 
 @Injectable({
   providedIn :'root'
@@ -35,5 +37,9 @@ export class SinistroService{
 
   excluir(id: number): Observable<Sinistro>{
     return this.httpClient.delete<Sinistro>(this.API+'/delete/'+id);
+  }
+
+  getListaSeguros(): Observable<Array<Seguro>> {
+    return this.httpClient.get<Array<Seguro>>('http://localhost:8080/api/seguros/todos')
   }
 }

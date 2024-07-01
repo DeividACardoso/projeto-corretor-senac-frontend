@@ -7,6 +7,7 @@ import { SinistroService } from '../../shared/service/sinistro.service';
 import { SeguroService } from '../../shared/service/seguro.service';
 import { Title } from '@angular/platform-browser';
 import { formatDate } from '@angular/common';
+import { Seguro } from '../../shared/model/seguro';
 
 
 @Component({
@@ -19,8 +20,8 @@ export class SinistroDetalheComponent implements OnInit {
   public sinistro: Sinistro = new Sinistro();
   public idSinistro: number;
 
-  public listaClientes: any[] = [];
-  public displayCliente: string;
+  public listaSeguros: Array<Seguro> = new Array();
+  public displaySeguro: string;
   // public seguroSelecionado?: SeguroService;
 
   @ViewChild('ngForm')
@@ -47,7 +48,8 @@ export class SinistroDetalheComponent implements OnInit {
   // }
   ngOnInit(): void {
     this.titleService.setTitle(this.title)
-      this.seguroService.listarTodos
+      this.seguroService.listarTodos;
+      this.preencherListaSeguros();
 
     this.route.params.subscribe((params) => {
       this.idSinistro = params['id'];
@@ -58,6 +60,23 @@ export class SinistroDetalheComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    if (this.idSinistro) {
+      this.preencherListaSeguros();
+    }
+  }
+
+  preencherListaSeguros() {
+    this.sinistroService.getListaSeguros().subscribe(
+        (seguros) => {
+            this.listaSeguros = seguros;
+            console.log(this.listaSeguros)
+        },
+        (error) => {
+            console.error('Erro ao obter lista de clientes', error);
+        }
+    );
+}
 
   salvar(form: NgForm) {
     if (form.invalid) {
@@ -147,9 +166,9 @@ export class SinistroDetalheComponent implements OnInit {
 
   onInputChange(event: any) {
     const input = event.target.value;
-    const selectedClient = this.listaClientes.find(cliente => `${cliente.nome}` === input);
+    const selectedClient = this.listaSeguros.find(seguro => `${seguro.cliente.nome}` === input);
     if (selectedClient) {
-        this.sinistro.seguro.cliente = selectedClient;
+        this.sinistro.seguro = selectedClient;
     } else {
         this.sinistro.seguro.cliente = null;
     }
@@ -157,9 +176,9 @@ export class SinistroDetalheComponent implements OnInit {
 
   ngOnChanges() {
     if (this.sinistro.seguro.cliente) {
-        this.displayCliente = `${this.sinistro.seguro.cliente.cpf}`;
+        this.displaySeguro = `${this.sinistro.seguro}`;
     } else {
-        this.displayCliente = '';
+        this.displaySeguro = '';
     }
 }
 

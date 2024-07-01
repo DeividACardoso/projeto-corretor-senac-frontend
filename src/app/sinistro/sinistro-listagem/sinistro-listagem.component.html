@@ -49,6 +49,12 @@
                     <input class="form-control shadow-sm rounded border-dark" type="time" name="horarioFinal"
                     [(ngModel)]="seletor.horarioFinal">
                   </div>
+                  <div class="form-group col col-md-6">
+                    <label for="descricao">Descrição</label>
+                    <input class="form-control shadow-sm rounded border-dark" name="descricao" placeholder="Pesquise pela descrição"
+                    [(ngModel)]="seletor.descricao">
+                  </div>
+
                   <div> </div>
                   <div class="form-group col pt-3 col-md-2">
                     <button type="sumbit" name="btnrelatorio"
@@ -80,7 +86,8 @@
             class="table table-responsive table-striped table-hover table-sm table-bordered border-secondary">
             <thead>
               <tr>
-                <th scope="col" class="text-center">ID</th>
+                <!-- <th scope="col" class="text-center">ID</th> -->
+                <th scope="col" class="text-center">Nome</th>
                 <!-- <th scope="col" class="text-center">Nome e núm. Apólice</th> -->
                 <th scope="col" class="text-center">Tipo</th>
                 <th scope="col" class="text-center">Data</th>
@@ -91,10 +98,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let si of sinistros">
-                <td class="text-center align-middle">{{si.id}}</td>
+                <td class="text-center align-middle">{{si.seguro.cliente.nome}}</td>
                 <td class="text-center align-middle">{{si.tipo}}</td>
-                <td class="text-center align-middle">{{si.data| date:'dd/MM/yyyy'}}</td>
-                <td class="text-center align-middle">{{si.horario}}</td>
+                <td class="text-center align-middle">{{si.data | date:'dd/MM/yyyy'}}</td>
+                <td class="text-center align-middle">{{si.horario | timeFormat}}</td>
                 <td class="text-center align-middle">{{si.descricao}}</td>
                 <td class="text-center align-middle">
 

@@ -13,11 +13,11 @@ export class PhonePipe implements PipeTransform {
 
       if (value.length > 12) {
         foneFormatado = value.replace(/(\d{2})?(\d{2})?(\d{5})?(\d{4})/,
-           '+$1 ($2) $3-$4');
+          '+$1 ($2) $3-$4');
 
       } else if (value.length > 11) {
         foneFormatado = value.replace(/(\d{2})?(\d{2})?(\d{4})?(\d{4})/,
-           '+$1 ($2) $3-$4');
+          '+$1 ($2) $3-$4');
 
       } else if (value.length > 10) {
         foneFormatado = value.replace(/(\d{2})?(\d{5})?(\d{4})/, '($1) $2-$3');
@@ -37,7 +37,13 @@ export class PhonePipe implements PipeTransform {
 
       return foneFormatado;
     }
-
+    return tel;
   }
-
+  unformatPhone(tel: string | null | undefined): string {
+    if (tel) {
+      // Replace all non-numeric characters with an empty string
+      return tel.replace(/[^\d]/g, '');
+    }
+    return tel || '';
+  }
 }
