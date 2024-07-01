@@ -30,7 +30,7 @@ export class ClienteListagemComponent implements OnInit {
     this.buscarClientes();
   }
 
-  verificarToken(){
+  verificarToken() {
     if (localStorage.getItem('token') == null) {
       this.router.navigate(['login']);
     }
@@ -71,44 +71,51 @@ export class ClienteListagemComponent implements OnInit {
     });
   }
 
-  possuiSeguroAtivo(id: number) {
+  possuiSeguroAtivo(id: number): boolean {
     this.clienteService.verificarClienteTemSeguro(id).subscribe(
       resultado => {
         this.possuiSeguro = resultado;
+        console.log("Possui seguro: ", this.possuiSeguro);
       },
       erro => {
         Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
       }
     )
+    return this.possuiSeguro;
   }
 
   excluir(id: number) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: 'Deseja excluir o cliente #' + id + "?",
-      icon: 'warning',
-      showCancelButton: true,
-    }).then(r => {
-      if (r.isConfirmed) {
-        this.clienteService.excluir(id).subscribe(
-          sucesso => {
-            Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
-            this.buscarClientes();
-          },
-          erro => {
-            Swal.fire("Erro", "Erro ao excluir o cliente: " + erro.error.message, 'error')
-          }
-        )
-      }
-    })
+    const seguroAtivo = this.possuiSeguroAtivo(id);
+    if (seguroAtivo) {
+      Swal.fire("Erro", "Não é possível excluir um cliente com seguro ativo!", 'error');
+    } else {
+      Swal.fire({
+        title: 'Você tem certeza?',
+        text: 'Deseja excluir o cliente #' + id + "?",
+        icon: 'warning',
+        showCancelButton: true,
+      }).then(r => {
+        if (r.isConfirmed) {
+          this.clienteService.excluir(id).subscribe(
+            sucesso => {
+              Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
+              this.buscarClientes();
+            },
+            erro => {
+              Swal.fire("Erro", "Erro ao excluir o cliente: " + erro.error.message, 'error')
+            }
+          )
+        }
+      })
+    }
   }
 
-  exportar(){
+  exportar() {
     let data = document.getElementById("tabelaClientes");
-    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     XLSX.writeFile(wb, this.fileName);
   }
