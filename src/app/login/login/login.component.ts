@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormsModule, NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { AuthenticationDTO } from '../../shared/model/authentication.dto';
 import { CommonModule } from '@angular/common';
 import { CorretorService } from '../../shared/service/corretor.service';
@@ -12,35 +12,33 @@ import { LoginResponseDTO } from '../../shared/model/loginResponse.dto';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   public dto: AuthenticationDTO = new AuthenticationDTO();
   public loginResponseDTO: LoginResponseDTO = new LoginResponseDTO();
-  public idCorretor: number;
   public corretor: Corretor = new Corretor();
-  public idCliente: number;
   public cliente: Cliente = new Cliente();
+  public isLoggedIn: boolean = false;
+
+  private wrongAttempts: number = 0;
 
   constructor(
     private corretorService: CorretorService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
-
+  ) { }
 
   public login() {
     localStorage.removeItem('token');
     this.corretorService.login(this.dto).subscribe(
       (resultado: LoginResponseDTO) => {
-        console.log('Login realizado com sucesso: ', resultado.token, ' Role: ', resultado.role);
         this.wrongAttempts = 0;
         this.corretorService.storeToken(resultado.token);
+        this.isLoggedIn = true;
         if (resultado.role === 'ADMIN') {
-          console.log('Role: ', resultado.role);
           this.router.navigate(['/clientes/lista']);
         } else if (resultado.role === '' || resultado.role === 'USER' || resultado.role === null) {
-          console.log('Role: ', resultado.role);
           this.encontrarClientePorEmail(this.dto.login);
         }
       },
@@ -52,7 +50,7 @@ export class LoginComponent {
           this.wrongAttempts++;
           Swal.fire({
             icon: 'error',
-            title: 'Tente novamente!.',
+            title: 'Tente novamente!',
             text: 'Usuário ou senha inválidos.',
           });
         }
@@ -65,18 +63,18 @@ export class LoginComponent {
   }
 
   public recuperarSenha() {
-    this.corretorService.recuperarSenha(this.idCorretor, this.corretor).subscribe(
-        (sucesso) => {
-          Swal.fire('Sucesso', 'Senha atualizada com Sucesso!', 'success'); },
-        (erro) => {
-          Swal.fire('Erro', 'Não foi possivel atualizar a sua senha', 'error');}
-      );
+    this.corretorService.recuperarSenha(this.corretor.id, this.corretor).subscribe(
+      (sucesso) => {
+        Swal.fire('Sucesso', 'Senha atualizada com Sucesso!', 'success');
+      },
+      (erro) => {
+        Swal.fire('Erro', 'Não foi possível atualizar a sua senha', 'error');
+      }
+    );
   }
 
-  private wrongAttempts: number = 0;
-
   public loginWithTimeout() {
-    if (this.wrongAttempts >= 5) {
+    if (this.wrongAttempts >= 5 && this.wrongAttempts < 7) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -115,8 +113,15 @@ export class LoginComponent {
   encontrarClientePorEmail(login: string) {
     this.corretorService.encontrarClientePorEmail(login).subscribe(
       (resultado: Cliente) => {
-        this.idCliente = resultado.id;
-        this.router.navigate(['/clientes/inspecao/',resultado.id]);
+        if (resultado == null) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Dados não encontrados',
+            text: 'Seu seguro pode não ter sido criado ainda. Entre em contato com o seu corretor.',
+          });
+        } else {
+          this.router.navigate(['/clientes/inspecao/', resultado.id]);
+        }
       },
       (erro: any) => {
         console.log('Erro ao buscar Cliente por Email: ', erro);
@@ -124,4 +129,3 @@ export class LoginComponent {
     );
   }
 }
-

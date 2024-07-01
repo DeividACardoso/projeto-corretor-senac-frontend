@@ -116,6 +116,8 @@ export class ClienteDetalheComponent implements OnInit {
       }
     )
   }
+
+
   atualizar() {
     this.clienteService.atualizar(this.cliente).subscribe(
       sucesso => {
