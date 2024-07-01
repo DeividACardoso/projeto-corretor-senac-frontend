@@ -18,12 +18,10 @@ export class CadastroComponent {
 
   public dto: RegisterDTO = new RegisterDTO();
   public confirmarSenha: string;
-  public emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   public cadastrar(form: NgForm) {
     try {
-      console.log(form)
-      if (this.validCPF(this.dto.cpf) || this.validTelefone(this.dto.telefone) || !form.valid) {
+      if (!this.validCPF(this.dto.cpf) || !this.validTelefone(this.dto.telefone) || !form.valid) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
