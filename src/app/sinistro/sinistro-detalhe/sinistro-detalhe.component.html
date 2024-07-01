@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-sm-12 pt-2">
         <div class="col-sm-12 text-center">
-          <h3>Cadastro de Sinistro</h3>
+          <h3>{{ idSinistro ? 'Atualizar Sinistro' : 'Cadastro de Sinistro' }}</h3>
         </div>
 
         <div class="card-body card-info">
@@ -12,33 +12,20 @@
             <div class="row align-items-start">
               <div class="form-group col col-md-3">
                 <label for="cliente">Cliente</label>
-                <form>
-                  <input [ngClass]="(!sinistro.seguro.cliente.nome) ? 'form-select is-invalid' : 'form-select'"
-                    [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displayCliente"
-                    class="shadow-sm rounded border-dark form-control" name="cliente" list="dataListOptions" required>
-                  <datalist id="dataListOptions">
-                    <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">{{ sinistro.seguro.cliente.nome }}
-                    </option>
-                  </datalist>
-                </form>
+                <input [ngClass]="(!sinistro.seguro && ngForm.submitted) ? 'form-select is-invalid' : 'form-select'"
+                  [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displaySeguro"
+                  class="shadow-sm rounded border-dark form-control" name="seguro" list="dataListOptions" required>
+                <datalist id="dataListOptions">
+                  <option *ngFor="let seguro of listaSeguros" [ngValue]="seguro.cliente">{{ seguro.cliente.nome }}</option>
+                </datalist>
                 <div class="invalid-feedback">Informe o cliente</div>
               </div>
-              <!-- <div class="form-group col col-md-6">
-                <label for="seguro">Seguro: </label>
-                   <select name="seguro" class="shadow-sm rounded border-dark" required>
-                  <option value="" disabled selected>Selecione um seguro</option>
-                  <option *ngFor="let seguro of listaSeguros" ></option>
-                  </select> -->
-              <!-- <datalist id="dataListOptions"> -->
-              <!-- <option *ngFor="let seguro of listaSeguros" [ngValue]="seguro">{{ seguro.listarTodos }} | {{seguroSelecionado.getListaClientes.name}}</option> -->
-              <!-- </datalist> -->
-              <!-- </div>  -->
 
               <div class="form-group col col-md-3">
                 <label for="tipo">Tipo de Sinistro</label>
                 <select
                   [ngClass]="((!sinistro.tipo || (sinistro.tipo.length != 18)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example"
+                  class="shadow-sm rounded border border-dark form-select" aria-label="Default select example"
                   [ngModel]="sinistro.tipo" (ngModelChange)="sinistro.tipo=$event" placeholder="Tipo" name="tipo"
                   required>
                   <option selected disabled>Selecione um tipo de Sinistro</option>
@@ -52,41 +39,33 @@
                 <div class="invalid-feedback">Informe um tipo de Sinistro válido</div>
               </div>
 
-              <div class="form-group col col-md-6">
+              <div class="form-group col col-md-3">
                 <label for="data">Data: </label>
                 <div></div>
                 <input [ngClass]="(!sinistro.data) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="sinistro.data" class="shadow-sm rounded border border-secondary"
+                  [(ngModel)]="sinistro.data" class="shadow-sm rounded border-dark"
                   placeholder="Data do Sinistro" type="date" name="data" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe a data do Sinistro.</div>
               </div>
-              <div></div>
-              <div class="form-group col col-md-6">
+              <!-- <div></div> -->
+              <div class="form-group col col-md-2">
                 <label for="horario">Horário</label>
                 <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="sinistro.horario" class="shadow-sm rounded border border-secondary"
+                  [(ngModel)]="sinistro.horario" class="shadow-sm rounded border-dark"
                   placeholder="Horário do Sinistro" type="time" name="horario" required>
                 <div class="invalid-feedback">Informe o horário do Sinistro.</div>
               </div>
 
-              <!-- <div>
-                <label for="data">Data:</label>
-                <input id="data" type="date" [(ngModel)]="sinistro.data" (change)="onDateChange($event)" />
-              </div>
-              <div>
-                <label for="horario">Horário:</label>
-                <input id="horario" type="time" [(ngModel)]="sinistro.horario" (change)="onTimeChange($event)" />
-              </div> -->
-
-              <div class="form-group col col-md-6">
-                <label for="descricao">Descrição</label>
+              <div class="form-group col col-md-4">
+                <label for="descricao">Descrição: </label>
                 <input
                   [ngClass]="((!sinistro.descricao || (sinistro.descricao.length <= 9)) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  class="shadow-sm rounded border border-secondary" [ngModel]="sinistro.descricao"
+                  class="shadow-sm rounded border-dark" [ngModel]="sinistro.descricao"
                   (ngModelChange)="sinistro.descricao=$event" placeholder="Insira a descrição" name="descricao"
                   type="descricao">
                 <div class="invalid-feedback">Informe uma descrição de Sinistro válida</div>
               </div>
+
               <div> </div>
               <div class="form-group col-md-6 pt-4">
                 <button type="submit" class="form-control btn btn-warning rounded shadow-sm border-dark"
@@ -94,9 +73,7 @@
               </div>
               <div class="form-group col-md-6 pt-4">
                 <button type="submit" class="form-control btn btn-primary rounded shadow-sm border-dark"
-                  (click)="salvar(ngForm)">
-                  {{ idSinistro ? 'Atualizar' : 'Cadastrar' }}
-                </button>
+                  (click)="salvar(ngForm)">{{ idSinistro ? 'Atualizar' : 'Cadastrar' }}</button>
               </div>
             </div>
           </form>
