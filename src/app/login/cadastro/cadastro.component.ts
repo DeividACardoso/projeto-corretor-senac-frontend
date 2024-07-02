@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { RegisterDTO } from '../../shared/model/register.dto';
-import { CorretorService } from '../../shared/service/corretor.service';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import { RegisterDTO } from '../../shared/model/register.dto';
+import { CorretorService } from '../../shared/service/corretor.service';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrl: './cadastro.component.scss'
+  styleUrls: ['./cadastro.component.scss'] // Corrected this line
 })
 export class CadastroComponent {
 
@@ -18,12 +18,10 @@ export class CadastroComponent {
 
   public dto: RegisterDTO = new RegisterDTO();
   public confirmarSenha: string;
-  public emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   public cadastrar(form: NgForm) {
     try {
-      console.log(form)
-      if (this.validCPF(this.dto.cpf) || this.validTelefone(this.dto.telefone) || !form.valid) {
+      if (this.validCPF(this.dto.cpf) == false || this.validTelefone(this.dto.telefone) == false) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -71,22 +69,22 @@ export class CadastroComponent {
     }
   }
 
-  validCPF(cpf: string) {
+  validCPF(cpf: string): boolean {
     cpf = cpf.replace(/\D/g, '');
+    console.log('Cpf: ', cpf);
     if (cpf.length !== 11) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
-  validTelefone(telefone: string) {
+  validTelefone(telefone: string): boolean {
     telefone = telefone.replace(/\D/g, '');
+    console.log('Telefone: ', telefone);
     if (telefone.length !== 11) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   voltar() {

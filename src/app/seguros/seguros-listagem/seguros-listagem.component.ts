@@ -1,13 +1,12 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Seguro } from '../../shared/model/seguro';
-import { SeguroService } from '../../shared/service/seguro.service';
-import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { differenceInCalendarDays } from 'date-fns';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
-import { differenceInCalendarDays } from 'date-fns';
-import * as XLSX from 'xlsx';
+import { Seguro } from '../../shared/model/seguro';
+import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
+import { SeguroService } from '../../shared/service/seguro.service';
 
 
 
@@ -120,12 +119,12 @@ export class SegurosListagemComponent implements OnInit {
     })
   }
 
-  exportar(){
+  exportar() {
     let data = document.getElementById("tabelaSeguros");
-    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     XLSX.writeFile(wb, this.fileName);
   }

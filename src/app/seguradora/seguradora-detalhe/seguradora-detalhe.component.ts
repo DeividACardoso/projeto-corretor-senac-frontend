@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Seguradora } from '../../shared/model/seguradora';
+import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import { Seguradora } from '../../shared/model/seguradora';
 import { SeguradoraService } from '../../shared/service/seguradora.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-seguradora-detalhe',
@@ -22,21 +22,21 @@ export class SeguradoraDetalheComponent implements OnInit {
   constructor(private seguradoraService: SeguradoraService,
     private route: ActivatedRoute,
     private router: Router,
-    private titleService: Title) {}
+    private titleService: Title) { }
 
-    title="Cadastro de Seguradora"
+  title = "Cadastro de Seguradora"
 
 
-    ngOnInit(): void {
-      this.titleService.setTitle(this.title)
-      this.route.params.subscribe(params => {
-        this.idSeguradora = params['id'];
+  ngOnInit(): void {
+    this.titleService.setTitle(this.title)
+    this.route.params.subscribe(params => {
+      this.idSeguradora = params['id'];
 
-        if(this.idSeguradora){
-          this.buscarSeguradora();
-        }
-      });
-    }
+      if (this.idSeguradora) {
+        this.buscarSeguradora();
+      }
+    });
+  }
 
   salvar(form: NgForm) {
     if (form.invalid) {
@@ -78,10 +78,10 @@ export class SeguradoraDetalheComponent implements OnInit {
 
   buscarSeguradora() {
     this.seguradoraService.pesquisarPorId(this.idSeguradora).subscribe(
-      resultado =>{
+      resultado => {
         this.seguradora = resultado;
       },
-      erro =>{
+      erro => {
         Swal.fire('Erro', 'Erro ao buscar Seguradora com ID (' + this.idSeguradora + ') : ', 'error');
         return;
       }

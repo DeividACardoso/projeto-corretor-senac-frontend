@@ -1,84 +1,80 @@
+<!-- <pre>{{dto | json}}</pre> -->
 <div class="container-fluid">
-    <div class="row text-center p-2 align-items-center justify-content-center">
-        <div class="col col-md-6 pt-5">
-            <div class="card border-dark shadow round">
-                <div class="card-header bg-primary">
-                    <h3 class="text-center text-white pt-2">Cadastro</h3>
-                </div>
-                <div class="card-body">
-                    <form #ngForm="ngForm">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-md-6">
-                                <div class="mb-1">
-                                    <label class="form-label">Nome</label>
-                                    <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.nome || dto.nome.length < 3) && ngForm.submitted}"
-                                        [(ngModel)]="dto.nome" type="text" class="form-control border-dark"
-                                        name="nome" required minlength="3"/>
-                                    <div class="invalid-feedback"> O nome deve conter pelo menos 3 caracteres.</div>
-                                </div>
-                                <div class="mb-1">
-                                    <label class="form-label">E-mail</label>
-                                    <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.email || !emailPattern.test(dto.email)) && ngForm.submitted}"
-                                        [(ngModel)]="dto.email" type="email" class="form-control border-dark"
-                                        name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
-                                    <div class="invalid-feedback"> O e-mail deve ser válido.</div>
-                                </div>
-                                <div class="mb-1">
-                                    <label class="form-label">CPF</label>
-                                    <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.cpf || !validCPF(dto.cpf)) && ngForm.submitted}"
-                                        [ngModel]="dto.cpf | numberMask: 'cpf'" (ngModelChange)="dto.cpf=$event"
-                                        placeholder="xxx.xxx.xxx-xx" maxlength="14" name="cpf" required appOnlyNumbers
-                                        class="form-control border-dark" />
-                                    <div class="invalid-feedback"> O CPF deve ser válido.</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-1">
-                                    <label class="form-label">Telefone(DDD)</label>
-                                    <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.telefone || !validTelefone(dto.telefone)) && ngForm.submitted}"
-                                        [ngModel]="dto.telefone | numberMask: 'phone'"
-                                        (ngModelChange)="dto.telefone=$event" placeholder="(xx) #xxxx-xxxx"
-                                        maxlength="15" type="text" class="form-control border-dark"
-                                        name="telefone" required />
-                                    <div class="invalid-feedback"> O telefone deve ser válido.</div>
-                                </div>
-                                <div class="mb-1">
-                                    <label class="form-label">Senha</label>
-                                    <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.senha || dto.senha.length < 6) && ngForm.submitted}"
-                                        [(ngModel)]="dto.senha" type="password" class="form-control border-dark"
-                                        name="senha" required minlength="6">
-                                    <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
-                                </div>
-                                <div class="mb-1">
-                                    <label class="form-label">Confirme a senha</label>
-                                    <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (confirmarSenha !== dto.senha) && ngForm.submitted}"
-                                        [(ngModel)]="confirmarSenha" type="password" class="form-control border-dark"
-                                        name="confirmarSenha" required>
-                                    <div class="invalid-feedback"> As senhas não coincidem.</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 form-group pt-3">
-                                <button type="button" class="form-control btn btn-warning border-dark rounded"
-                                    (click)="voltar()">
-                                    Voltar
-                                </button>
-                            </div>
-                            <div class="col-md-6 form-group pt-3">
-                                <button type="button" class="form-control btn btn-primary border-dark rounded"
-                                    (click)="cadastrar(ngForm)" [disabled]="!ngForm.valid">
-                                    Cadastrar
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div class="row text-center p-2 align-items-center justify-content-center">
+    <div class="col col-md-6 pt-5">
+      <div class="card border-dark shadow round">
+        <div class="card-header bg-primary">
+          <h3 class="text-center text-white pt-2">Cadastro</h3>
         </div>
+        <div class="card-body">
+          <form #ngForm="ngForm">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-6">
+                <div class="mb-1">
+                  <label class="form-label">Nome</label>
+                  <input
+                    [ngClass]="(!dto.nome || dto.nome.length < 3) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="dto.nome" type="text" class="form-control border-dark" name="nome" required
+                    minlength="3" />
+                  <div class="invalid-feedback"> O nome deve conter pelo menos 3 caracteres.</div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">E-mail</label>
+                  <input
+                    [ngClass]="(!dto.email || dto.email == '') && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="dto.email" type="email" class="form-control border-dark" name="email" required />
+                  <div class="invalid-feedback"> O e-mail deve ser válido.</div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">CPF</label>
+                  <input [ngClass]="(!dto.cpf) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                    [ngModel]="dto.cpf | numberMask: 'cpf'" (ngModelChange)="dto.cpf=$event"
+                    placeholder="xxx.xxx.xxx-xx" maxlength="14" name="cpf" required appOnlyNumbers
+                    class="form-control border-dark" />
+                  <div class="invalid-feedback"> O CPF deve ser válido.</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-1">
+                  <label class="form-label">Telefone(DDD)</label>
+                  <input [ngClass]="(!dto.telefone) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                    [ngModel]="dto.telefone | numberMask: 'phone'" (ngModelChange)="dto.telefone=$event"
+                    placeholder="(xx) #xxxx-xxxx" maxlength="15" type="text" class="form-control border-dark"
+                    name="telefone" required />
+                  <div class="invalid-feedback"> O telefone deve ser válido.</div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Senha</label>
+                  <input
+                    [ngClass]="(!dto.senha || dto.senha.length < 6) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="dto.senha" type="password" class="form-control border-dark" name="senha" required
+                    minlength="6">
+                  <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Confirme a senha</label>
+                  <input
+                    [ngClass]="(confirmarSenha !== dto.senha) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                    [(ngModel)]="confirmarSenha" type="password" class="form-control border-dark" name="confirmarSenha"
+                    required>
+                  <div class="invalid-feedback"> As senhas não coincidem.</div>
+                </div>
+              </div>
+              <div class="col-md-6 form-group pt-3">
+                <button type="button" class="form-control btn btn-warning border-dark rounded" (click)="voltar()">
+                  Voltar
+                </button>
+              </div>
+              <div class="col-md-6 form-group pt-3">
+                <button type="button" class="form-control btn btn-primary border-dark rounded"
+                  (click)="cadastrar(ngForm)" [disabled]="!ngForm.valid">
+                  Cadastrar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
