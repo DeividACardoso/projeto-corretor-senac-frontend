@@ -56,7 +56,7 @@ export class VeiculoListagemComponent {
   }
 
   editar(id: number) {
-    this.router.navigate(['veiculo/detalhe', id]);
+    this.router.navigate(['veiculos/detalhe', id]);
   }
 
   pesquisar(){

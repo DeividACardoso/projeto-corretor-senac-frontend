@@ -24,9 +24,10 @@ export class CorretorService {
         return this.httpClient.post(this.API + '/register', registerDTO);
     }
 
-  recuperarSenha(id: number, corretorAtualizar: Corretor): Observable<Corretor> {
-    const url = this.API + '/atualizar/' + id;
-    return this.httpClient.put<Corretor>(url, corretorAtualizar);
+    // enviarEmail
+  enviarEmail(corretorAtualizar: Corretor): Observable<Corretor> {
+    const url = this.API + '/enviar-email/' + corretorAtualizar;
+    return this.httpClient.post<Corretor>(url, corretorAtualizar);
   }
 
     storeToken(token: string) {

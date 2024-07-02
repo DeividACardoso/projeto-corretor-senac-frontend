@@ -53,15 +53,6 @@ export class LoginComponent {
     this.router.navigate(['login/cadastro']);
   }
 
-  public recuperarSenha() {
-    this.corretorService.recuperarSenha(this.idCorretor, this.corretor).subscribe(
-        (sucesso) => {
-          Swal.fire('Sucesso', 'Senha atualizada com Sucesso!', 'success'); },
-        (erro) => {
-          Swal.fire('Erro', 'Não foi possivel atualizar a sua senha', 'error');}
-      );
-  }
-
   private wrongAttempts: number = 0;
 
   public loginWithTimeout() {

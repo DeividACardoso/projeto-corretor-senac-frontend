@@ -5,7 +5,11 @@ import { SeguroService } from '../../shared/service/seguro.service';
 import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
 import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 import { differenceInCalendarDays } from 'date-fns';
+import * as XLSX from 'xlsx';
+
+
 
 @Component({
   selector: 'app-seguros-listagem',
@@ -20,6 +24,8 @@ export class SegurosListagemComponent implements OnInit {
   public seguros: Array<Seguro> = new Array();
   public idSeguro: number;
   public seguro: Seguro = new Seguro();
+  fileName = "RelatorioSeguros.xlsx"
+
 
   public seletor: SeguroSeletor = new SeguroSeletor();
   title = "Listagem de Seguros"
@@ -112,6 +118,16 @@ export class SegurosListagemComponent implements OnInit {
         )
       }
     })
+  }
+
+  exportar(){
+    let data = document.getElementById("tabelaSeguros");
+    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
   }
 
   limpar() {
