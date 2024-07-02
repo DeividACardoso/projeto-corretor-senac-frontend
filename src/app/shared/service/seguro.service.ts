@@ -11,9 +11,9 @@ import { Seguradora } from "../model/seguradora";
   providedIn: 'root'
 })
 export class SeguroService {
-  private readonly API = 'http://localhost:8080/api/seguros'
-
   constructor(private httpClient: HttpClient) { }
+
+  private readonly API = 'http://localhost:8080/api/seguros'
 
   listarTodos(): Observable<Array<Seguro>> {
     return this.httpClient.get<Array<Seguro>>(this.API + '/todos');

@@ -71,7 +71,7 @@ export class CadastroComponent {
 
   validCPF(cpf: string): boolean {
     cpf = cpf.replace(/\D/g, '');
-    console.log('Cpf: ',cpf);
+    console.log('Cpf: ', cpf);
     if (cpf.length !== 11) {
       return false;
     }
@@ -80,7 +80,7 @@ export class CadastroComponent {
 
   validTelefone(telefone: string): boolean {
     telefone = telefone.replace(/\D/g, '');
-    console.log('Telefone: ',telefone);
+    console.log('Telefone: ', telefone);
     if (telefone.length !== 11) {
       return false;
     }
