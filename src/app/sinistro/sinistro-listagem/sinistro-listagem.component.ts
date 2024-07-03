@@ -74,15 +74,15 @@ export class SinistroListagemComponent {
     )
   }
 
-  excluir(id: number) {
+  excluir(sinistro: Sinistro) {
     Swal.fire({
       title: 'Você tem certeza?',
-      text: 'Deseja excluir o sinistro #' + id + '?',
+      text: 'Deseja excluir o sinistro do: ' + sinistro.seguro.cliente.nome + '?',
       icon: 'warning',
       showCancelButton: true,
     }).then((r) => {
       if (r.isConfirmed) {
-        this.sinistroService.excluir(id).subscribe(
+        this.sinistroService.excluir(sinistro.id).subscribe(
           (sucesso) => {
             Swal.fire('Sucesso', 'Sinistro excluído com sucesso!', 'success');
             this.buscarSinistro();
