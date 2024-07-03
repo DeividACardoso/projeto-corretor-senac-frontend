@@ -1,4 +1,3 @@
-import { Time } from "@angular/common";
 import { Seguro } from "./seguro";
 
 export class Sinistro {

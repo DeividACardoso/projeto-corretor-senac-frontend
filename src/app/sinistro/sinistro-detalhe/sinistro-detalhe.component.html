@@ -16,7 +16,9 @@
                   [ngModelOptions]="{standalone: true}" (input)="onInputChange($event)" [(ngModel)]="displaySeguro"
                   class="shadow-sm rounded border-dark form-control" name="seguro" list="dataListOptions" required>
                 <datalist id="dataListOptions">
-                  <option *ngFor="let seguro of listaSeguros" [ngValue]="seguro.cliente">{{ seguro.cliente.nome }}</option>
+                  <option *ngFor="let seguro of listaSeguros" [ngValue]="seguro">{{ seguro.cliente.cpf }} |
+                    {{ seguro.numApolice }}
+                  </option>
                 </datalist>
                 <div class="invalid-feedback">Informe o cliente</div>
               </div>
@@ -42,17 +44,17 @@
               <div class="form-group col col-md-3">
                 <label for="data">Data: </label>
                 <div></div>
-                <input [ngClass]="(!sinistro.data) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="sinistro.data" class="shadow-sm rounded border-dark"
-                  placeholder="Data do Sinistro" type="date" name="data" required appOnlyNumbers>
+                <input [ngClass]="(!sinistro.data) || (sinistro.data) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="sinistro.data" class="shadow-sm rounded border-dark" placeholder="Data do Sinistro"
+                  type="date" name="data" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe a data do Sinistro.</div>
               </div>
               <!-- <div></div> -->
               <div class="form-group col col-md-2">
                 <label for="horario">Horário</label>
                 <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="sinistro.horario" class="shadow-sm rounded border-dark"
-                  placeholder="Horário do Sinistro" type="time" name="horario" required>
+                  [(ngModel)]="sinistro.horario" class="shadow-sm rounded border-dark" placeholder="Horário do Sinistro"
+                  type="time" name="horario" required>
                 <div class="invalid-feedback">Informe o horário do Sinistro.</div>
               </div>
 

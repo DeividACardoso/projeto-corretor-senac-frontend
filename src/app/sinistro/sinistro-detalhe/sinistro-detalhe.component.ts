@@ -166,7 +166,7 @@ export class SinistroDetalheComponent implements OnInit {
 
   onInputChange(event: any) {
     const input = event.target.value;
-    const selectedClient = this.listaSeguros.find(seguro => `${seguro.cliente.nome}` === input);
+    const selectedClient = this.listaSeguros.find(seguro => `${seguro.cliente.cpf} | ${seguro.numApolice}` === input);
     if (selectedClient) {
         this.sinistro.seguro = selectedClient;
     } else {

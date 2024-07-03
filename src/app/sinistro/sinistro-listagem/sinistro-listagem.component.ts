@@ -77,7 +77,7 @@ export class SinistroListagemComponent {
   excluir(sinistro: Sinistro) {
     Swal.fire({
       title: 'Você tem certeza?',
-      text: 'Deseja excluir o sinistro do: ' + sinistro.seguro.cliente.nome + '?',
+      text: 'Deseja excluir o sinistro do: ' + sinistro.seguro.cliente.cpf + '?',
       icon: 'warning',
       showCancelButton: true,
     }).then((r) => {
