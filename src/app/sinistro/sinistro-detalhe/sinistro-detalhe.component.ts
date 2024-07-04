@@ -48,8 +48,8 @@ export class SinistroDetalheComponent implements OnInit {
   // }
   ngOnInit(): void {
     this.titleService.setTitle(this.title)
-      this.seguroService.listarTodos;
-      this.preencherListaSeguros();
+    this.seguroService.listarTodos;
+    this.preencherListaSeguros();
 
     this.route.params.subscribe((params) => {
       this.idSinistro = params['id'];
@@ -68,15 +68,15 @@ export class SinistroDetalheComponent implements OnInit {
 
   preencherListaSeguros() {
     this.sinistroService.getListaSeguros().subscribe(
-        (seguros) => {
-            this.listaSeguros = seguros;
-            console.log(this.listaSeguros)
-        },
-        (error) => {
-            console.error('Erro ao obter lista de clientes', error);
-        }
+      (seguros) => {
+        this.listaSeguros = seguros;
+        console.log(this.listaSeguros)
+      },
+      (error) => {
+        console.error('Erro ao obter lista de clientes', error);
+      }
     );
-}
+  }
 
   salvar(form: NgForm) {
     if (form.invalid) {
@@ -143,16 +143,29 @@ export class SinistroDetalheComponent implements OnInit {
     return formatDate(date, 'yyyy-MM-dd', 'UTC-8');
   }
 
+  onDateChange(event: any) {
+    const dateStr = event.target.value;
+    const date = new Date(dateStr);
+    const today = new Date();
+    const fiftyYearsAgo = new Date(today.getFullYear() - 50, today.getMonth(), today.getDate());
+
+    if (!isNaN(date.getTime()) && date <= today && date >= fiftyYearsAgo) {
+      this.sinistro.data = date;
+      alert()
+    } else {
+      this.sinistro.data = null;
+      event.target.value = '';
+      Swal.fire("Erro", "Não é possível salvar a seguradora: " + 'error');
+    }
+  }
+
+
   formatHora(time: string): string {
     const timeFormat = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
     if (!timeFormat.test(time)) {
-      throw new Error('Invalid time format. Expected format is HH:mm:ss.');
+      throw new Error('Formato inválido do campo horário. Formato esperado é: HH:mm');
     }
     return time;
-  }
-
-  onDateChange(event: any): void {
-    this.sinistro.data = event.target.value;
   }
 
   onTimeChange(event: any): void {
@@ -160,7 +173,6 @@ export class SinistroDetalheComponent implements OnInit {
       this.sinistro.horario = this.formatHora(event.target.value);
     } catch (error) {
       console.error(error.message);
-      // Adicione manipulação de erro apropriada, por exemplo, mostrar uma mensagem de erro ao usuário
     }
   }
 
@@ -168,18 +180,18 @@ export class SinistroDetalheComponent implements OnInit {
     const input = event.target.value;
     const selectedClient = this.listaSeguros.find(seguro => `${seguro.cliente.cpf} | ${seguro.numApolice}` === input);
     if (selectedClient) {
-        this.sinistro.seguro = selectedClient;
+      this.sinistro.seguro = selectedClient;
     } else {
-        this.sinistro.seguro.cliente = null;
+      this.sinistro.seguro.cliente = null;
     }
   }
 
   ngOnChanges() {
     if (this.sinistro.seguro.cliente) {
-        this.displaySeguro = `${this.sinistro.seguro}`;
+      this.displaySeguro = `${this.sinistro.seguro}`;
     } else {
-        this.displaySeguro = '';
+      this.displaySeguro = '';
     }
-}
+  }
 
 }

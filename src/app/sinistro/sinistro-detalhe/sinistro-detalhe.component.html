@@ -46,10 +46,10 @@
                 <div></div>
                 <input [ngClass]="(!sinistro.data) || (sinistro.data) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="sinistro.data" class="shadow-sm rounded border-dark" placeholder="Data do Sinistro"
-                  type="date" name="data" required appOnlyNumbers>
+                  type="date" name="data" maxlength="8" (change)="onDateChange" appOnlyNumbers>
                 <div class="invalid-feedback">Informe a data do Sinistro.</div>
               </div>
-              <!-- <div></div> -->
+
               <div class="form-group col col-md-2">
                 <label for="horario">Horário</label>
                 <input [ngClass]="(!sinistro.horario) ? 'form-control is-invalid' : 'form-control'"
