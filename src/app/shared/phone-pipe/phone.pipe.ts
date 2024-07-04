@@ -37,7 +37,13 @@ export class PhonePipe implements PipeTransform {
 
       return foneFormatado;
     }
-
+    return tel;
   }
-
+  unformatPhone(tel: string | null | undefined): string {
+    if (tel) {
+      // Replace all non-numeric characters with an empty string
+      return tel.replace(/[^\d]/g, '');
+    }
+    return tel || '';
+  }
 }

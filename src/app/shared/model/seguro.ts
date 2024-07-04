@@ -13,7 +13,7 @@ export class Seguro {
   dtFimVigencia: Date;
   numeroProposta: string;
   franquia: number;
+  numApolice: string;
   carroReserva: boolean;
   ativo: boolean;
-  numApolice: string;
 }

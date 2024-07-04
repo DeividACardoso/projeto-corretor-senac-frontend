@@ -5,4 +5,5 @@ export class VeiculoSeletor {
   ano: Date;
   preco: string;
   cepDePernoite: string;
+  cliente: string
 }
