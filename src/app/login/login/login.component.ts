@@ -72,7 +72,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
     );
   }
-  private wrongAttempts: number = 0;
 
   public loginWithTimeout() {
     if (this.wrongAttempts >= 5 && this.wrongAttempts < 7) {

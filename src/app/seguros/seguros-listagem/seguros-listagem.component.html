@@ -89,8 +89,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let s of seguros" [ngClass]="{'fw-bold fst-normal table-danger border-danger border': isNearExpiry(s.dtFimVigencia),
-               'fw-lighter fst-italic table-secondary border-secondary border' : !s.ativo}">
+                <tr *ngFor="let s of seguros" [ngClass]="{
+                'fw-lighter fst-italic table-secondary border-secondary border': !s.ativo,
+                'fw-bold fst-normal table-danger border-danger border': isNearExpiry(s.dtFimVigencia) && s.ativo,
+                }">
                 <td class="text-center align-middle">{{s.numApolice}}</td>
                 <td class="text-center align-middle">{{s.cliente.nome}}</td>
                 <td class="text-center align-middle">{{s.seguradora.nome}}</td>
