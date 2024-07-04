@@ -16,9 +16,8 @@ import * as XLSX from 'xlsx';
 
 export class ClienteListagemComponent implements OnInit {
   seletor: ClienteSeletor = new ClienteSeletor();
-  possuiSeguro: boolean = false;
+  possuiSeguro: boolean;
   fileName = "RelatorioClientes.xlsx"
-
 
   constructor(private clienteService: ClienteService, private router: Router) {
   }
@@ -74,21 +73,24 @@ export class ClienteListagemComponent implements OnInit {
   possuiSeguroAtivo(id: number): boolean {
     this.clienteService.verificarClienteTemSeguro(id).subscribe(
       resultado => {
+        console.log("Resultado possuiSeguro: ", resultado);
         this.possuiSeguro = resultado;
-        console.log("Possui seguro: ", this.possuiSeguro);
+        console.log("Possui seguro: ", resultado);
       },
       erro => {
-        Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
+        Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: ", 'error');
       }
     )
     return this.possuiSeguro;
   }
 
   excluir(id: number) {
-    const seguroAtivo = this.possuiSeguroAtivo(id);
-    if (seguroAtivo) {
+    this.possuiSeguroAtivo(id);
+    console.log("Possui seguro: ", this.possuiSeguro);
+    if (this.possuiSeguro) {
       Swal.fire("Erro", "Não é possível excluir um cliente com seguro ativo!", 'error');
-    } else {
+    }
+    if(!this.possuiSeguro){
       Swal.fire({
         title: 'Você tem certeza?',
         text: 'Deseja excluir o cliente #' + id + "?",
@@ -102,7 +104,7 @@ export class ClienteListagemComponent implements OnInit {
               this.buscarClientes();
             },
             erro => {
-              Swal.fire("Erro", "Erro ao excluir o cliente: " + erro.error.message, 'error')
+              Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error')
             }
           )
         }

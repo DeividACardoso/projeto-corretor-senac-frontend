@@ -57,6 +57,7 @@ export class VeiculoService {
     }
 
     procurarVeiculo(marcaCodigo: string, modeloCodigo: string, ano: string): Observable<any> {
+        console.log(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos/' + modeloCodigo + '/anos/' + ano);
         return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos/' + modeloCodigo + '/anos/' + ano);
     }
 }

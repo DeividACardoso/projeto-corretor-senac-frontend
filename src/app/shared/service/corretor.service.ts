@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthenticationDTO } from '../model/authentication.dto';
 import { Corretor as Corretor } from '../model/corretor';
 import { Observable } from 'rxjs';
+import { RegisterDTO } from '../model/register.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class CorretorService {
         return this.httpClient.post(this.API + '/login', authenticationDTO);
     }
 
-    register(registerDTO: any) {
+    register(registerDTO: RegisterDTO) {
         return this.httpClient.post(this.API + '/register', registerDTO);
     }
 
