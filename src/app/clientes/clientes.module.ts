@@ -6,12 +6,14 @@ import { ClienteDetalheComponent } from './cliente-detalhe/cliente-detalhe.compo
 import { ClienteListagemComponent } from './cliente-listagem/cliente-listagem.component';
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { SharingModule } from '../shared/shared.module';
+import { ClienteInspecaoComponent } from './cliente-inspecao/cliente-inspecao.component';
 
 
 @NgModule({
   declarations: [
     ClienteDetalheComponent,
     ClienteListagemComponent,
+    ClienteInspecaoComponent
   ],
   imports: [
     CommonModule,

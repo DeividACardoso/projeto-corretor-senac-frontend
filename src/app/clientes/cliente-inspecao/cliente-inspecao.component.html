@@ -1,0 +1,100 @@
+<div class="bg-light">
+    <div class="container-fluid pt-5">
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h5 class="text-white text-center">Seus dados</h5>
+            </div>
+            <div class="card-body border-dark">
+                <ul class="nav border-dark nav-tabs nav-fill" id="myTab" role="tablist">
+                    <li class="nav-item " role="presentation">
+                        <button class="border-secondary nav-link active" id="seguro-tab" data-bs-toggle="tab"
+                            data-bs-target="#seguro" type="button" role="tab" aria-controls="seguro"
+                            aria-selected="true">
+                            Seguros
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="border-secondary nav-link" id="veiculo-tab" data-bs-toggle="tab"
+                        data-bs-target="#veiculo" type="button" role="tab" aria-controls="veiculo"
+                        aria-selected="true">
+                        Veículos
+                    </button>
+                    </li>
+                </ul>
+                <div class="tab-content p-2">
+                    <div class="tab-pane active" id="seguro" role="tabpanel" aria-labelledby="seguro-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 align-items-center justify-content-center">
+                                <table
+                                    class="table table-striped table-bordered border-dark table-hover justify-content-center text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID Apólice</th>
+                                            <th scope="col">Ativo?</th>
+                                            <th scope="col">Vigência</th>
+                                            <th scope="col">Placa Veículo</th>
+                                            <th scope="col">Modelo Veículo</th>
+                                            <th scope="col">Seguradora</th>
+                                            <th scope="col"># Seguradora</th>
+                                            <th scope="col">Franquia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let seguro of seguros">
+                                            <td>{{ seguro.numApolice }}</td>
+                                            <td>{{ (seguro.ativo) ? 'Sim' : 'Não'}}</td>
+                                            <td>{{ seguro.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{ seguro.dtFimVigencia |
+                                                date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{ seguro.veiculo.placa }}</td>
+                                            <td>{{ seguro.veiculo.modelo }}</td>
+                                            <td>{{ seguro.seguradora.nome }}</td>
+                                            <td>{{ seguro.seguradora.telefone | numberMask: 'phone' }}</td>
+                                            <td>{{ seguro.franquia | currency: 'BRL' }}</td>
+                                        </tr>
+                                        <tr *ngIf="seguros.length === 0">
+                                            <td colspan="8" class="text-center fw-bold">Nada encontrado.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="veiculo" role="tabpanel" aria-labelledby="veiculo-tab">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-12 ">
+                                <table
+                                    class="table table-striped table-bordered border-dark table-hover justify-content-center text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Placa</th>
+                                            <th scope="col">Marca</th>
+                                            <th scope="col">Modelo</th>
+                                            <th scope="col">Ano</th>
+                                            <th scope="col">Valor(FIPE)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let veiculo of veiculos">
+                                            <td>{{ veiculo.placa }}</td>
+                                            <td>{{ veiculo.marca }}</td>
+                                            <td>{{ veiculo.modelo }}</td>
+                                            <td>{{ veiculo.anoModelo }}</td>
+                                            <td>{{ veiculo.preco}}</td>
+                                        </tr>
+                                        <tr *ngIf="veiculos.length === 0">
+                                            <td colspan="5" class="text-center fw-bold">Nada encontrado.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col col-md-1 pt-5">
+                            <button class="btn btn-warning border-dark" (click)="voltar()">Sair</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

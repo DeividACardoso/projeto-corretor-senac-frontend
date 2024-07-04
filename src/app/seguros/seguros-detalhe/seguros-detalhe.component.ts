@@ -35,13 +35,13 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     this.verificarToken();
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
-
+      this.carregarListaSeguradoras();
       if (this.idSeguro) {
-        this.buscarSeguro();
+        console.log("Modo atualizar: ID do seguro:", this.idSeguro);
         this.carregarListaVeiculos();
+        this.buscarSeguro();
       } else {
         this.carregarListaClientes();
-        this.carregarListaSeguradoras();
       }
     });
   }
@@ -90,16 +90,44 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     );
   }
 
+  onClienteSelected(clienteId: number): void {
+    this.seguro.cliente = this.listaClientes.find(cliente => cliente.id === clienteId);
+    if (this.seguro.cliente) {
+      this.carregarListaVeiculos();
+    }
+  }
+
   carregarListaVeiculos() {
-    this.veiculoService.listarPorCliente(this.seguro.cliente.id).subscribe(
-      (veiculos) => {
-        this.listaVeiculos = veiculos;
-        console.log("Lista de veiculos carregada:", this.listaVeiculos);
-      },
-      (error) => {
-        console.error('Erro ao obter lista de veiculos', error);
-      }
-    );
+    if (this.idSeguro) {
+      this.seguroService.pesquisarPorId(this.idSeguro).subscribe(
+        (seguro) => {
+          this.seguro = seguro;
+          this.veiculoService.listarPorCliente(this.seguro.cliente.id).subscribe(
+            (veiculos) => {
+              this.listaVeiculos = veiculos;
+              console.log("Lista de veiculos carregada com seguro.id:", this.seguro.id);
+            },
+            (error) => {
+              console.error('Erro ao obter lista de veiculos', error);
+            }
+          );
+          console.log("Seguro carregado com idSeguro:", this.seguro, ' id: ', this.seguro.id);
+        },
+        (error) => {
+          console.error('Erro ao obter lista de veiculos', error);
+        }
+      );
+    } else {
+      this.veiculoService.listarPorCliente(this.seguro.cliente.id).subscribe(
+        (veiculos) => {
+          this.listaVeiculos = veiculos;
+          console.log("Lista de veiculos carregada com seguro.cliente.id:", this.listaVeiculos);
+        },
+        (error) => {
+          console.error('Erro ao obter lista de veiculos', error);
+        }
+      );
+    }
   }
 
   carregarListaSeguradoras() {

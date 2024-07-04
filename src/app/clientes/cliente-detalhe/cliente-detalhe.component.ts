@@ -112,10 +112,12 @@ export class ClienteDetalheComponent implements OnInit {
         this.router.navigate(['/veiculos/detalhe']);
       },
       erro => {
-        Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro.error.message, 'error');
+        Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro, 'error');
       }
     )
   }
+
+
   atualizar() {
     this.clienteService.atualizar(this.cliente).subscribe(
       sucesso => {
