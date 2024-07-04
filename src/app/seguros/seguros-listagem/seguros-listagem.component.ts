@@ -7,7 +7,6 @@ import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { differenceInCalendarDays } from 'date-fns';
-import * as XLSX from 'xlsx';
 
 
 
