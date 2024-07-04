@@ -29,7 +29,7 @@
         </ul>
         <div class="tab-content p-2">
             <div class="tab-pane active" id="seguro" role="tabpanel" aria-labelledby="seguro-tab">
-                <div class="row justify-content-center align-items-center">
+                <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="card border-dark">
                             <h5 class="card-header">Seguro</h5>
@@ -71,19 +71,21 @@
                             <h5 class="card-header">Sinistros</h5>
                             <div class="card-body text-center">
                                 <div class="card-body">
-                                    <table class="table table-striped table-hover">
+                                    <table class="table table-responsive table-hover table-sm table-bordered border-secondary">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Data</th>
+                                                <th scope="col">Horário</th>
                                                 <th scope="col">Tipo</th>
-                                                <th scope="col">Valor</th>
+                                                <th scope="col">Descriçao</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let sinistro of sinistros">
-                                                <td>{{ sinistro.dtSinistro }}</td>
+                                                <td>{{ sinistro.data }}</td>
+                                                <td>{{ sinistro.horario }}</td>
                                                 <td>{{ sinistro.tipo }}</td>
-                                                <td>{{ sinistro.valor | currency : "BRL" }}</td>
+                                                <td>{{ sinistro.descricao }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -221,9 +223,13 @@
                                     {{seguro.veiculo.tipoCombustivel}}
                                 </li>
                                 <li class="list-group-item align-items-center p-3">
-                                    <span class="fw-bold">Preço: </span>
-                                    {{seguro.veiculo.preco}}
+                                    <span class="fw-bold">Placa: </span>
+                                    {{seguro.veiculo.placa}}
                                 </li>
+                                <li class="list-group-item align-items-center p-3">
+                                  <span class="fw-bold">Preço: </span>
+                                  {{seguro.veiculo.preco}}
+                              </li>
                                 <li class="list-group-item align-items-center p-3"></li>
                             </ul>
                         </div>
