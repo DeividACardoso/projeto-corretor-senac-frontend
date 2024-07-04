@@ -6,6 +6,7 @@ import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
 import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { differenceInCalendarDays } from 'date-fns';
+import * as XLSX from 'xlsx';
 
 
 
