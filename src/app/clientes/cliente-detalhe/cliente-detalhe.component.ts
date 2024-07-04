@@ -53,7 +53,7 @@ export class ClienteDetalheComponent implements OnInit {
     "SP",
     "SE",
     "TO"
-    ];
+  ];
 
   listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"];
 
@@ -75,7 +75,7 @@ export class ClienteDetalheComponent implements OnInit {
     });
   }
 
-  verificarToken(){
+  verificarToken() {
     if (localStorage.getItem('token') == null) {
       this.router.navigate(['login']);
     }
@@ -94,16 +94,18 @@ export class ClienteDetalheComponent implements OnInit {
   }
 
   salvar(form: NgForm) {
+    console.log(form.form.controls);
     if (form.invalid) {
       Swal.fire("Erro", "Formulário inválido", 'error');
-    }
-    if (this.idCliente) {
-      this.atualizar();
     } else {
-      this.inserirCliente();
-
+      if (this.idCliente) {
+        this.atualizar();
+      } else {
+        this.inserirCliente();
+      }
     }
   }
+
   inserirCliente() {
     this.clienteService.salvar(this.cliente).subscribe(
       sucesso => {
