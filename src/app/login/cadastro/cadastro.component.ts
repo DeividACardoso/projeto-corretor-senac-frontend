@@ -29,6 +29,14 @@ export class CadastroComponent {
         });
         return;
       }
+      if(!this.validarSenha(this.dto.senha)){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
+        });
+        return;
+      }
       if (this.dto.senha !== this.confirmarSenha) {
         Swal.fire({
           icon: 'error',
@@ -76,6 +84,12 @@ export class CadastroComponent {
       return false;
     }
     return true;
+  }
+
+  validarSenha(senha: string): boolean {
+    const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    console.log('Senha válida? ', senhaRegex.test(senha));
+    return senhaRegex.test(senha);
   }
 
   validTelefone(telefone: string): boolean {
