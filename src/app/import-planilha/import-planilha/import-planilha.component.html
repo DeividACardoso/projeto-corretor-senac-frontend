@@ -10,11 +10,8 @@
                     <div class="card-body">
                         <div class="form">
                             <input type="file" accept=".XLS" class="border border-secondary p-2 rounded" (change)="onFileSelected($event)">
-                            <div class="drop-zone border border-secondary p-2 rounded" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onFileDrop($event)">
-                                <p class="fs-6 text-secondary fst-italic fw-lighter">Arraste e solte o arquivo aqui</p>
-                                <img src="https://imgur.com/vHMwUnP.png" alt="Dropzone" class="dropzone-image">
-                            </div>
-                            <p class="fs-6 text-secondary fst-italic fw-lighter">Tipos de arquivos aceitos: XLSX, XLS, CSV</p>
+                            <p class="fs-6 text-secondary fst-italic fw-lighter">Tipos de arquivos aceitos: XLSX, XLS</p>
+                            <p class="fs-6 text-secondary fst-italic">Certifique-se de que sua planilha esteja de acordo com o padrão.</p>
                             <div class="pt-2">
                                 <button class="btn btn-primary mb-3 rounded shadow-md border-dark" type="submit" (click)="uploadPlanilha()">Importar</button>
                             </div>

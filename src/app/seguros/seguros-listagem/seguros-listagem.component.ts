@@ -4,9 +4,6 @@ import { Router } from '@angular/router';
 import { differenceInCalendarDays } from 'date-fns';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
-import { Seguro } from '../../shared/model/seguro';
-import { SeguroSeletor } from '../../shared/model/seletor/seguro.seletor';
-import { SeguroService } from '../../shared/service/seguro.service';
 
 
 
@@ -72,6 +69,7 @@ export class SegurosListagemComponent implements OnInit {
 
   isNearExpiry(dtFimVigencia: Date): boolean {
     const today = new Date();
+    console.log(differenceInCalendarDays(new Date(dtFimVigencia), today) <= 7)
     return differenceInCalendarDays(new Date(dtFimVigencia), today) <= 7;
   }
 

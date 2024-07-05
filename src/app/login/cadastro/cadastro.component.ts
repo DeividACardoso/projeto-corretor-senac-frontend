@@ -21,7 +21,7 @@ export class CadastroComponent {
 
   public cadastrar(form: NgForm) {
     try {
-      if (this.validCPF(this.dto.cpf) == false || this.validTelefone(this.dto.telefone) == false) {
+      if (!this.validCPF(this.dto.cpf) || !this.validTelefone(this.dto.telefone)) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

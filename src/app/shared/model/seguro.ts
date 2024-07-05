@@ -16,5 +16,4 @@ export class Seguro {
   numApolice: string;
   carroReserva: boolean;
   ativo: boolean;
-  seguro: any;
 }

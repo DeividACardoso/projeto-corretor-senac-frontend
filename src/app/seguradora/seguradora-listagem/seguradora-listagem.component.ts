@@ -70,15 +70,15 @@ export class SeguradoraListagemComponent {
     this.router.navigate(['seguradora/detalhe', id])
   }
 
-  excluir(id: number){
+  excluir(seguradora: Seguradora){
     Swal.fire({
       title: 'Você tem certeza?',
-      text: 'Deseja excluir a seguradora #' + id +  "?",
+      text: 'Deseja excluir a seguradora: ' + seguradora.nome +  "?",
       icon: 'warning',
       showCancelButton: true,
     }).then(r => {
       if(r.isConfirmed){
-      this.seguradoraService.excluir(id).subscribe(
+      this.seguradoraService.excluir(seguradora.id).subscribe(
         sucesso => {
           Swal.fire("Sucesso", "Seguradora excluída com sucesso!", 'success');
           this.buscarSeguradora();

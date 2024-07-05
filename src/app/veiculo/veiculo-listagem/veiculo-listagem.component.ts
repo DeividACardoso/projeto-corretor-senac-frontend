@@ -94,4 +94,7 @@ export class VeiculoListagemComponent {
       }
     });
   }
+  limpar() {
+    this.seletor = new VeiculoSeletor();
+  }
 }
