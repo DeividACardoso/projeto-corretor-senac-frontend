@@ -4,7 +4,7 @@ import { ClienteService } from '../../shared/service/cliente.service';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 
@@ -73,9 +73,7 @@ export class ClienteListagemComponent implements OnInit {
   possuiSeguroAtivo(id: number): boolean {
     this.clienteService.verificarClienteTemSeguro(id).subscribe(
       resultado => {
-        console.log("Resultado possuiSeguro: ", resultado);
         this.possuiSeguro = resultado;
-        console.log("Possui seguro: ", resultado);
       },
       erro => {
         Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: ", 'error');
@@ -85,31 +83,35 @@ export class ClienteListagemComponent implements OnInit {
   }
 
   excluir(id: number) {
-    this.possuiSeguroAtivo(id);
-    console.log("Possui seguro: ", this.possuiSeguro);
-    if (this.possuiSeguro) {
-      Swal.fire("Erro", "Não é possível excluir um cliente com seguro ativo!", 'error');
-    }
-    if(!this.possuiSeguro){
-      Swal.fire({
-        title: 'Você tem certeza?',
-        text: 'Deseja excluir o cliente #' + id + "?",
-        icon: 'warning',
-        showCancelButton: true,
-      }).then(r => {
-        if (r.isConfirmed) {
-          this.clienteService.excluir(id).subscribe(
-            sucesso => {
-              Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
-              this.buscarClientes();
-            },
-            erro => {
-              Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error')
+    this.verificarClienteTemSeguro(id).pipe(
+      switchMap(possuiSeguro => {
+        if (possuiSeguro) {
+          Swal.fire("Erro", "Cliente possui seguro ativo!", 'error');
+          return new Observable<void>(observer => observer.complete());
+        } else {
+          return Swal.fire({
+            title: 'Você tem certeza?',
+            text: 'Deseja excluir o cliente #' + id + "?",
+            icon: 'warning',
+            showCancelButton: true,
+          }).then(r => {
+            if (r.isConfirmed) {
+              return this.clienteService.excluir(id);
             }
-          )
+          });
         }
       })
-    }
+    ).subscribe(
+      sucesso => {
+        if (sucesso) {
+          Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
+          this.buscarClientes();
+        }
+      },
+      erro => {
+        Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error');
+      }
+    );
   }
 
   exportar() {

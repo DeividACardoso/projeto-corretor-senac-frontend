@@ -37,7 +37,7 @@ export class ClienteService {
   }
 
   verificarClienteTemSeguro(id: number): Observable<boolean> {
-    return this.httpClient.get<boolean>(this.API + '/verificar-seg/' + id);
+    return this.httpClient.get<boolean>(this.API + '/verificar-seg-ativo/' + id);
   }
 
   public uploadfile(file: File) {
