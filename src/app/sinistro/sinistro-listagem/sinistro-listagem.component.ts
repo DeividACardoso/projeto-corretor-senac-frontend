@@ -5,6 +5,7 @@ import { Sinistro } from '../../shared/model/sinistro';
 import { SinistroService } from '../../shared/service/sinistro.service';
 import { SinistroSeletor } from '../../shared/model/seletor/sinistro.seletor';
 import { Title } from '@angular/platform-browser';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-sinistro-listagem',
@@ -16,6 +17,7 @@ export class SinistroListagemComponent {
   public seletor: SinistroSeletor = new SinistroSeletor();
 
   public idSinistro: number;
+  fileName = "RelatorioSinistros.xlsx"
 
   constructor(
     private sinistroService: SinistroService,
@@ -79,6 +81,20 @@ export class SinistroListagemComponent {
         console.log('Erro ao buscar os Sinistros com filtros: ', erro);
       }
     )
+  }
+
+  limpar() {
+    this.seletor = new SinistroSeletor();
+  }
+  exportar() {
+    let data = document.getElementById("tabelaSeguros");
+    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
+
   }
 
   excluir(sinistro: Sinistro) {
