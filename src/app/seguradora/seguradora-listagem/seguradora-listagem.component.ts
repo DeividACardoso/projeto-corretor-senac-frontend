@@ -5,6 +5,7 @@ import { SeguradoraService } from '../../shared/service/seguradora.service';
 import Swal from 'sweetalert2';
 import { SeguradoraSeletor } from '../../shared/model/seletor/seguradora.seletor';
 import { Title } from '@angular/platform-browser';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class SeguradoraListagemComponent {
   public seguradora: Seguradora = new Seguradora();
   public idSeguradora: number;
   public seletor: SeguradoraSeletor = new SeguradoraSeletor();
+  fileName = "RelatorioSeguradoras.xlsx"
 
   constructor(private seguradoraService: SeguradoraService,
     private route: ActivatedRoute,
@@ -35,10 +37,6 @@ export class SeguradoraListagemComponent {
     this.seguradoraService.listarTodos().subscribe(
       resultado =>{
         this.seguradoras = resultado;
-      },
-      erro =>{
-        Swal.fire('Erro', 'Erro ao buscar todas as Seguradoras: ', 'error');
-        return;
       }
     )
   }
@@ -68,6 +66,20 @@ export class SeguradoraListagemComponent {
 
   editar(id: number){
     this.router.navigate(['seguradora/detalhe', id])
+  }
+
+  limpar() {
+    this.seletor = new SeguradoraSeletor();
+  }
+
+  exportar() {
+    let data = document.getElementById("tabelaSeguradora");
+    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+
+    XLSX.writeFile(wb, this.fileName);
   }
 
   excluir(seguradora: Seguradora){
