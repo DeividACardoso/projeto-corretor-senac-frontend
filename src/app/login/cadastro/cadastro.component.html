@@ -50,7 +50,7 @@
                                 <div class="mb-1">
                                     <label class="form-label">Senha</label>
                                     <input
-                                        [ngClass]="(!dto.senha || dto.senha.length < 6) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
+                                        [ngClass]="(!dto.senha || validarSenha(dto.senha ) == false) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="dto.senha" type="password" class="form-control border-dark"
                                         name="senha" required minlength="6">
                                     <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
