@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrl: './cadastro.component.scss'
+  styleUrls: ['./cadastro.component.scss'] // Corrected this line
 })
 export class CadastroComponent {
 
@@ -18,16 +18,22 @@ export class CadastroComponent {
 
   public dto: RegisterDTO = new RegisterDTO();
   public confirmarSenha: string;
-  public emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   public cadastrar(form: NgForm) {
     try {
-      console.log(form)
-      if (this.validCPF(this.dto.cpf) || this.validTelefone(this.dto.telefone) || !form.valid) {
+      if (!this.validCPF(this.dto.cpf) || !this.validTelefone(this.dto.telefone)) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Preencha todos os campos corretamente!'
+        });
+        return;
+      }
+      if(!this.validarSenha(this.dto.senha)){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
         });
         return;
       }
@@ -71,22 +77,28 @@ export class CadastroComponent {
     }
   }
 
-  validCPF(cpf: string) {
+  validCPF(cpf: string): boolean {
     cpf = cpf.replace(/\D/g, '');
+    console.log('Cpf: ', cpf);
     if (cpf.length !== 11) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
-  validTelefone(telefone: string) {
+  validarSenha(senha: string): boolean {
+    const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    console.log('Senha válida? ', senhaRegex.test(senha));
+    return senhaRegex.test(senha);
+  }
+
+  validTelefone(telefone: string): boolean {
     telefone = telefone.replace(/\D/g, '');
+    console.log('Telefone: ', telefone);
     if (telefone.length !== 11) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   voltar() {

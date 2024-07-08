@@ -6,19 +6,20 @@ import { Observable } from "rxjs";
 import { Cliente } from "../model/cliente";
 import { SeguroSeletor } from "../model/seletor/seguro.seletor";
 import { Seguradora } from "../model/seguradora";
+import { Sinistro } from "../model/sinistro";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeguroService {
-  private readonly API = 'http://localhost:8080/api/seguros'
-
   constructor(private httpClient: HttpClient) { }
+
+  private readonly API = 'http://localhost:8080/api/seguros'
 
   listarTodos(): Observable<Array<Seguro>> {
     return this.httpClient.get<Array<Seguro>>(this.API + '/todos');
   }
-  
+
   getListaClientes(): Observable<Array<Cliente>> {
     return this.httpClient.get<Array<Cliente>>('http://localhost:8080/api/clientes/todos');
   }
@@ -45,5 +46,17 @@ export class SeguroService {
 
   excluir(id: number): Observable<Seguro> {
     return this.httpClient.delete<Seguro>(this.API + '/delete-id/' + id);
+  }
+
+  public encontrarSeguroPorCliente(id: number): Observable<Seguro[]> {
+    return this.httpClient.get<Array<Seguro>>(this.API + '/seg-cliente/' + id);
+  }
+
+  public encontrarSeguroPorVeiculo(id: number): Observable<Seguro> {
+    return this.httpClient.get<Seguro>(this.API + '/seg-veiculo/' + id);
+  }
+
+  public encontrarSeguroPorSinistro(id: number): Observable<Sinistro[]> {
+    return this.httpClient.get<Array<Sinistro>>(this.API + '/seg-sinistro/' + id);
   }
 }

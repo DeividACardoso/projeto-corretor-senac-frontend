@@ -4,7 +4,7 @@ import { ClienteService } from '../../shared/service/cliente.service';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 
@@ -16,9 +16,8 @@ import * as XLSX from 'xlsx';
 
 export class ClienteListagemComponent implements OnInit {
   seletor: ClienteSeletor = new ClienteSeletor();
-  possuiSeguro: boolean = false;
+  possuiSeguro: boolean;
   fileName = "RelatorioClientes.xlsx"
-
 
   constructor(private clienteService: ClienteService, private router: Router) {
   }
@@ -30,7 +29,7 @@ export class ClienteListagemComponent implements OnInit {
     this.buscarClientes();
   }
 
-  verificarToken(){
+  verificarToken() {
     if (localStorage.getItem('token') == null) {
       this.router.navigate(['login']);
     }
@@ -71,44 +70,56 @@ export class ClienteListagemComponent implements OnInit {
     });
   }
 
-  possuiSeguroAtivo(id: number) {
+  possuiSeguroAtivo(id: number): boolean {
     this.clienteService.verificarClienteTemSeguro(id).subscribe(
       resultado => {
         this.possuiSeguro = resultado;
       },
       erro => {
-        Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
+        Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: ", 'error');
       }
     )
+    return this.possuiSeguro;
   }
 
   excluir(id: number) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: 'Deseja excluir o cliente #' + id + "?",
-      icon: 'warning',
-      showCancelButton: true,
-    }).then(r => {
-      if (r.isConfirmed) {
-        this.clienteService.excluir(id).subscribe(
-          sucesso => {
-            Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
-            this.buscarClientes();
-          },
-          erro => {
-            Swal.fire("Erro", "Erro ao excluir o cliente: " + erro.error.message, 'error')
-          }
-        )
+    this.verificarClienteTemSeguro(id).pipe(
+      switchMap(possuiSeguro => {
+        if (possuiSeguro) {
+          Swal.fire("Erro", "Cliente possui seguro ativo!", 'error');
+          return new Observable<void>(observer => observer.complete());
+        } else {
+          return Swal.fire({
+            title: 'Você tem certeza?',
+            text: 'Deseja excluir o cliente #' + id + "?",
+            icon: 'warning',
+            showCancelButton: true,
+          }).then(r => {
+            if (r.isConfirmed) {
+              return this.clienteService.excluir(id);
+            }
+          });
+        }
+      })
+    ).subscribe(
+      sucesso => {
+        if (sucesso) {
+          Swal.fire("Sucesso", "Cliente excluído com sucesso!", 'success');
+          this.buscarClientes();
+        }
+      },
+      erro => {
+        Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error');
       }
-    })
+    );
   }
 
-  exportar(){
+  exportar() {
     let data = document.getElementById("tabelaClientes");
-    const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     XLSX.writeFile(wb, this.fileName);
   }

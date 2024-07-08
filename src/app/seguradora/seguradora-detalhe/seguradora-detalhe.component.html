@@ -19,7 +19,7 @@
               </div>
               <div class="form-group col col-md-6">
                 <label for="cnpj">CNPJ</label>
-                <input [ngClass]="((!seguradora.cnpj || (seguradora.cnpj && seguradora.cnpj.length != 18)) && ngForm.submitted)
+                <input [ngClass]="((!seguradora.cnpj || (seguradora.cnpj && seguradora.cnpj.length != 14)) && ngForm.submitted)
                   ? 'form-control is-invalid' : 'form-control'" class="shadow-sm rounded border border-secondary"
                   [ngModel]="seguradora.cnpj | cnpjMask" (ngModelChange)="seguradora.cnpj=$event"
                   placeholder="xx.xxx.xxx/xxxx-xx" maxlength="18" name="cnpj" onsubmit="Text" required appOnlyNumbers>
@@ -36,7 +36,7 @@
               </div>
               <div class="form-group col col-md-6">
                 <label for="telefone">Telefone (com DDD)</label>
-                <input [ngClass]="((!seguradora.telefone || (seguradora.telefone && seguradora.telefone.length != 15) || (seguradora.telefone && seguradora.telefone.length != 14)) && ngForm.submitted)
+                <input [ngClass]="((!seguradora.telefone || ((seguradora.telefone && seguradora.telefone.length < 14))) && ngForm.submitted)
                   ? 'form-control is-invalid' : 'form-control'" [ngModel]="seguradora.telefone | phone"
                   (ngModelChange)="seguradora.telefone=$event" placeholder="(xx) #xxxx-xxxx"
                   class="shadow-sm rounded border border-secondary" id="phone" type="tel" maxlength="15" name="telefone" required appOnlyNumbers>

@@ -1,3 +1,4 @@
+<pre>{{dto | json}}</pre>
 <div class="container-fluid">
     <div class="row text-center p-2 align-items-center justify-content-center">
         <div class="col col-md-6 pt-5">
@@ -12,7 +13,7 @@
                                 <div class="mb-1">
                                     <label class="form-label">Nome</label>
                                     <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.nome || dto.nome.length < 3) && ngForm.submitted}"
+                                        [ngClass]="(!dto.nome || dto.nome.length < 3) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="dto.nome" type="text" class="form-control border-dark"
                                         name="nome" required minlength="3"/>
                                     <div class="invalid-feedback"> O nome deve conter pelo menos 3 caracteres.</div>
@@ -20,15 +21,15 @@
                                 <div class="mb-1">
                                     <label class="form-label">E-mail</label>
                                     <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.email || !emailPattern.test(dto.email)) && ngForm.submitted}"
+                                        [ngClass]="(!dto.email || dto.email == '') && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="dto.email" type="email" class="form-control border-dark"
-                                        name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+                                        name="email" required/>
                                     <div class="invalid-feedback"> O e-mail deve ser válido.</div>
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label">CPF</label>
                                     <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.cpf || !validCPF(dto.cpf)) && ngForm.submitted}"
+                                        [ngClass]="(!dto.cpf || !validCPF(dto.cpf)) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [ngModel]="dto.cpf | numberMask: 'cpf'" (ngModelChange)="dto.cpf=$event"
                                         placeholder="xxx.xxx.xxx-xx" maxlength="14" name="cpf" required appOnlyNumbers
                                         class="form-control border-dark" />
@@ -39,7 +40,7 @@
                                 <div class="mb-1">
                                     <label class="form-label">Telefone(DDD)</label>
                                     <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.telefone || !validTelefone(dto.telefone)) && ngForm.submitted}"
+                                        [ngClass]="(!dto.telefone || !validTelefone(dto.telefone)) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [ngModel]="dto.telefone | numberMask: 'phone'"
                                         (ngModelChange)="dto.telefone=$event" placeholder="(xx) #xxxx-xxxx"
                                         maxlength="15" type="text" class="form-control border-dark"
@@ -49,7 +50,7 @@
                                 <div class="mb-1">
                                     <label class="form-label">Senha</label>
                                     <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (!dto.senha || dto.senha.length < 6) && ngForm.submitted}"
+                                        [ngClass]="(!dto.senha || validarSenha(dto.senha ) == false) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="dto.senha" type="password" class="form-control border-dark"
                                         name="senha" required minlength="6">
                                     <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
@@ -57,7 +58,7 @@
                                 <div class="mb-1">
                                     <label class="form-label">Confirme a senha</label>
                                     <input
-                                        [ngClass]="{'form-control': true, 'is-invalid': (confirmarSenha !== dto.senha) && ngForm.submitted}"
+                                        [ngClass]="(confirmarSenha !== dto.senha) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="confirmarSenha" type="password" class="form-control border-dark"
                                         name="confirmarSenha" required>
                                     <div class="invalid-feedback"> As senhas não coincidem.</div>

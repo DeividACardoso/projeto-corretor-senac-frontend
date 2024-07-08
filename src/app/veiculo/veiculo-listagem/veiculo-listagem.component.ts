@@ -31,10 +31,6 @@ export class VeiculoListagemComponent {
     this.veiculoService.listarTodos().subscribe(
       (resultado) => {
         this.veiculos = resultado;
-      },
-      (erro) => {
-        Swal.fire('Erro', 'Erro ao buscar todos os veículos: ', 'error');
-        return;
       }
     );
   }
@@ -93,5 +89,8 @@ export class VeiculoListagemComponent {
         );
       }
     });
+  }
+  limpar() {
+    this.seletor = new VeiculoSeletor();
   }
 }

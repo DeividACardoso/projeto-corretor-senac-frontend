@@ -72,6 +72,7 @@ export class SegurosListagemComponent implements OnInit {
 
   isNearExpiry(dtFimVigencia: Date): boolean {
     const today = new Date();
+    console.log(differenceInCalendarDays(new Date(dtFimVigencia), today) <= 7)
     return differenceInCalendarDays(new Date(dtFimVigencia), today) <= 7;
   }
 

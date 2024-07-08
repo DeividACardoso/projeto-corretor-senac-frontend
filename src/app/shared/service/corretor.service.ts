@@ -3,44 +3,53 @@ import { Injectable } from '@angular/core';
 import { AuthenticationDTO } from '../model/authentication.dto';
 import { Corretor as Corretor } from '../model/corretor';
 import { Observable } from 'rxjs';
+import { RegisterDTO } from '../model/register.dto';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CorretorService {
 
-    private readonly API = 'http://localhost:8080/api/auth';
+  private readonly API = 'http://localhost:8080/api/auth';
 
-    constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-    private token: string;
-    private tokenFromStorage: string;
+  private token: string;
+  private tokenFromStorage: string;
 
-    login(authenticationDTO: AuthenticationDTO) {
-        return this.httpClient.post(this.API + '/login', authenticationDTO);
-    }
-
-    register(registerDTO: any) {
-        return this.httpClient.post(this.API + '/register', registerDTO);
-    }
-
-    // enviarEmail
-  enviarEmail(corretorAtualizar: Corretor): Observable<Corretor> {
-    const url = this.API + '/enviar-email/' + corretorAtualizar;
-    return this.httpClient.post<Corretor>(url, corretorAtualizar);
+  login(authenticationDTO: AuthenticationDTO) {
+    return this.httpClient.post(this.API + '/login', authenticationDTO);
   }
 
-    storeToken(token: string) {
-        this.token = token;
-        localStorage.setItem('token', token);
-    }
+  register(registerDTO: RegisterDTO) {
+    return this.httpClient.post(this.API + '/register', registerDTO);
+  }
 
-    getToken() {
-        this.tokenFromStorage = localStorage.getItem('token');
-        return this.tokenFromStorage;
-    }
+  recuperarSenha(id: number, corretorAtualizar: Corretor): Observable<Corretor> {
+    const url = this.API + '/atualizar/' + id;
+    return this.httpClient.put<Corretor>(url, corretorAtualizar);
+  }
 
-    initRefresh() {
-        return this.tokenFromStorage;
-    }
+  // enviarEmail
+  enviarEmail(corretorAtualizar: Corretor) {
+    return this.httpClient.post('http://localhost:8080/api/recuperacao/atualizar-senha', corretorAtualizar);
+  }
+
+  storeToken(token: string) {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    this.tokenFromStorage = localStorage.getItem('token');
+    return this.tokenFromStorage;
+  }
+
+  initRefresh() {
+    return this.tokenFromStorage;
+  }
+
+  encontrarClientePorEmail(email: string) {
+    return this.httpClient.get('http://localhost:8080/api/clientes/email/' + email);
+  }
 }
