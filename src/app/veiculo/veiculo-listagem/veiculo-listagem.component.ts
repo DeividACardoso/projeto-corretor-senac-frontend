@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { Veiculo } from '../../shared/model/veiculo';
 import { VeiculoService } from '../../shared/service/veiculo.service';
 import { VeiculoSeletor } from '../../shared/model/seletor/veiculo.seletor';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-veiculo-listagem',
@@ -18,13 +19,23 @@ export class VeiculoListagemComponent {
   constructor(
     private veiculoService: VeiculoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   public veiculos: Array<Veiculo> = new Array();
+  public title = 'Listagem de Veículos';
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.verificarToken();
     this.buscarVeiculo();
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarVeiculo() {

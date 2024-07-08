@@ -87,6 +87,9 @@
                                                 <td>{{ sinistro.tipo }}</td>
                                                 <td>{{ sinistro.descricao }}</td>
                                             </tr>
+                                            <tr *ngIf="sinistros.length === 0">
+                                                <td colspan="4" class="text-center fw-bold">Nada encontrado.</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

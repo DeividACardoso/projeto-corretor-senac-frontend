@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { VeiculoService } from '../../shared/service/veiculo.service';
 import { Veiculo } from '../../shared/model/veiculo';
 import { Seguradora } from '../../shared/model/seguradora';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-seguro-detalhe',
@@ -22,6 +23,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   public listaClientes: Array<Cliente> = new Array();
   public listaVeiculos: Array<Veiculo> = new Array();
   displayCliente: string;
+  title = "Cadastro de Seguro";
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
@@ -29,9 +31,11 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
   constructor(private seguroService: SeguroService,
     private veiculoService: VeiculoService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private titleService: Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     this.verificarToken();
     this.route.params.subscribe(params => {
       this.idSeguro = params['id'];
@@ -46,7 +50,7 @@ export class SeguroDetalheComponent implements OnInit, AfterViewInit {
     });
   }
 
-  verificarToken(){
+  verificarToken() {
     if (localStorage.getItem('token') == null) {
       this.router.navigate(['login']);
     }

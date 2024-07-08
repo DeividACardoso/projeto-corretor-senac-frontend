@@ -6,6 +6,7 @@ import { Cliente } from '../../shared/model/cliente';
 import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
 import { from, Observable, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,13 +19,15 @@ export class ClienteListagemComponent implements OnInit {
   seletor: ClienteSeletor = new ClienteSeletor();
   possuiSeguro: boolean;
   fileName = "RelatorioClientes.xlsx"
+  title = "Listagem de Clientes"
 
-  constructor(private clienteService: ClienteService, private router: Router) {
+  constructor(private clienteService: ClienteService, private router: Router, private titleService: Title) {
   }
 
   public clientes: Array<Cliente> = new Array();
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     this.verificarToken();
     this.buscarClientes();
   }
@@ -87,7 +90,7 @@ export class ClienteListagemComponent implements OnInit {
     this.verificarClienteTemSeguro(id).pipe(
       switchMap(possuiSeguro => {
         if (possuiSeguro) {
-          Swal.fire("Erro", "Cliente possui seguro ativo!", 'error');
+          Swal.fire("Não é possível deletar", "Cliente possui seguro ativo!", 'warning');
           return new Observable<void>(observer => observer.complete());
         } else {
           return from(Swal.fire({
@@ -147,5 +150,9 @@ export class ClienteListagemComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  inspecionar(id: number) {
+    this.router.navigate(['clientes/inspecao', id]);
   }
 }

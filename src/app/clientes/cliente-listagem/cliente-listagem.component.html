@@ -24,8 +24,8 @@
                   </div>
                   <div class="form-group col col-md-3">
                     <label for="cpf">CPF</label>
-                    <input class="form-control shadow-sm rounded border-dark" name="cpf" [ngModel]="seletor.cpf | numberMask: 'cpf'"
-                    (ngModelChange)="seletor.cpf=$event" appOnlyNumbers>
+                    <input class="form-control shadow-sm rounded border-dark" name="cpf"
+                      [ngModel]="seletor.cpf | numberMask: 'cpf'" (ngModelChange)="seletor.cpf=$event" appOnlyNumbers>
                   </div>
                   <div class="form-group col col-md-3">
                     <label for="cnh">CNH</label>
@@ -48,12 +48,13 @@
                   </div>
                   <div class="form-group col pt-3 col-md-5">
                     <button type="sumbit" name="btnsubmit"
-                      class="form-control btn btn-warning mb-3 rounded border-dark shadow-sm" (click)="limpar()">Limpar</button>
+                      class="form-control btn btn-warning mb-3 rounded border-dark shadow-sm"
+                      (click)="limpar()">Limpar</button>
                     <!-- <-- Implementar: (click)="limpar()" -->
                   </div>
                   <div class="form-group col pt-3 col-md-5">
-                    <button type="sumbit"
-                      class="form-control btn btn-primary mb-3 rounded border-dark shadow-sm" (click)="pesquisar()">Pesquisar</button>
+                    <button type="sumbit" class="form-control btn btn-primary mb-3 rounded border-dark shadow-sm"
+                      (click)="pesquisar()">Pesquisar</button>
                     <!-- Implementar: (click)="pesquisar()" -->
                   </div>
                 </form>
@@ -69,7 +70,7 @@
       <div class="col-md pt-2">
         <div class="table-responsive rounded-0 border">
           <table id="tabelaClientes"
-          class="table table-responsive table-striped table-hover table-sm table-bordered border-secondary">
+            class="table table-responsive table-striped table-hover table-sm table-bordered border-secondary">
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
@@ -88,13 +89,16 @@
                 <td class="text-center align-middle">{{c.email}}</td>
                 <td class="text-center align-middle">{{(c.temSeguro) ? 'Sim' : 'Não'}}</td>
                 <td class="text-center align-middle">
+                  <button name="inspecionar" class="btn btn-sm btn-primary shadow-sm" data-toggle="tooltip"
+                    data-placement="top" title="Inspecionar" (click)="inspecionar(c.id)">
+                    <img src="https://imgur.com/FSJgeji.png" width="15" class="pb-1 align-items-center" />
+                  </button>
                   <button name="editar" class="btn btn-sm btn-warning m-1 shadow-sm" (click)="editar(c.id)"
                     data-toggle="tooltip" data-placement="top" title="Editar">
                     <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
                   </button>
-                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm"
-                    (click)="excluir(c.id)" data-toggle="tooltip" data-placement="top"
-                    title="Excluir">
+                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(c.id)"
+                    data-toggle="tooltip" data-placement="top" title="Excluir">
                     <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
                   </button>
                 </td>

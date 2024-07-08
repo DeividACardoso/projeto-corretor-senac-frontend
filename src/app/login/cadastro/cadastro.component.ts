@@ -1,23 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterDTO } from '../../shared/model/register.dto';
 import { CorretorService } from '../../shared/service/corretor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.scss']
 })
-export class CadastroComponent {
+export class CadastroComponent implements OnInit{
 
   constructor(private corretorService: CorretorService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+  private titleService: Title) { }
+
+
+  ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+  }
 
   public dto: RegisterDTO = new RegisterDTO();
   public confirmarSenha: string;
+  title = "Cadastro de Usuário";
 
   public cadastrar(form: NgForm) {
     try {

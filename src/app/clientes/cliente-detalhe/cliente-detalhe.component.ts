@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { ClienteService } from '../../shared/service/cliente.service';
 import { HttpClient } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 interface DadosDoJSON {
   cep: string,
@@ -54,6 +55,7 @@ export class ClienteDetalheComponent implements OnInit {
     "SE",
     "TO"
   ];
+  title = "Cadastro de Cliente";
 
   listaEstadoCivil: ["Solteiro", "Casado", "Viúvo", "Divorciado"];
 
@@ -62,9 +64,11 @@ export class ClienteDetalheComponent implements OnInit {
 
   constructor(private clienteService: ClienteService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private titleService: Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     this.verificarToken();
     this.route.params.subscribe(params => {
       this.idCliente = params['id'];
@@ -107,7 +111,7 @@ export class ClienteDetalheComponent implements OnInit {
     }
   }
 
-  removerMascaraCep(){
+  removerMascaraCep() {
     this.cliente.cep = this.cliente.cep.replace(/\D/g, '');
   }
 

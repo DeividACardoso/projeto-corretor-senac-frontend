@@ -1,4 +1,3 @@
-<app-nav-bar></app-nav-bar>
 <div class="bg-light">
     <div class="container-fluid pt-5">
         <div class="card border-dark">
@@ -16,10 +15,10 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="border-secondary nav-link" id="veiculo-tab" data-bs-toggle="tab"
-                            data-bs-target="#veiculo" type="button" role="tab" aria-controls="veiculo"
-                            aria-selected="true">
-                            Veículos
-                        </button>
+                        data-bs-target="#veiculo" type="button" role="tab" aria-controls="veiculo"
+                        aria-selected="true">
+                        Veículos
+                    </button>
                     </li>
                 </ul>
                 <div class="tab-content p-2">
@@ -44,8 +43,7 @@
                                         <tr *ngFor="let seguro of seguros">
                                             <td>{{ seguro.numApolice }}</td>
                                             <td>{{ (seguro.ativo) ? 'Sim' : 'Não'}}</td>
-                                            <td>{{ seguro.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{
-                                                seguro.dtFimVigencia |
+                                            <td>{{ seguro.dtInicioVigencia | date: 'dd/MM/yyyy'}} - {{ seguro.dtFimVigencia |
                                                 date: 'dd/MM/yyyy'}}</td>
                                             <td>{{ seguro.veiculo.placa }}</td>
                                             <td>{{ seguro.veiculo.modelo }}</td>
@@ -58,6 +56,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="col-md-12 align-items-center justify-content-center">
+
                             </div>
                         </div>
                     </div>
@@ -92,11 +93,11 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col col-md-2 pt-5">
-                            <button class="btn btn-warning border-dark" (click)="voltar()">Voltar para Listagem</button>
+                        <div class="col col-md-1 pt-5">
+                            <button class="btn btn-warning border-dark" (click)="voltar()">Sair</button>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
+</div>

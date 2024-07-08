@@ -22,7 +22,6 @@ export class SinistroDetalheComponent implements OnInit {
 
   public listaSeguros: Array<Seguro> = new Array();
   public displaySeguro: string;
-  // public seguroSelecionado?: SeguroService;
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
@@ -37,16 +36,8 @@ export class SinistroDetalheComponent implements OnInit {
 
   title = "Cadastro de Sinistro"
 
-  // ngOnInit(): void {
-  //   this.route.params.subscribe((params) => {
-  //     this.idSinistro = params['id'];
-
-  //     if (this.idSinistro) {
-  //       this.buscarSinistro();
-  //     }
-  //   });
-  // }
   ngOnInit(): void {
+    this.verificarToken();
     this.titleService.setTitle(this.title)
     this.seguroService.listarTodos;
     this.preencherListaSeguros();
@@ -58,6 +49,12 @@ export class SinistroDetalheComponent implements OnInit {
         this.buscarSinistro();
       }
     });
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   ngAfterViewInit(): void {
