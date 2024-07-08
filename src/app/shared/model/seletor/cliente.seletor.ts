@@ -1,9 +1,9 @@
 export class ClienteSeletor {
   nomeCliente: String;
-  cpf: number;
+  cpf: string;
   dtNascimentoInicio: Date;
   dtNascimentoFim: Date;
   enderecoEmail: String;
-  cnh: number;
+  cnh: string;
 
 }

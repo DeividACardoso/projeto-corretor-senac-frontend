@@ -8,6 +8,7 @@ import { Corretor } from '../../shared/model/corretor';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { LoginResponseDTO } from '../../shared/model/loginResponse.dto';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -20,14 +21,21 @@ export class LoginComponent implements OnInit, OnDestroy {
   public corretor: Corretor = new Corretor();
   public cliente: Cliente = new Cliente();
   public isLoggedIn: boolean = false;
-
+  title = 'Login';
   private wrongAttempts: number = 0;
 
   constructor(
     private corretorService: CorretorService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) { }
+
+  ngOnInit() {
+    this.titleService.setTitle(this.title);
+    localStorage.removeItem('token');
+    this.wrongAttempts = Number(localStorage.getItem('wrongAttempts')) || 0;
+  }
 
   public login() {
     localStorage.removeItem('token');
@@ -101,10 +109,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.login();
   }
 
-  ngOnInit() {
-    localStorage.removeItem('token');
-    this.wrongAttempts = Number(localStorage.getItem('wrongAttempts')) || 0;
-  }
 
   ngOnDestroy() {
     localStorage.setItem('wrongAttempts', String(this.wrongAttempts));
@@ -120,7 +124,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             text: 'Seu seguro pode não ter sido criado ainda. Entre em contato com o seu corretor.',
           });
         } else {
-          this.router.navigate(['/clientes/inspecao/', resultado.id]);
+          this.router.navigate(['/clientes/dados/', resultado.id]);
         }
       },
       (erro: any) => {

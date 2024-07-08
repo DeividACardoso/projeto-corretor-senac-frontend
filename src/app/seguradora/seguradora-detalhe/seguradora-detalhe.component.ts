@@ -28,6 +28,7 @@ export class SeguradoraDetalheComponent implements OnInit {
 
 
     ngOnInit(): void {
+      this.verificarToken();
       this.titleService.setTitle(this.title)
       this.route.params.subscribe(params => {
         this.idSeguradora = params['id'];
@@ -36,6 +37,12 @@ export class SeguradoraDetalheComponent implements OnInit {
           this.buscarSeguradora();
         }
       });
+    }
+
+    verificarToken() {
+      if (localStorage.getItem('token') == null) {
+        this.router.navigate(['login']);
+      }
     }
 
   salvar(form: NgForm) {

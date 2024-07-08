@@ -1,23 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterDTO } from '../../shared/model/register.dto';
 import { CorretorService } from '../../shared/service/corretor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss'] // Corrected this line
+  styleUrls: ['./cadastro.component.scss']
 })
-export class CadastroComponent {
+export class CadastroComponent implements OnInit{
 
   constructor(private corretorService: CorretorService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+  private titleService: Title) { }
+
+
+  ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+  }
 
   public dto: RegisterDTO = new RegisterDTO();
   public confirmarSenha: string;
+  title = "Cadastro de Usuário";
 
   public cadastrar(form: NgForm) {
     try {
@@ -58,11 +66,11 @@ export class CadastroComponent {
               }
             });
           },
-          (error: any) => {
+          (error) => {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Ocorreu um erro ao realizar o cadastro. Tente novamente mais tarde.'
+              text: 'Ocorreu um erro ao realizar o cadastro: ' + error.error.message
             });
           }
         );
@@ -77,6 +85,7 @@ export class CadastroComponent {
     }
   }
 
+
   validCPF(cpf: string): boolean {
     cpf = cpf.replace(/\D/g, '');
     console.log('Cpf: ', cpf);
@@ -88,7 +97,6 @@ export class CadastroComponent {
 
   validarSenha(senha: string): boolean {
     const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    console.log('Senha válida? ', senhaRegex.test(senha));
     return senhaRegex.test(senha);
   }
 

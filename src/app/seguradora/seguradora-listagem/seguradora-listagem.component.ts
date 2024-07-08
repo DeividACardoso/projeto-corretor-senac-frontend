@@ -29,8 +29,15 @@ export class SeguradoraListagemComponent {
   title="Listagem de Seguradoras"
 
   ngOnInit(): void {
+    this.verificarToken();
     this.titleService.setTitle(this.title)
     this.buscarSeguradora();
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarSeguradora() {

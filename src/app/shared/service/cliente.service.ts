@@ -2,6 +2,7 @@ import { HttpClient, withInterceptors } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable, map, tap } from "rxjs";
 import { Cliente } from "../model/cliente";
+import { ClienteSeletor } from '../model/seletor/cliente.seletor';
 // import { ClienteSeletor } from 'src/app/shared/model/seletor/cliente.seletor'
 
 @Injectable({
@@ -20,9 +21,9 @@ export class ClienteService {
     return this.httpClient.get<Cliente>(this.API + '/' + id);
   }
 
-  // listarComFiltro(seletor: ClienteSeletor): Observable<Array<Cliente>>{
-  //   return this.httpClient.post<Array<Cliente>>(this.API+'/filtro', seletor);
-  // }
+  pesquisar(seletor: ClienteSeletor): Observable<Array<Cliente>>{
+    return this.httpClient.post<Array<Cliente>>(this.API+'/filtro', seletor);
+  }
 
   salvar(cliente: Cliente): Observable<Cliente> {
     return this.httpClient.post<Cliente>(this.API + '/novo', cliente);

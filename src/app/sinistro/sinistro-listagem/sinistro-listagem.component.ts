@@ -29,8 +29,15 @@ export class SinistroListagemComponent {
   public sinistros: Array<Sinistro> = new Array();
 
   ngOnInit(): void {
+    this.verificarToken();
     this.titleService.setTitle(this.title)
     this.buscarSinistro();
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['login']);
+    }
   }
 
   buscarSinistro() {

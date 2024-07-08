@@ -1,4 +1,3 @@
-<pre>{{dto | json}}</pre>
 <div class="container-fluid">
     <div class="row text-center p-2 align-items-center justify-content-center">
         <div class="col col-md-6 pt-5">
@@ -14,8 +13,8 @@
                                     <label class="form-label">Nome</label>
                                     <input
                                         [ngClass]="(!dto.nome || dto.nome.length < 3) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
-                                        [(ngModel)]="dto.nome" type="text" class="form-control border-dark"
-                                        name="nome" required minlength="3"/>
+                                        [(ngModel)]="dto.nome" type="text" class="form-control border-dark" name="nome"
+                                        required minlength="3" maxlength="50" />
                                     <div class="invalid-feedback"> O nome deve conter pelo menos 3 caracteres.</div>
                                 </div>
                                 <div class="mb-1">
@@ -23,7 +22,7 @@
                                     <input
                                         [ngClass]="(!dto.email || dto.email == '') && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="dto.email" type="email" class="form-control border-dark"
-                                        name="email" required/>
+                                        name="email" maxlength="50" required />
                                     <div class="invalid-feedback"> O e-mail deve ser válido.</div>
                                 </div>
                                 <div class="mb-1">
@@ -43,8 +42,8 @@
                                         [ngClass]="(!dto.telefone || !validTelefone(dto.telefone)) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [ngModel]="dto.telefone | numberMask: 'phone'"
                                         (ngModelChange)="dto.telefone=$event" placeholder="(xx) #xxxx-xxxx"
-                                        maxlength="15" type="text" class="form-control border-dark"
-                                        name="telefone" required />
+                                        maxlength="15" type="text" class="form-control border-dark" name="telefone"
+                                        required />
                                     <div class="invalid-feedback"> O telefone deve ser válido.</div>
                                 </div>
                                 <div class="mb-1">
@@ -52,8 +51,8 @@
                                     <input
                                         [ngClass]="(!dto.senha || validarSenha(dto.senha ) == false) && ngForm.submitted ? 'form-control is-invalid' : 'form-control'"
                                         [(ngModel)]="dto.senha" type="password" class="form-control border-dark"
-                                        name="senha" required minlength="6">
-                                    <div class="invalid-feedback"> A senha deve conter pelo menos 6 caracteres.</div>
+                                        name="senha" required minlength="8">
+                                    <div class="invalid-feedback"> A senha deve conter pelo menos 8 caracteres.</div>
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label">Confirme a senha</label>

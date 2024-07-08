@@ -4,8 +4,9 @@ import { ClienteService } from '../../shared/service/cliente.service';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
-import { Observable, switchMap } from 'rxjs';
+import { from, Observable, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,13 +19,15 @@ export class ClienteListagemComponent implements OnInit {
   seletor: ClienteSeletor = new ClienteSeletor();
   possuiSeguro: boolean;
   fileName = "RelatorioClientes.xlsx"
+  title = "Listagem de Clientes"
 
-  constructor(private clienteService: ClienteService, private router: Router) {
+  constructor(private clienteService: ClienteService, private router: Router, private titleService: Title) {
   }
 
   public clientes: Array<Cliente> = new Array();
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     this.verificarToken();
     this.buscarClientes();
   }
@@ -61,6 +64,7 @@ export class ClienteListagemComponent implements OnInit {
         resultado => {
           observer.next(resultado);
           observer.complete();
+          console.log('Cliente possui seguro: ', resultado);
         },
         erro => {
           Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
@@ -86,19 +90,23 @@ export class ClienteListagemComponent implements OnInit {
     this.verificarClienteTemSeguro(id).pipe(
       switchMap(possuiSeguro => {
         if (possuiSeguro) {
-          Swal.fire("Erro", "Cliente possui seguro ativo!", 'error');
+          Swal.fire("Não é possível deletar", "Cliente possui seguro ativo!", 'warning');
           return new Observable<void>(observer => observer.complete());
         } else {
-          return Swal.fire({
+          return from(Swal.fire({
             title: 'Você tem certeza?',
             text: 'Deseja excluir o cliente #' + id + "?",
             icon: 'warning',
             showCancelButton: true,
-          }).then(r => {
-            if (r.isConfirmed) {
-              return this.clienteService.excluir(id);
-            }
-          });
+          })).pipe(
+            switchMap(result => {
+              if (result.isConfirmed) {
+                return this.clienteService.excluir(id);
+              } else {
+                return new Observable<void>(observer => observer.complete());
+              }
+            })
+          );
         }
       })
     ).subscribe(
@@ -114,6 +122,26 @@ export class ClienteListagemComponent implements OnInit {
     );
   }
 
+  limpar(){
+    this.seletor = new ClienteSeletor();
+    this.buscarClientes();
+  }
+
+  pesquisar(){
+    console.log(this.seletor.cpf);
+    if(this.seletor.cpf){
+      this.seletor.cpf = this.seletor.cpf.replace(/\D/g, '');
+    }
+    this.clienteService.pesquisar(this.seletor).subscribe(
+      resultado => {
+        this.clientes = resultado;
+      },
+      erro => {
+        Swal.fire("Erro", "Erro ao pesquisar clientes: " + erro, 'error');
+      }
+    );
+  }
+
   exportar() {
     let data = document.getElementById("tabelaClientes");
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data)
@@ -122,5 +150,9 @@ export class ClienteListagemComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  inspecionar(id: number) {
+    this.router.navigate(['clientes/inspecao', id]);
   }
 }

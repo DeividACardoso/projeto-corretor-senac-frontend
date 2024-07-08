@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { VeiculoService } from '../../shared/service/veiculo.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-veiculo-detalhe',
@@ -40,12 +41,15 @@ export class VeiculoDetalheComponent implements OnInit {
         "SE",
         "TO"
     ];
+    title = "Cadastro de Veículo";
 
     constructor(private veiculoService: VeiculoService,
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+        private titleService: Title) { }
 
     ngOnInit(): void {
+        this.titleService.setTitle(this.title);
         this.verificarToken();
         this.route.params.subscribe(params => {
             this.idVeiculo = params['id'];
