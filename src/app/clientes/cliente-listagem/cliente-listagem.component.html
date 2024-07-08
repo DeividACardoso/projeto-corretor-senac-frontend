@@ -73,7 +73,6 @@
             class="table table-responsive table-striped table-hover table-sm table-bordered border-secondary">
             <thead>
               <tr>
-                <th scope="col" class="text-center">ID</th>
                 <th scope="col" class="text-center">Nome</th>
                 <th scope="col" class="text-center">CPF</th>
                 <th scope="col" class="text-center">E-mail</th>
@@ -83,7 +82,6 @@
             </thead>
             <tbody>
               <tr *ngFor="let c of clientes">
-                <td class="text-center align-middle">{{c.id}}</td>
                 <td class="text-center align-middle">{{c.nome}}</td>
                 <td class="text-center align-middle">{{c.cpf | numberMask: 'cpf'}}</td>
                 <td class="text-center align-middle">{{c.email}}</td>
