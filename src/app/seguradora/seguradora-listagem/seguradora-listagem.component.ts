@@ -89,7 +89,7 @@ export class SeguradoraListagemComponent {
     XLSX.writeFile(wb, this.fileName);
   }
 
-  excluir(seguradora: Seguradora){
+  excluir(id: number){
     Swal.fire({
       title: 'Confirmação',
       text: 'Deseja realmente excluir a Seguradora?',
