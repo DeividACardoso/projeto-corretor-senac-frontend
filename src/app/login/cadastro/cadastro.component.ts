@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss'] // Corrected this line
+  styleUrls: ['./cadastro.component.scss']
 })
 export class CadastroComponent {
 
@@ -58,11 +58,11 @@ export class CadastroComponent {
               }
             });
           },
-          (error: any) => {
+          (error) => {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Ocorreu um erro ao realizar o cadastro. Tente novamente mais tarde.'
+              text: 'Ocorreu um erro ao realizar o cadastro: ' + error.error.message
             });
           }
         );
@@ -77,6 +77,7 @@ export class CadastroComponent {
     }
   }
 
+
   validCPF(cpf: string): boolean {
     cpf = cpf.replace(/\D/g, '');
     console.log('Cpf: ', cpf);
@@ -88,7 +89,6 @@ export class CadastroComponent {
 
   validarSenha(senha: string): boolean {
     const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    console.log('Senha válida? ', senhaRegex.test(senha));
     return senhaRegex.test(senha);
   }
 
