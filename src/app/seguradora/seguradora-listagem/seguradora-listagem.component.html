@@ -29,22 +29,22 @@
                   <div class="form-group col col-md-4">
                     <label for="cnpj">CNPJ</label>
                     <input class="form-control shadow-sm rounded border-dark" type="text" name="cnpj"
-                    [ngModel]="seletor.cnpj | cnpjMask" (ngModelChange)="seletor.cnpj=$event"
-                     placeholder="xx.xxx.xxx/xxxx-xx" maxlength="18" appOnlyNumbers>
+                      [ngModel]="seletor.cnpj | cnpjMask" (ngModelChange)="seletor.cnpj=$event"
+                      placeholder="xx.xxx.xxx/xxxx-xx" maxlength="18" appOnlyNumbers>
                   </div>
 
                   <div class="form-group col col-md-4">
                     <label for="email">Email</label>
                     <input class="form-control shadow-sm rounded border-dark" type="email" name="email"
-                      [(ngModel)]="seletor.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Insira seu e-mail"
-                      maxlength="150">
+                      [(ngModel)]="seletor.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                      placeholder="Insira seu e-mail" maxlength="150">
                   </div>
 
                   <div class="form-group col col-md-3">
                     <label for="telefone">Telefone (com DDD) da Seguradora</label>
                     <input class="form-control shadow-sm rounded border-dark" type="text" name="telefone"
-                    [ngModel]="seletor.telefone | phone" (ngModelChange)="seletor.telefone=$event"
-                     placeholder="(xx) #xxxx-xxxx" maxlength="15" appOnlyNumbers>
+                      [ngModel]="seletor.telefone | phone" (ngModelChange)="seletor.telefone=$event"
+                      placeholder="(xx) #xxxx-xxxx" maxlength="15" appOnlyNumbers>
                   </div>
 
                   <div> </div>
@@ -99,7 +99,7 @@
                     data-toggle="tooltip" data-placement="top" title="Editar">
                     <img src="https://i.imgur.com/9H2mwRv.png" width="15" class="pb-1 align-items-center" />
                   </button>
-                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(s)"
+                  <button name="deletar" class="btn btn-sm btn-danger shadow-sm" (click)="excluir(s.id)"
                     data-toggle="tooltip" data-placement="top" title="Excluir">
                     <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
                   </button>

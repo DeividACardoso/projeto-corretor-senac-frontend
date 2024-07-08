@@ -21,10 +21,10 @@ export class SeguradoraListagemComponent {
     private route: ActivatedRoute,
     private router: Router,
     private titleService: Title) {
-    }
+  }
 
   public seguradoras: Array<Seguradora> = new Array();
-  title="Listagem de Seguradoras"
+  title = "Listagem de Seguradoras"
 
   ngOnInit(): void {
     this.verificarToken();
@@ -40,10 +40,10 @@ export class SeguradoraListagemComponent {
 
   buscarSeguradora() {
     this.seguradoraService.listarTodos().subscribe(
-      resultado =>{
+      resultado => {
         this.seguradoras = resultado;
       },
-      erro =>{
+      erro => {
         Swal.fire('Erro', 'Erro ao buscar todas as Seguradoras: ', 'error');
         return;
       }
@@ -52,49 +52,76 @@ export class SeguradoraListagemComponent {
 
   buscarSeguradoraPorId() {
     this.seguradoraService.pesquisarPorId(this.idSeguradora).subscribe(
-      resultado =>{
+      resultado => {
         this.seguradora = resultado;
       },
-      erro =>{
+      erro => {
         Swal.fire('Erro', 'Erro ao buscar Seguradora com ID (' + this.idSeguradora + ') : ', 'error');
         return;
       }
     )
   }
 
-  pesquisar(){
+  pesquisar() {
     this.seguradoraService.listarComFiltro(this.seletor).subscribe(
       resultado => {
         this.seguradoras = resultado;
       },
-      erro =>{
+      erro => {
         Swal.fire('Erro ao buscar as seguradoras com filtros: ', erro);
       }
     )
   }
 
-  editar(id: number){
+  editar(id: number) {
     this.router.navigate(['seguradora/detalhe', id])
   }
 
-  excluir(seguradora: Seguradora){
+  excluir(id: number) {
     Swal.fire({
-      title: 'Você tem certeza?',
-      text: 'Deseja excluir a seguradora: ' + seguradora.nome +  "?",
+      title: 'Confirmação',
+      text: 'Deseja realmente excluir a Seguradora?',
       icon: 'warning',
       showCancelButton: true,
-    }).then(r => {
-      if(r.isConfirmed){
-      this.seguradoraService.excluir(seguradora.id).subscribe(
-        sucesso => {
-          Swal.fire("Sucesso", "Seguradora excluída com sucesso!", 'success');
-          this.buscarSeguradora();
-        },
-        erro => {
-          Swal.fire("Erro", "Erro ao excluir a seguradora " + erro.error.message, 'error')
-        }
-      )
-    }
-    })
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.seguradoraService.verificarSeguro(id).subscribe(
+          (temSeguro) => {
+            if (temSeguro) {
+              Swal.fire(
+                'Erro',
+                'Não é possível excluir a seguradora pois possui seguro(s) associado',
+                'error'
+              );
+            } else {
+              this.seguradoraService.excluir(id).subscribe(
+                (sucesso) => {
+                  Swal.fire('Sucesso', 'Veguradora excluído com sucesso!', 'success');
+                  this.buscarSeguradora();
+                },
+                (erro) => {
+                  Swal.fire(
+                    'Erro',
+                    'Erro ao excluir o Veguradora' + erro.error.message,
+                    'error'
+                  );
+                }
+              );
+            }
+          },
+          (erro) => {
+            Swal.fire(
+              'Erro',
+              'Erro ao verificar seguro do veículo: ' + erro.error.message,
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
 }
