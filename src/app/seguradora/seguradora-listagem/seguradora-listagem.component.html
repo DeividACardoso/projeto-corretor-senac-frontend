@@ -17,16 +17,16 @@
             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <form class="row align-items-center form-floating ">
+
                   <div class="form-group col col-md-3">
-
-                    <div class="form-group col col-md-12">
-                      <label for="nome">Nome da Seguradora</label>
-                      <input class="form-control shadow-sm rounded border-dark" type="text" name="nome"
-                        [(ngModel)]="seletor.nome" placeholder="Nome da Seguradora" maxlength="150">
-                    </div>
+                    <!-- <div class="form-group col col-md-12"> -->
+                    <label for="nome">Nome da Seguradora</label>
+                    <input class="form-control shadow-sm rounded border-dark" type="text" name="nome"
+                      [(ngModel)]="seletor.nome" placeholder="Nome da Seguradora" maxlength="150">
                   </div>
+                  <!-- </div> -->
 
-                  <div class="form-group col col-md-4">
+                  <div class="form-group col col-md-2">
                     <label for="cnpj">CNPJ</label>
                     <input class="form-control shadow-sm rounded border-dark" type="text" name="cnpj"
                       [ngModel]="seletor.cnpj | cnpjMask" (ngModelChange)="seletor.cnpj=$event"
@@ -47,19 +47,19 @@
                       placeholder="(xx) #xxxx-xxxx" maxlength="15" appOnlyNumbers>
                   </div>
 
-                  <div> </div>
                   <div class="form-group col pt-3 col-md-2">
                     <button type="sumbit" name="btnrelatorio"
-                      class="form-control btn btn-success mb-3 rounded shadow-md border-dark">Relatório</button>
-                    <!-- Implementar: (click)="exportExcel()" -->
+                      class="form-control btn btn-success mb-3 rounded shadow-md border-dark"
+                      (click)="exportar()">Relatório</button>
                   </div>
                   <div class="form-group col pt-3 col-md-5">
                     <button type="sumbit" name="btnsubmit"
-                      class="form-control btn btn-warning mb-3 rounded shadow-md border-dark">Limpar</button>
-                    <!-- Implementar: (click)="limpar()"  -->
+                      class="form-control btn btn-warning mb-3 rounded shadow-md border-dark"
+                      (click)="limpar()">Limpar</button>
                   </div>
                   <div class="form-group col pt-3 col-md-5">
-                    <button type="sumbit" class="form-control btn btn-primary mb-3 rounded shadow-md border-dark"
+                    <button type="sumbit"
+                      class="form-control btn btn-primary mb-3 rounded shadow-md border-dark align-items-center"
                       (click)="pesquisar()">Pesquisar</button>
                   </div>
                 </form>
@@ -104,6 +104,9 @@
                     <img src="https://i.imgur.com/JnmcPWf.png" width="15" class="pb-1 align-items-center">
                   </button>
                 </td>
+              </tr>
+              <tr *ngIf="seguradoras.length === 0">
+                <td colspan="9" class="text-center">Nada encontrado.</td>
               </tr>
             </tbody>
           </table>
