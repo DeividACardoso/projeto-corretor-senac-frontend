@@ -4,7 +4,7 @@ import { ClienteService } from '../../shared/service/cliente.service';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../shared/model/cliente';
 import { ClienteSeletor } from '../../shared/model/seletor/cliente.seletor';
-import { Observable, switchMap } from 'rxjs';
+import { from, Observable, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 
@@ -61,6 +61,7 @@ export class ClienteListagemComponent implements OnInit {
         resultado => {
           observer.next(resultado);
           observer.complete();
+          console.log('Cliente possui seguro: ', resultado);
         },
         erro => {
           Swal.fire("Erro", "Erro ao verificar se cliente possui seguro: " + erro.error.message, 'error');
@@ -89,16 +90,20 @@ export class ClienteListagemComponent implements OnInit {
           Swal.fire("Erro", "Cliente possui seguro ativo!", 'error');
           return new Observable<void>(observer => observer.complete());
         } else {
-          return Swal.fire({
+          return from(Swal.fire({
             title: 'Você tem certeza?',
             text: 'Deseja excluir o cliente #' + id + "?",
             icon: 'warning',
             showCancelButton: true,
-          }).then(r => {
-            if (r.isConfirmed) {
-              return this.clienteService.excluir(id);
-            }
-          });
+          })).pipe(
+            switchMap(result => {
+              if (result.isConfirmed) {
+                return this.clienteService.excluir(id);
+              } else {
+                return new Observable<void>(observer => observer.complete());
+              }
+            })
+          );
         }
       })
     ).subscribe(
@@ -110,6 +115,26 @@ export class ClienteListagemComponent implements OnInit {
       },
       erro => {
         Swal.fire("Erro", "Erro ao excluir o cliente: " + erro, 'error');
+      }
+    );
+  }
+
+  limpar(){
+    this.seletor = new ClienteSeletor();
+    this.buscarClientes();
+  }
+
+  pesquisar(){
+    console.log(this.seletor.cpf);
+    if(this.seletor.cpf){
+      this.seletor.cpf = this.seletor.cpf.replace(/\D/g, '');
+    }
+    this.clienteService.pesquisar(this.seletor).subscribe(
+      resultado => {
+        this.clientes = resultado;
+      },
+      erro => {
+        Swal.fire("Erro", "Erro ao pesquisar clientes: " + erro, 'error');
       }
     );
   }

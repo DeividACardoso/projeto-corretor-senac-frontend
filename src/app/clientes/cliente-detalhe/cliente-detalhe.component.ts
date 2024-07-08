@@ -94,7 +94,8 @@ export class ClienteDetalheComponent implements OnInit {
   }
 
   salvar(form: NgForm) {
-    console.log(form.form.controls);
+    this.validarData();
+    this.removerMascaraCep();
     if (form.invalid) {
       Swal.fire("Erro", "Formulário inválido", 'error');
     } else {
@@ -106,15 +107,48 @@ export class ClienteDetalheComponent implements OnInit {
     }
   }
 
+  removerMascaraCep(){
+    this.cliente.cep = this.cliente.cep.replace(/\D/g, '');
+  }
+
+  validarData() {
+    const currentDate = new Date();
+    const birthDate = new Date(this.cliente.dtNascimento);
+
+    if (birthDate > currentDate) {
+      Swal.fire("Erro", "Data de nascimento não pode ser no futuro", 'error');
+      return;
+    }
+
+    let ageDifference = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+    const dayDifference = currentDate.getDate() - birthDate.getDate();
+
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+      ageDifference--;
+    }
+
+    if (ageDifference < 18) {
+      Swal.fire("Erro", "A pessoa deve ter pelo menos 18 anos", 'error');
+      return;
+    }
+  }
+
+  formatarDataParaYYYYMMDD(data: Date): Date {
+    const year = data.getFullYear();
+    const month = ('0' + (data.getMonth() + 1)).slice(-2);
+    const day = ('0' + data.getDate()).slice(-2);
+    return new Date(`${year}-${month}-${day}`)
+  }
+
   inserirCliente() {
     this.clienteService.salvar(this.cliente).subscribe(
       sucesso => {
         Swal.fire("Sucesso", "Cliente salvo com sucesso", 'success');
         this.cliente = new Cliente();
-        this.router.navigate(['/veiculos/detalhe']);
       },
       erro => {
-        Swal.fire("Erro", "Não foi possivel salvar o cliente: " + erro, 'error');
+        Swal.fire("Erro", erro.error + ".", 'error');
       }
     )
   }

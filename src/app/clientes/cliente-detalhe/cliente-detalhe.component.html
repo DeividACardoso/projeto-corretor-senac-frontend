@@ -36,17 +36,15 @@
               </div>
               <div class="form-group col col-md-3">
                 <label for="email">E-mail</label>
-                <input
-                  [ngClass]="((!cliente.email) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                <input [ngClass]="((!cliente.email) && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   class="shadow-sm rounded border border-secondary" [ngModel]="cliente.email"
                   (ngModelChange)="cliente.email=$event" placeholder="Insira seu e-mail" name="email" type="email"
                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
                 <div class="invalid-feedback">Informe um e-mail válido</div>
               </div>
-                <div class="form-group col col-md-3">
+              <div class="form-group col col-md-3">
                 <label for="genero">Gênero</label>
-                <select
-                  [ngClass]="(!cliente.genero && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                <select [ngClass]="(!cliente.genero && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example"
                   [ngModel]="cliente.genero" (ngModelChange)="cliente.genero=$event" name="genero" required>
                   <option selected disabled>Selecione um gênero</option>
@@ -55,7 +53,7 @@
                   <option value="Outro">Outro</option>
                 </select>
                 <div class="invalid-feedback">Informe um gênero válido</div>
-                </div>
+              </div>
               <div class="form-group col col-md-3">
                 <label for="estadoCivil">Estado Civil</label>
                 <select
@@ -83,7 +81,8 @@
               </div>
               <div class="form-group col col-md-3">
                 <label for="dataNascimento">Data de Nascimento</label>
-                <input [ngClass]="(!cliente.dtNascimento && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                <input
+                  [ngClass]="(!cliente.dtNascimento && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="cliente.dtNascimento" class="shadow-sm rounded border border-secondary" type="date"
                   name="dataNascimento" required>
                 <div class="invalid-feedback">Insira uma data de nascimento válida.</div>
@@ -92,7 +91,7 @@
               <div class="form-group col col-md-2">
                 <label for="cep">CEP</label>
                 <input [ngClass]="(!cliente.cep && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.cep" class="shadow-sm rounded border border-secondary" name="cep" maxlength="8"
+                  [ngModel]="cliente.cep | numberMask: 'cep'" (ngModelChange)="cliente.cep=$event" class="shadow-sm rounded border border-secondary" name="cep" maxlength="9"
                   (blur)="viaCep(cliente.cep)" required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um cep válido</div>
               </div>
@@ -103,25 +102,6 @@
                   required appOnlyNumbers>
                 <div class="invalid-feedback">Insira um número de casa válido</div>
               </div>
-              <div class="form-group col col-md-1">
-                <label for="estado">Estado</label>
-                <select
-                  [ngClass]="(!cliente.uf && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.uf"
-                  class="shadow-sm rounded border border-secondary form-select" aria-label="Default select example"
-                  name="estado" required>
-                  <option selected disabled>Selecione um estado</option>
-                  <option *ngFor="let estado of listaEstados" [value]="estado">{{ estado }}</option>
-                </select>
-                <div class="invalid-feedback">Insira um estado válido</div>
-              </div>
-              <div class="form-group col col-md-2">
-                <label for="logradouro">Logradouro</label>
-                <input [ngClass]="(!cliente.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="cliente.rua" class="shadow-sm rounded border border-secondary" name="logradouro"
-                  required>
-                <div class="invalid-feedback">Insira uma rua válida</div>
-              </div>
               <div class="form-group col col-md-2">
                 <label for="complemento">Complemento</label>
                 <input
@@ -129,6 +109,13 @@
                   [(ngModel)]="cliente.complemento" class="shadow-sm rounded border border-secondary" name="complemento"
                   required>
                 <div class="invalid-feedback">Insira um complemento válido</div>
+              </div>
+              <div class="form-group col col-md-2">
+                <label for="logradouro">Logradouro</label>
+                <input [ngClass]="(!cliente.rua && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="cliente.rua" class="shadow-sm rounded border border-secondary" name="logradouro"
+                  required>
+                <div class="invalid-feedback">Insira uma rua válida</div>
               </div>
               <div class="form-group col col-md-2">
                 <label for="bairro">Bairro</label>
@@ -143,6 +130,16 @@
                   [(ngModel)]="cliente.cidade" class="shadow-sm rounded  border border-secondary" name="cidade"
                   required>
                 <div class="invalid-feedback">Insira uma cidade válida</div>
+              </div>
+              <div class="form-group col col-md-1">
+                <label for="estado">Estado</label>
+                <select [ngClass]="(!cliente.uf && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
+                  [(ngModel)]="cliente.uf" class="shadow-sm rounded border border-secondary form-select"
+                  aria-label="Default select example" name="estado" required>
+                  <option selected disabled>Selecione um estado</option>
+                  <option *ngFor="let estado of listaEstados" [value]="estado">{{ estado }}</option>
+                </select>
+                <div class="invalid-feedback">Insira um estado válido</div>
               </div>
               <div></div>
               <div class="form-group col-md-6 pt-4">
