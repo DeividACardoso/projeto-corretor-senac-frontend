@@ -47,14 +47,14 @@
                 <label for="numeroProposta">Número da proposta</label>
                 <input class="shadow-sm rounded border-dark"
                   [ngClass]="(!seguro.numeroProposta && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="seguro.numeroProposta" minlength="3" name="numeroProposta" required>
+                  [(ngModel)]="seguro.numeroProposta" minlength="3" maxlength="32" name="numeroProposta" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe o número da proposta</div>
               </div>
               <div class="form-group col-md-3">
                 <label for="numApolice">Número da apólice</label>
                 <input class="shadow-sm rounded border-dark"
                   [ngClass]="(!seguro.numApolice && ngForm.submitted) ? 'form-control is-invalid' : 'form-control'"
-                  [(ngModel)]="seguro.numApolice" minlength="3" name="numApolice" required>
+                  [(ngModel)]="seguro.numApolice" minlength="3" maxlength="32" name="numApolice" required appOnlyNumbers>
                 <div class="invalid-feedback">Informe o número da apólice</div>
               </div>
               <div class="form-group col-md-3">

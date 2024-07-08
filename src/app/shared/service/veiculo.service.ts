@@ -60,4 +60,8 @@ export class VeiculoService {
         console.log(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos/' + modeloCodigo + '/anos/' + ano);
         return this.httpClient.get<any>(this.API_VEICULO + '/carros/marcas/' + marcaCodigo + '/modelos/' + modeloCodigo + '/anos/' + ano);
     }
+
+    verificarSeguro(idVeiculo: number) {
+        return this.httpClient.get<boolean>(this.API + '/verificarSeguro/' + idVeiculo);
+    }
 }

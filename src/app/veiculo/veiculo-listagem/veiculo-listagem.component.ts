@@ -21,7 +21,7 @@ export class VeiculoListagemComponent {
     private route: ActivatedRoute,
     private router: Router,
     private titleService: Title
-  ) {}
+  ) { }
 
   public veiculos: Array<Veiculo> = new Array();
   public title = 'Listagem de Veículos';
@@ -66,12 +66,12 @@ export class VeiculoListagemComponent {
     this.router.navigate(['veiculos/detalhe', id]);
   }
 
-  pesquisar(){
+  pesquisar() {
     this.veiculoService.listarComFiltro(this.seletor).subscribe(
       resultado => {
         this.veiculos = resultado;
       },
-      erro =>{
+      erro => {
         console.log('Erro ao buscar os veículos com filtros: ', erro);
       }
     )
@@ -79,27 +79,51 @@ export class VeiculoListagemComponent {
 
   excluir(id: number) {
     Swal.fire({
-      title: 'Você tem certeza?',
-      text: 'Deseja excluir o veículo #' + id + '?',
+      title: 'Confirmação',
+      text: 'Deseja realmente excluir o veículo?',
       icon: 'warning',
       showCancelButton: true,
-    }).then((r) => {
-      if (r.isConfirmed) {
-        this.veiculoService.excluir(id).subscribe(
-          (sucesso) => {
-            Swal.fire('Sucesso', 'Veículo excluído com sucesso!', 'success');
-            this.buscarVeiculo();
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.veiculoService.verificarSeguro(id).subscribe(
+          (temSeguro) => {
+            if (temSeguro) {
+              Swal.fire(
+                'Erro',
+                'Não é possível excluir o veículo pois possui seguro associado',
+                'error'
+              );
+            } else {
+              this.veiculoService.excluir(id).subscribe(
+                (sucesso) => {
+                  Swal.fire('Sucesso', 'Veículo excluído com sucesso!', 'success');
+                  this.buscarVeiculo();
+                },
+                (erro) => {
+                  Swal.fire(
+                    'Erro',
+                    'Erro ao excluir o veículo' + erro.error.message,
+                    'error'
+                  );
+                }
+              );
+            }
           },
           (erro) => {
             Swal.fire(
               'Erro',
-              'Erro ao excluir o veículo' + erro.error.message,
+              'Erro ao verificar seguro do veículo: ' + erro.error.message,
               'error'
             );
           }
         );
       }
     });
+
   }
   limpar() {
     this.seletor = new VeiculoSeletor();

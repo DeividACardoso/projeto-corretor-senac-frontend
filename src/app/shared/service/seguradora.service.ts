@@ -9,6 +9,7 @@ import { SeguroSeletor } from "../model/seletor/seguro.seletor";
   providedIn: 'root'
 })
 export class SeguradoraService {
+
   private readonly API = 'http://localhost:8080/api/seguradora'
 
   constructor(private httpClient: HttpClient) { }
@@ -38,4 +39,7 @@ export class SeguradoraService {
     return this.httpClient.delete<Seguradora>(this.API + '/delete/' + id);
   }
 
+  verificarSeguro(id: number) {
+    return this.httpClient.get<boolean>(this.API + '/verificarSeguro/' + id);
+  }
 }
