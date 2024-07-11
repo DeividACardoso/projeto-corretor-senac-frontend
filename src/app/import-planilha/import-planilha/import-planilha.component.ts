@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from '../../shared/service/cliente.service';
 import { Title } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-upload-file',
@@ -28,10 +29,10 @@ export class ImportPlanilhaComponent implements OnInit {
   uploadPlanilha() {
     this.clienteService.uploadfile(this.file).subscribe(
       resultado => {
-        console.log('Arquivo enviado com sucesso!');
+        Swal.fire('Sucesso', 'Arquivo enviado com sucesso', 'success');
       },
       erro => {
-        console.log('Erro ao enviar arquivo!');
+        Swal.fire('Erro', 'Erro ao enviar arquivo : ' + erro, 'error');
       }
     );
   }
