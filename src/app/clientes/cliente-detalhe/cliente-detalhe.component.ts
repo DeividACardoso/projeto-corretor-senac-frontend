@@ -112,7 +112,9 @@ export class ClienteDetalheComponent implements OnInit {
   }
 
   removerMascaraCep() {
-    this.cliente.cep = this.cliente.cep.replace(/\D/g, '');
+    if(this.cliente.cep != null){
+      this.cliente.cep = this.cliente.cep.replace(/\D/g, '');
+    }
   }
 
   validarData() {
